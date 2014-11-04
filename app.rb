@@ -18,6 +18,8 @@ require 'dm-types'
 
 get '/' do
 
+	erb :index
+
 end
 
 
