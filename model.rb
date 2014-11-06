@@ -9,7 +9,7 @@ class User
   property :username, String
   property  :created_at,  DateTime
 
-  has n, :games
+  has n, :games, :notes
 end
 class Game
   include DataMapper::Resource
@@ -21,5 +21,17 @@ class Game
   property  :update_at,   DateTime
 
   belongs_to  :user
-  end
+end
+
+class Note
+	include DataMapper::Resource
+
+	property :id, Serial
+	property :name, String
+	property :description, Text
+	property :created_at, DateTime
+	property :finish_at, DateTime
+	property :status, Boolean
+
+	belongs_to :user
 end
