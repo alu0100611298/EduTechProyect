@@ -6,7 +6,6 @@ class User
   property :last_name, String
   property :username, String
   property :profile_picture, Text
-  property :username, String
   property  :created_at,  DateTime
 
   has n, :games, :notes
@@ -52,6 +51,7 @@ end
 class Relationship
 	include DataMapper::Resource
 
+	property  :id,		  Serial
 	property :from_username, String
 	property :to_username, String
 
@@ -61,9 +61,10 @@ end
 class Grade
 	include DataMapper::Resource
 
+	property  :id,		  Serial
 	property :name, String
 	property :class, String
 	property :promotion, String
 
-	has n, users
+	has n, :users
 end
