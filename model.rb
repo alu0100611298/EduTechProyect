@@ -10,6 +10,7 @@ class User
   property  :created_at,  DateTime
 
   has n, :games, :notes
+  belongs_to :grade
 end
 class Game
   include DataMapper::Resource
@@ -55,4 +56,14 @@ class Relationship
 	property :to_username, String
 
 	belongs_to :user
+end
+
+class Grade
+	include DataMapper::Resource
+
+	property :name, String
+	property :class, String
+	property :promotion, String
+
+	has n, users
 end
