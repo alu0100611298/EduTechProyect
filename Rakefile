@@ -5,6 +5,6 @@ desc "run the tests"
     task :test => :default
 
 desc "Run server"
-    task :server => :use_keys do
+    task :server do
       sh "rackup"
 end
