@@ -47,3 +47,12 @@ class Message
 
 	belongs_to :user
 end
+
+class Relationship
+	include DataMapper::Resource
+
+	property :from_username, String
+	property :to_username, String
+
+	belongs_to :user
+end
