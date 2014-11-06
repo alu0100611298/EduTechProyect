@@ -13,7 +13,29 @@ require 'haml'
 require 'chartkick'
 require 'dm-core'
 require 'dm-timestamps'
-require 'dm-types' 
+require 'dm-types'
+
+configure :development do
+    DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
+end
+
+configure :production do
+  DataMapper.setup(:default, ENV['DATABASE_URL'])
+end
+
+configure :test do
+  DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/test.db")
+end
+
+DataMapper::Logger.new($stdout, :debug)
+DataMapper::Model.raise_on_save_failure = true 
+
+require_relative 'model'
+
+DataMapper.finalize
+
+#DataMapper.auto_migrate!
+DataMapper.auto_upgrade!
 
 
 get '/' do
