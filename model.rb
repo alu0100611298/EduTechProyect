@@ -35,3 +35,15 @@ class Note
 
 	belongs_to :user
 end
+
+class Message
+	include DataMapper::Resource
+
+	property :id, Serial
+	property :from_user, String
+	property :message, Text
+	property :created_at, DateTime
+	property :status, Boolean
+
+	belongs_to :user
+end
