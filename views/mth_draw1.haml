@@ -1,3 +1,53 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %h2 Instrucciones
+    .panel-body
+      %p El juego consiste en hacer la operación matemática que aparece en cada área del dibujo. Para seleccionar el color, pinchamos sobre el resultado de la operación en la barra de números que aparece en la derecha, luego hacemos click donde corresponda el resultado de esa operación.
+  .row
+    .col-md-10
+      .row
+        .panel
+          %h3
+            Puntos:
+            %span#score
+      .row
+        %img#map1{:src=>"/img/games/draw0.gif", "usemap"=>"#map1"}
+        %map{:name => "map1"}
+          %area{:coords => "64,90,40,108,40,145,70,163,84,168,80,127,77,107", :href => "#1", :shape => "poly"}
+          %area{:coords => "87,83,125,58,146,54,159,23,186,24,174,71,187,111,164,145,126,163,112,163", :href => "#2", :shape => "poly"}
+          %area{:coords => "114,165,103,264,115,242,135,227,170,221,190,213,181,160,184,134,187,114,159,149", :href => "#3", :shape => "poly"}
+          %area{:coords => "222,350,221,299,187,298,204,212,185,205,181,220,144,223,115,241,107,275,118,322,154,341", :href => "#4", :shape => "poly"}
+          %area{:coords => "254,348,256,297,317,292,305,212,333,207,364,242,364,288,354,318,309,338", :href => "#5", :shape => "poly"}
+          %area{:coords => "37,379,58,382,106,428,173,443,274,444,355,423,391,393,416,376,436,390,426,434,372,481,272,500,188,500,102,483,48,454,25,412,22,392", :href => "#6", :shape => "poly"}
+          %area{:coords => "139,336,173,346,202,351,193,397,200,444,136,435,146,389", :href => "#7", :shape => "poly"}
+          %area{:coords => "280,345,353,318,340,381,354,426,284,440,292,388", :href => "#8", :shape => "poly"}
+          %area{:coords => "204,212,187,295,257,299,316,293,309,208,257,214", :href => "#9", :shape => "poly"}
+          %area{:coords => "222,302,254,301,253,351,224,350", :href => "#10", :shape => "poly"}
+          %area{:coords => "70,86,89,165,110,164,102,114,89,80", :href => "#11", :shape => "poly"}
+          %area{:coords => "105,69,86,61,83,32,102,43,97,24,107,6,127,25,163,12,204,26,215,56,213,65,227,97,229,152,243,169,221,186,207,181,226,195,187,205,182,147,185,85,177,72,186,25,170,22,149,33,146,53", :href => "#12", :shape => "poly"}
+          %area{:coords => "361,229,379,218,423,211,452,183,457,143,430,158,446,120,435,90,416,116,412,92,399,81,391,104,361,114,338,131,322,163,322,205", :href => "#13", :shape => "poly"}
+    .col-md-2
+      .panel.panel-info
+        .panel-heading.colors
+          %span#b0.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b0');", :src => "http://placehold.it/64x64/db7d42/000000/&text=15"}/
+          %span#b1.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b1');", :src => "http://placehold.it/64x64/49220a/000000/&text=9"}/
+          %span#b2.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b2');", :src => "http://placehold.it/64x64/de2033/000000/&text=8"}/
+          %span#b3.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b3');", :src => "http://placehold.it/64x64/f7cbd0/000000/&text=3"}/
+          %span#b4.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b4');", :src => "http://placehold.it/64x64/f5efb9/000000/&text=6"}/
 %script{:src=>"http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
 %script{:src=>"/js/jquery.imagemapster.js"}
+:javascript
+  const COLORS = [0,0,0,0,0,0,1,1,2,3,3,4,4];
+  const IMAGE = '/img/games/draw0_complete.gif';
 %script{:src=>"/js/maps.js"}

@@ -32,9 +32,9 @@ $(document).ready(function ()
 	}
 });
 function change_color(color){
-	var inputs = $('label[for="color"]>span>input');
-	var imgs = $('label[for="color"]>span>img');
-	var actual = $('label[for="color"]>span#'+color+">input");
+	var inputs = $('span>input');
+	var imgs = $('span>img');
+	var actual = $('span#'+color+">input");
 	$(inputs).each(function(){
 		if(actual[0] != this){
 			$(this).attr('checked',false);
