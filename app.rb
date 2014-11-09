@@ -63,3 +63,11 @@ end
 get '/game' do
   haml :game, :layout => :bar
 end
+
+#PintaMatematicas
+get '/game/mathematics/draw' do
+  #Para enlazar con el dibujo correspondiente
+  #al nivel hay que extraer el curso del alumno
+  #Provisionalmente se pone por defecto el mismo
+  haml :mth_draw1, :layout => :bar
+end
