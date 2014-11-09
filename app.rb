@@ -58,4 +58,8 @@ post '/home' do
 
 end
 
-
+# URLs para los juegos
+#Provisional, es necesario verificar que el usuario está logueado
+get '/game' do
+  haml :game, :layout => :bar
+end
