@@ -28,7 +28,7 @@ $(document).ready(function ()
 		}
 	}
 	function end(score){
-		$('label[for="color"]').remove();
+		$('.hide-finish').hide("slow");
 	}
 });
 function change_color(color){
