@@ -1,17 +1,45 @@
 <!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+  <div class="container">
+	  <form name="input" action="/" method="post">
+	    <h2 class="form-signin-heading">Please sign in</h2>
+	    <h3 class="form-signin-heading">Curso</h3>
+	    <input type="text" class="form-control" placeholder="Curso" name="gname" required autofocus>
+	    <input type="text" class="form-control" placeholder="Clase" name="gclass">
+	    <input type="text" class="form-control" placeholder="Promoción" name="gpromotion">
+	    <h3 class="form-signin-heading">Alumno</h3>
+	    <input type="text" class="form-control" placeholder="Nombre" name="uname">
+	    <input type="text" class="form-control" placeholder="Apellido" name="ulast_name">
+	    <input type="text" class="form-control" placeholder="Nombre de usuario" name="uusername">
+	    <input type="text" class="form-control" placeholder="Foto" name="uprofile_picture">
+	    <div class="checkbox">
+	    </div>
+	    <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+	  </form>
+	</div> <!-- /container -->
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+  </body>
+</html>
+<!DOCTYPE html>
 <html>
 <body>
-
-	<form name="input" action="/" method="post">
-		gname: <input type="text" = name="gname"><br>
-		gclass: <input type="text" = name="gclass"><br>
-		gpromotion: <input type="text" = name="gpromotion"><br>
-		uname: <input type="text" = name="uname"><br>
-		ulast_name: <input type="text" = name="ulast_name"><br>
-		uusername: <input type="text" = name="uusername"><br>
-		uprofile_picture: <input type="text" = name="uprofile_picture"><br>
-		<input type="submit" value="Submit"><br>
-	</form>
-
-</body>
-</html>

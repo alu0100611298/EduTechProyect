@@ -44,43 +44,6 @@ get '/' do
 
 end
 
-
-post '/' do
-	print params
-	#Crear un grado
-	#if !Grade.first(:name => params["gname"])
-	@table = Grade.create(:name => params["gname"], :class => params["gclass"], :promotion => params["gpromotion"])
-	#end
-	@grade = Grade.first(:name => params["gname"])
-	#if !User.first(:name => params["uname"])
-	#incluir usuarios en el grado
-	@user = User.first_or_create(:name => params["uname"], :last_name => params["ulast_name"], :username => params["uusername"], :profile_picture => params["uprofile_picture"], :created_at => Time.now, :grade => @grade)
-	#end
-	redirect "/lista"
-end
-
-get '/lista' do
-	@table = Grade.all
-	puts "----------------------"
-	@table.each do |var|
-		puts var.name
-		puts var.class
-		puts var.promotion
-	end
-	@user = User.all
-	puts "----------------------"
-	@user.each do |var|
-		puts var.name
-		puts var.last_name
-		puts var.username
-		puts var.profile_picture
-		puts var.created_at
-		puts var.grade
-	end
-	puts "----------------------"
-end
-
-
 get '/home' do
 
 end
@@ -92,4 +55,28 @@ get '/register' do
 	erb :register
 end
 
+post '/' do
+	print params
+	#Crear un grado
+	#if !Grade.first(:name => params["gname"])
+	@table = Grade.first_or_create(:name => params["gname"], :class => params["gclass"], :promotion => params["gpromotion"])
+	#end
+	@grade = Grade.first(:name => params["gname"])
+	#if !User.first(:name => params["uname"])
+	#incluir usuarios en el grado
+	@user = User.first(:username => params["uusername"])
+	# No se puede repetir el nombre de usuario
+	if(!@user)
+		@user = User.first_or_create(:name => params["uname"], :last_name => params["ulast_name"], :username => params["uusername"], :profile_picture => params["uprofile_picture"], :created_at => Time.now, :grade => @grade)
+	else
+		print "Usuario creado"
+	end
+	#end
+	redirect '/list'
+end
 
+get '/list' do
+	@table = Grade.all
+	@user = User.all
+	erb :list
+end
