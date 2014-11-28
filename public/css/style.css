@@ -1,10 +1,39 @@
-body{
-	font-family: Verdana;
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+  font-family: Verdana;
 	height: 100%;
 	
-	
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+
+  border-top: 1px solid #e5e5e5;
 }
 
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* Not required for template or sticky footer method. */
+
+.container {
+  width: 100%;
+}
+.container .text-muted {
+  margin: 20px 0;
+  text-align: center;
+}
 
 .header{
 	
@@ -26,7 +55,6 @@ body{
 	background-position: left;
 	background-size: 50% auto;
 	background-repeat: no-repeat;
-	min-height: 400px;
 	border-radius: 0px;
 	text-align: right;
 	background-color: transparent;
