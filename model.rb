@@ -5,6 +5,7 @@ class User
   property :name, String
   property :last_name, String
   property :username, String
+  property :password, String
   property :profile_picture, Text
   property  :created_at,  DateTime
 

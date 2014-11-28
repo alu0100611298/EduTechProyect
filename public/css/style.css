@@ -1,0 +1,41 @@
+body{
+	font-family: Verdana;
+	height: 100%;
+	
+	
+}
+
+
+.header{
+	
+	background-image: url("/img/logo.png");
+	background-size: 45px 45px;
+	background-repeat: no-repeat;
+	padding-bottom: 10px;
+}
+.mynav{
+	margin-bottom: 0.5%;
+	text-align: right;
+}
+.tit{
+	text-align: right;
+}
+
+.main{
+	background-image: url("/img/fondo_vectorized.png");
+	background-position: left;
+	background-size: 50% auto;
+	background-repeat: no-repeat;
+	min-height: 400px;
+	border-radius: 0px;
+	text-align: right;
+	background-color: transparent;
+	margin-bottom: 0;
+}
+
+.myform{
+
+	border-radius: 5px;
+	background-color: #dbe7f2;
+	padding: 2%;
+}

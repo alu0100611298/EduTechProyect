@@ -15,6 +15,9 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-types'
 
+use Rack::Session::Pool, :expire_after => 2592000
+set :session_secret, '*&(^#234a)'
+
 configure :development do
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 end
@@ -38,9 +41,20 @@ DataMapper.finalize
 DataMapper.auto_upgrade!
 
 
+helpers do
+	def current_user
+		@current_user ||= User.get(session[:user_id]) if session[:user_id]
+	end
+end
+
+
 get '/' do
 
-	erb :index
+	if current_user
+		erb :index
+	else
+		erb :login
+	end
 
 end
 
