@@ -1,0 +1,55 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}/
+    %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+    %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+    
+    %title EduTech
+    / Bootstrap core CSS
+    %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
+    %link{:href => "http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}/
+    %link{:href => "/css/bootstrap.css", :rel => "stylesheet"}/
+    %link{:href => "/css/dashboard.css", :rel => "stylesheet"}
+    %link{:href => "/css/mth-draw.css", :rel => "stylesheet"}
+    %link{:href => "/css/grumble.min.css", :rel => "stylesheet"}
+    %link{:href => "/img/logo.png", :rel => "icon"}
+    %script{:src => "/js/ie-emulation-modes-warning.js"}
+  %body
+    .container-fluid
+      .row
+        .col-sm-2.col-md-2.sidebar
+          %ul.nav.nav-sidebar
+            %li.active
+              %a{:href => "#"}
+            %li
+              %a{:href => "#"}
+                %i.fa.fa-file-text
+            %li
+              %a{:href => "#"}
+                %i.fa.fa-gamepad
+            %li
+              %a{:href => "#"}
+                %i.fa.fa-trophy
+        .col-sm-12.col-md-12.col-xs-12.header
+          .col-sm-12.col-lg-12.col-md-12.col-xs-12.user
+            .col-sm-4.col-md-4.col-sm-offset-7.col-md-offset-7.col-xs-9.info
+              %p#nombre
+                = current_user.name
+                = current_user.last_name
+              %p#icons
+                %a{:href => "#"}
+                  %i.fa.fa-envelope.myfa
+                %a{:href => "#"}
+                  %i.fa.fa-inbox.myfa
+                %a{:href => "#"}
+                  %i.fa.fa-cog.myfa
+                %a{:href => "#"}
+                  %i.fa.fa-power-off.myfa
+            .col-sm-1.col-md-1.col-xs-3.imagen
+              %img.img-responsive.img-circle.avatar{:src => "/img/kid_girl.png"}/
+            
+          .col-sm-12.col-md-12.col-xs-12.main 
+            =yield
+
+    
