@@ -2,14 +2,15 @@ class User
   include DataMapper::Resource
 
   property :id, Serial
+  property :username, String, :key => true
   property :name, String
-  property :last_name, String
-  property :username, String
+  property :last_name, String  
+  property :password, String
   property :profile_picture, Text
   property :created_at,  DateTime
 
   has n, :games, :notes
-  belongs_to :grade
+  #belongs_to :grade
 end
 class Game
   include DataMapper::Resource
@@ -66,5 +67,5 @@ class Grade
 	property :class, String
 	property :promotion, String
 
-	has n, :users
+	#has n, :users
 end

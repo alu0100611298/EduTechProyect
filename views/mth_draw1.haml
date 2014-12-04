@@ -1,0 +1,61 @@
+.container
+  .panel.panel-primary
+    .panel-heading
+      %h2 Instrucciones
+    .panel-body
+      %p El juego consiste en hacer la operación matemática que aparece en cada área del dibujo.
+      %button.btn.btn-success{:onclick=>"tour();"} Ver explicación
+      %strong Haz click en las burbujas cuando lo hayas comprendido.
+  .row.jumbotron
+    .col-md-9
+      .row
+        .panel.panel-primary
+          .panel-heading
+            %h3
+              Puntos:
+              %span#score 0
+        .panel-body
+          %center#tour2
+            %img#map1{:src=>"/img/games/draw0.gif", "usemap"=>"#map1"}
+          %map{:id=>"tour3",:name => "map1"}
+            %area{:coords => "44,83,52,93,59,119,65,139,65,160,67,161,50,161,36,155,27,149,18,135,14,116,18,105,26,92,34,88", :href => "#1", :shape => "poly"}
+            %area{:coords => "65,77,80,73,90,62,101,56,118,52,121,52,127,30,138,19,147,18,158,18,162,21,160,35,157,54,153,68,157,77,161,84,164,100,164,115,154,130,135,145,115,155,94,160,84,161,81,126,71,94", :href => "#2", :shape => "poly"}
+            %area{:coords => "94,161,113,156,140,141,160,121,165,112,162,138,160,168,161,192,166,201,163,213,157,218,142,217,118,220,106,226,95,238,90,251,84,268,81,243,89,201,93,175", :href => "#3", :shape => "poly"}
+            %area{:coords => "165,200,180,208,176,228,170,260,167,280,166,292,181,297,202,297,201,347,178,344,145,340,110,324,99,316,88,296,83,272,85,267,93,240,111,224,128,218,148,217,160,215,164,208", :href => "#4", :shape => "poly"}
+            %area{:coords => "230,297,231,347,263,341,282,336,320,321,332,307,342,290,345,260,336,226,324,214,306,203,282,203,289,235,292,267,293,287,292,290,257,296", :href => "#5", :shape => "poly"}
+            %area{:coords => "218,497,285,493,326,486,368,469,395,443,409,416,414,388,405,372,391,372,377,378,366,394,344,410,332,417,303,427,264,436,215,440,176,440,127,437,83,422,56,403,35,379,18,373,9,377,1,390,4,415,18,439,49,466,75,476,109,488,153,496,196,497", :href => "#6", :shape => "poly"}
+            %area{:coords => "120,330,123,370,121,402,116,432,136,437,168,440,178,440,175,426,173,388,175,361,181,344,150,339", :href => "#7", :shape => "poly"}
+            %area{:coords => "262,341,268,374,270,414,265,431,264,437,293,431,315,424,330,418,321,389,321,366,323,348,326,321,330,312,295,332,269,338", :href => "#8", :shape => "poly"}
+            %area{:coords => "179,208,209,211,245,209,281,204,286,217,293,255,293,279,293,288,260,295,232,296,199,297,164,292,170,246,178,207", :href => "#9", :shape => "poly"}
+            %area{:coords => "46,81,64,76,73,98,82,131,85,160,85,163,67,163,64,162,63,137,58,117,50,94", :href => "#10", :shape => "poly"}
+            %area{:coords => "201,298,231,299,230,347,229,347,202,347", :href => "#11", :shape => "poly"}
+            %area{:coords => "83,66,71,63,65,56,60,46,59,30,70,35,79,37,74,27,78,14,82,6,86,3,93,13,103,20,115,17,129,13,141,10,164,13,175,19,183,27,190,39,191,57,191,60,198,66,204,80,205,94,205,115,206,139,210,156,215,163,222,166,218,172,206,180,195,179,187,177,196,185,202,192,197,199,180,202,165,198,158,175,161,141,164,122,164,99,164,84,153,68,152,63,158,46,162,21,153,18,144,16,133,23,126,33,126,44,123,49,117,51,105,54,90,61,84,67", :href => "#12", :shape => "poly"}
+            %area{:coords => "336,226,349,217,366,210,384,208,403,202,420,193,426,181,433,164,436,140,427,147,413,152,417,143,421,134,423,121,423,104,419,92,414,85,410,95,405,105,396,112,393,105,389,87,382,82,380,78,375,92,367,100,355,104,341,113,323,122,315,131,310,141,302,156,299,174,299,189,302,202,315,205,330,216", :href => "#13", :shape => "poly"}
+    .col-md-3.hide-finish
+      .panel.panel-primary
+        .panel-heading.colors
+          %h3#tour1 Colores
+          %span#b0.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b0');", :src => "http://placehold.it/64x64/db7d42/000000/&text=15"}
+          %span#b1.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b1');", :src => "http://placehold.it/64x64/49220a/000000/&text=9"}
+          %span#b2.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b2');", :src => "http://placehold.it/64x64/de2033/000000/&text=8"}
+          %span#b3.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b3');", :src => "http://placehold.it/64x64/f7cbd0/000000/&text=3"}
+          %span#b4.row
+            %input{:name => "color", :type => "radio"}
+              %img{:border => "0", :onclick => "change_color('b4');", :src => "http://placehold.it/64x64/f5efb9/000000/&text=6"}
+%script{:src=>"http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
+%script{:src=>"/js/jquery.imagemapster.js"}
+%script{:src=>"/js/bootstrap.min.js"}
+:javascript
+  const COLORS = [0,0,0,0,0,0,1,1,2,3,3,4,4];
+  const IMAGE = '/img/games/draw0_complete.gif';
+%script{:src=>"/js/maps.js"}
+%script{:src=>"/js/jquery.grumble.min.js"}
+%script{:src=>"/js/tour-mth-draw.js"}

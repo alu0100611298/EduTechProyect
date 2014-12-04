@@ -1,0 +1,11 @@
+input[type="radio"]{
+  display: none;
+}
+
+.panel-heading.colors{
+  text-align: center;
+}
+
+span>img{
+  cursor: pointer;
+}
