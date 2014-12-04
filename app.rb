@@ -137,3 +137,25 @@ get '/game/mathematics/draw' do
   #Provisionalmente se pone por defecto el mismo
   haml :mth_draw1, :layout => :index
 end
+
+get '/notes' do
+	if current_user
+		user = User.first(:username => session[:username])
+		@notas = Note.all(:user => user)
+  		haml :notes, :layout => :index
+  	else
+  		redirect '/'
+  	end
+end
+
+post '/notes' do
+	if current_user
+		#buscar el usuario
+		user = User.first(:username => session[:username])
+		#Guardar la nota
+		nota = Note.first_or_create(:name => params[:asunto], :description => params[:texto], :created_at => Time.now, :finish_at => Time.now, :status => "false", :user =>user)
+  		redirect '/notes'
+  	else
+  		redirect '/'
+  	end
+end

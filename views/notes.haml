@@ -1,0 +1,29 @@
+.container
+  .row
+  - @notas.each do |nota|
+    .col-xs-12.col-sm-6.col-md-4.col-lg-3
+      .offer.offer-default
+        .shape
+          .shape-text
+            #{nota.status}
+        .offer-content
+          %h3.lead
+            #{nota.name}
+          %p
+            #{nota.description}
+            %br
+              #{nota.created_at}
+.container
+  .col-xs-12.col-sm-6.col-md-12.col-lg-12
+    .offer.offer-default
+      %form{:role => "form", :style => "width:400px; margin: 0 auto;", :action => "/notes", :method => "post"}
+        %h1 Nota
+        .required-field-block
+          %input.form-control{:placeholder => "Asunto", :type => "text", :id => "asunto", :name => "asunto"}
+            .required-icon
+        %br
+        .required-field-block
+          %textarea.form-control{:placeholder => "Escribe el texto aquí", :rows => "3", :type => "Text", :id => "texto", :name => "texto"}
+          .required-icon
+        %br
+        %button.btn.btn-primary Guardar
