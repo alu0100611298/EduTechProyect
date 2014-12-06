@@ -5,7 +5,10 @@
     .col-md-4
       .panel.panel-primary
         .panel-heading
-          %h2 PintaMatemáticas
+          %h2 
+            PintaMatemáticas
+            %span.badge
+              #{@score['pintamatematicas']}
         .panel-body
           %a.thumbnail{:href=>"/game/mathematics/draw"}
             %img{:src=>"/img/games/mathematics_draw_partial.png"}
@@ -15,7 +18,10 @@
     .col-md-4
       .panel.panel-primary
         .panel-heading
-          %h2 Memoria
+          %h2 
+            Memoria
+            %span.badge
+              #{@score['memoria']}
         .panel-body
           %a.thumbnail{:href=>"/game/memory"}
             %img{:src=>"/img/games/memory.png"}

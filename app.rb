@@ -123,6 +123,10 @@ end
 # URLs para los juegos
 get '/game' do
 	if current_user
+      game = Game.all(:user => current_user)
+      @score = Hash.new
+      @score['pintamatematicas'] = game.score('pintamatematicas')[0]
+      @score['memoria'] = game.score('memoria')[0]
   		haml :game, :layout => :index
   	else
   		redirect '/'
