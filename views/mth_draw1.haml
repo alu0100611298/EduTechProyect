@@ -1,11 +1,6 @@
 .container
-  .panel.panel-primary
-    .panel-heading
-      %h2 Instrucciones
-    .panel-body
-      %p El juego consiste en hacer la operación matemática que aparece en cada área del dibujo.
-      %button.btn.btn-success{:onclick=>"tour();"} Ver explicación
-      %strong Haz click en las burbujas cuando lo hayas comprendido.
+  .page-header
+    %h1 Pinta Matemáticas
   .row.jumbotron
     .col-md-9
       .row
@@ -50,6 +45,13 @@
           %span#b4.row
             %input{:name => "color", :type => "radio"}
               %img{:border => "0", :onclick => "change_color('b4');", :src => "http://placehold.it/64x64/f5efb9/000000/&text=6"}
+  .panel.panel-primary
+    .panel-heading
+      %h2 Instrucciones
+    .panel-body
+      %p El juego consiste en hacer la operación matemática que aparece en cada área del dibujo.
+      %button.btn.btn-success{:onclick=>"tour();"} Ver explicación
+      %strong Haz click en las burbujas cuando lo hayas comprendido.
 %script{:src=>"http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"}
 %script{:src=>"/js/jquery.imagemapster.js"}
 %script{:src=>"/js/bootstrap.min.js"}
