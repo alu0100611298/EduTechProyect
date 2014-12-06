@@ -127,6 +127,7 @@ get '/game' do
       @score = Hash.new
       @score['pintamatematicas'] = game.score('pintamatematicas')[0]
       @score['memoria'] = game.score('memoria')[0]
+      @score['numbers'] = game.score('numbers')[0]
   		haml :game, :layout => :index
   	else
   		redirect '/'
@@ -141,6 +142,15 @@ get '/game/mathematics/draw' do
   haml :mth_draw1, :layout => :index
 end
 
+#Memory
+get '/game/memory' do
+  haml :memory, :layout => :index
+end
+
+get '/game/english/numbers' do
+  haml :numbers, :layout => :index
+end
+
 #Salvar el resultado de un juego en la BD
 post '/game/save' do
   #Por defecto el nivel será 1
@@ -148,10 +158,6 @@ post '/game/save' do
   Game.create(:user => user, :name => params['name'], :score => params['score'], :level => 1, :created_at => Time.now)
 end
 
-#Memory
-get '/game/memory' do
-  haml :memory, :layout => :index
-end
 
 get '/notes' do
 	if current_user

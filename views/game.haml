@@ -31,4 +31,13 @@
     .col-md-4
       .panel.panel-primary
         .panel-heading
-          %h2 Relaciona en Inglés
+          %h2 
+            Numbers in English
+            %span.badge
+              #{@score['numbers']}
+        .panel-body
+          %a.thumbnail{:href=>"/game/english/numbers"}
+            %img{:src=>"/img/games/numbers.png"}
+        .panel-footer
+          %p 
+            %strong ¿Te sabes los números en inglés?

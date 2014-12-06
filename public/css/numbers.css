@@ -1,0 +1,34 @@
+.big{
+  width: 25%;
+  height: 150px;
+  text-align: center;
+  display: table;
+  background: #ed9922;
+  box-shadow: 0 0 12px #000;
+  border-radius: 10px;
+  font-size: 4em;
+  float: left;
+}
+
+.small{
+  width: 30%;
+  margin: 1%;
+  height: 75px;
+  text-align: center;
+  display: table;
+  background: #ADD8E6;
+  box-shadow: 0 0 12px #000;
+  border-radius: 5px;
+  font-size: 1.2em;
+  float: right;
+}
+.vcenter{
+  display: table-cell;
+  vertical-align: middle;
+}
+.win{
+  background: #76ed22 !important;
+}
+.wrong{
+  background: #ed3422 !important;  
+}
