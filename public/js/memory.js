@@ -31,8 +31,8 @@ function memory(){
       COLS = Math.floor(Math.random() * (9-2) + 2);
     }while(ROWS*COLS%2 != 0)
     matriz = new Array(ROWS*COLS);
-    var folders = ['animals','cities']
-    var folder = Math.floor(Math.random() * 1);
+    var folders = ['animals','flags']
+    var folder = Math.floor(Math.random() * 2);
     for(var i=0; i<ROWS; i++){
       for(var j=0; j<COLS; j++){
         var rand = 0;
@@ -46,7 +46,7 @@ function memory(){
     for(var i=0; i<ROWS; i++){
       var row = $("<div class='matriz rows'></div>");
       for(var j=0; j<COLS; j++){
-        row.append("<div id='flipfront" + (i*COLS+j) + "' class='front matriz columns col' onclick='flip("+(i*COLS+j)+")'><img class='thumb' src='/img/games/memory/" + matriz[i*COLS+j] + ".png'/></div>");
+        row.append("<div id='flipfront" + (i*COLS+j) + "' class='front matriz columns col' onclick='flip("+(i*COLS+j)+")'><img class='thumb' src='/img/games/memory/" + folders[folder] + "/" + matriz[i*COLS+j] + ".png'/></div>");
         row.append("<div id='flipback" + (i*COLS+j) + "' class='back matriz columns col' onclick='unflip("+(i*COLS+j)+")'><img class='thumb' src='/img/games/memory/back.png'/></div>");
       }
       table.append(row);
