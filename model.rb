@@ -16,10 +16,10 @@ class Game
   include DataMapper::Resource
   
   property  :id,		  Serial
-  property  :name,        String
+  property  :name,        String, :key => true
   property  :score,       Integer
-  property  :level,       Integer
-  property  :update_at,   DateTime
+  property  :level,       Integer, :key => true
+  property  :created_at,   DateTime
 
   belongs_to  :user
 end

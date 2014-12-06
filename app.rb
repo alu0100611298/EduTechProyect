@@ -121,7 +121,6 @@ get '/register' do
 end
 
 # URLs para los juegos
-#Provisional, es necesario verificar que el usuario está logueado
 get '/game' do
 	if current_user
   		haml :game, :layout => :index
@@ -136,6 +135,18 @@ get '/game/mathematics/draw' do
   #al nivel hay que extraer el curso del alumno
   #Provisionalmente se pone por defecto el mismo
   haml :mth_draw1, :layout => :index
+end
+
+#Salvar el resultado de un juego en la BD
+post '/game/save' do
+  #Por defecto el nivel será 1
+  user = User.first(:username => session[:username])
+  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => 1, :created_at => Time.now)
+end
+
+#Memory
+get '/game/memory' do
+  haml :memory, :layout => :index
 end
 
 get '/notes' do

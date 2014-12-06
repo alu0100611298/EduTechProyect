@@ -29,6 +29,9 @@ $(document).ready(function ()
 	}
 	function end(score){
 		$('.hide-finish').hide("slow");
+		$.post('/game/save',{score:score, name:'pintamatematicas'}, function(){
+			window.location.href = "/game";
+		});
 	}
 });
 function change_color(color){

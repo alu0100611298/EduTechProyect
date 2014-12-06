@@ -1,0 +1,29 @@
+.matriz{
+  width: 100%;
+  text-align: center;
+}
+
+.matriz .rows{
+  width: 100%;
+}
+
+.matriz .columns{
+  height: 110px;
+  float: left;
+}
+.col{
+  width: 110px;
+}
+.columns> img{
+  width: 100px;
+  height: 100px;
+}
+
+.front{
+  display: none;
+}
+#score{
+  position: relative;
+  top: 0;
+  left: 0;
+}
