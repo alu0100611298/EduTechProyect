@@ -43,6 +43,8 @@ function memory(){
       }
     }
     var table = $('#matriz');
+    table.css("background","url(/img/games/memory/"+folders[folder]+".jpg) fixed center center no-repeat");
+    table.css("background-size","cover");
     for(var i=0; i<ROWS; i++){
       var row = $("<div class='matriz rows'></div>");
       for(var j=0; j<COLS; j++){
@@ -109,7 +111,7 @@ function unflip(id){
           }
         }
       }
-    },1000);
+    },500);
   }
   if(end == (mem.rows()*mem.cols()/2)){
     var plus = (mem.get_clicks()-(mem.rows()*mem.cols()));

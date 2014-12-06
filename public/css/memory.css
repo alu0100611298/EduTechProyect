@@ -11,6 +11,10 @@
   height: 110px;
   float: left;
 }
+.columns > img{
+  border-radius: 5px;
+  box-shadow: 0 0 5px #000;
+}
 .col-3, .col-4, .col-5, .col-6, .col-7, .col-8{
   min-width: 110px;
 }
