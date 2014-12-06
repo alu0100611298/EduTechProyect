@@ -6,15 +6,15 @@
       .panel.panel-primary
         .panel-heading
           %h2 
-            PintaMatemáticas
+            Colors in English
             %span.badge
-              #{@score['pintamatematicas']}
+              #{@score['colors']}
         .panel-body
-          %a.thumbnail{:href=>"/game/mathematics/draw"}
-            %img{:src=>"/img/games/mathematics_draw_partial.png"}
+          %a.thumbnail{:href=>"/game/english/colors"}
+            %img{:src=>"/img/games/colors.png"}
         .panel-footer
           %p 
-            %strong Completa los colores usando las matemáticas
+            %strong ¿Te sabes los colores en inglés?
     .col-md-4
       .panel.panel-primary
         .panel-heading
@@ -41,3 +41,17 @@
         .panel-footer
           %p 
             %strong ¿Te sabes los números en inglés?
+  .row
+    .col-md-4
+      .panel.panel-primary
+        .panel-heading
+          %h2 
+            PintaMatemáticas
+            %span.badge
+              #{@score['pintamatematicas']}
+        .panel-body
+          %a.thumbnail{:href=>"/game/mathematics/draw"}
+            %img{:src=>"/img/games/mathematics_draw_partial.png"}
+        .panel-footer
+          %p 
+            %strong Completa los colores usando las matemáticas

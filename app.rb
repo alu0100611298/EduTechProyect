@@ -128,6 +128,7 @@ get '/game' do
       @score['pintamatematicas'] = game.score('pintamatematicas')[0]
       @score['memoria'] = game.score('memoria')[0]
       @score['numbers'] = game.score('numbers')[0]
+      @score['colors'] = game.score('colors')[0]
   		haml :game, :layout => :index
   	else
   		redirect '/'
@@ -149,6 +150,10 @@ end
 
 get '/game/english/numbers' do
   haml :numbers, :layout => :index
+end
+
+get '/game/english/colors' do
+  haml :colors, :layout => :index
 end
 
 #Salvar el resultado de un juego en la BD
