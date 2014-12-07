@@ -114,8 +114,13 @@ get '/home' do
 end
 
 post '/home' do
+	if current_user
 
+	else
+		redirect '/'
+	end
 end
+
 get '/register' do
 	erb :register
 end
@@ -135,7 +140,9 @@ get '/game/mathematics/draw' do
   #Para enlazar con el dibujo correspondiente
   #al nivel hay que extraer el curso del alumno
   #Provisionalmente se pone por defecto el mismo
-  haml :mth_draw1, :layout => :index
+  if current_user
+  	haml :mth_draw1, :layout => :index
+  end
 end
 
 get '/notes' do
@@ -158,4 +165,40 @@ post '/notes' do
   	else
   		redirect '/'
   	end
+end
+
+get '/puntuation' do 
+	if current_user
+
+	else
+		redirect '/'
+	end
+
+end
+
+post '/puntuation' do
+
+end
+
+
+get '/messages' do 
+	if current_user
+
+	else
+		redirect '/'
+	end
+end
+
+post '/messages' do
+
+end
+
+
+get '/logout' do
+	if current_user
+		session.clear
+	else
+		redirect '/'
+	end
+
 end
