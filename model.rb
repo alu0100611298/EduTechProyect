@@ -25,7 +25,10 @@ class Game
     DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' AND user_id = '" + id + "' GROUP BY name")
   end
 
-  belongs_to :user
+  def self.better(game)
+    DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' GROUP BY name, id")
+  end
+  belongs_to  :user
 end
 
 class Note
@@ -74,4 +77,16 @@ class Grade
 	property :promotion, String
 
 	#has n, :users
+end
+
+class Alert
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :to_user, String
+  property :game, String
+  property :message, Text
+  property :status, Boolean
+  property :created_at, DateTime
+
 end

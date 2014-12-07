@@ -1,0 +1,17 @@
+.ul-alert{
+  width: 300px !important;
+  padding: 20px;
+}
+
+.ul-alert > li{
+  padding: 5px;
+  border: dashed 0.1em #CCC;
+  border-radius: 5px;
+}
+
+.ul-alert > li:nth-child(odd){
+  background: #EEE;
+}
+.ul-alert > li:hover{
+  cursor: pointer;
+}

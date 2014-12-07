@@ -15,8 +15,6 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-types'
 
-
-
 configure :development do
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 end
@@ -53,7 +51,7 @@ end
 get '/' do
 
 	if current_user
-		erb :index
+		redirect '/home'
 	else
 		erb :login
 	end
@@ -113,10 +111,12 @@ end
 
 get '/home' do
 	if current_user
-
-		erb :index
-
-	end
+    alerts(current_user.id.to_s)
+    @alerts = Alert.count(:to_user => current_user.id.to_s, :game => 'memoria', :status => false)
+		haml :home, :layout => :index
+	else
+    redirect '/'
+  end
 end
 
 post '/home' do
@@ -296,6 +296,21 @@ post '/message' do
   	end
 end
 
+def alerts(id)
+  game = Game.all
+  better_memory = game.better('memoria')[0]
+  me_memory = game.score('memoria', id)[0]
+  if((better_memory.to_i - me_memory.to_i) >= 500)
+    alerts = Alert.count(:to_user => id, :game => 'memoria', :status => false)
+    if(alerts < 1)
+      Alert.create(:to_user => id, :game => 'memoria', :message => "No crees que vas necesitas mejorar en memoria", :status => false, :created_at => Time.now)
+      return alerts
+    else
+      return 0
+    end
+  end
+end
+
 get '/puntuation' do 
 	if current_user
 
@@ -307,27 +322,4 @@ end
 
 post '/puntuation' do
 
-end
-
-
-get '/messages' do 
-	if current_user
-
-	else
-		redirect '/'
-	end
-end
-
-post '/messages' do
-
-end
-
-
-get '/logout' do
-	if current_user
-		session.clear
-		redirect '/'
-	else
-		redirect '/'
-	end
 end
