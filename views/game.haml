@@ -68,3 +68,16 @@
         .panel-footer
           %p 
             %strong ¿Cómo se dice lo que utilizas en clase en inglés?
+    .col-md-4
+      .panel.panel-primary
+        .panel-heading
+          %h2 
+            Calculadoraa!!
+            %span.badge
+              #{@score['calculator']} puntos
+        .panel-body
+          %a.thumbnail{:href=>"/game/mathematics/calculator"}
+            %img{:src=>"/img/games/calculator.png"}
+        .panel-footer
+          %p 
+            %strong ¿Eres una calculadora humana?
