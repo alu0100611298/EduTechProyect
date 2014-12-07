@@ -1,0 +1,54 @@
+!!!
+%html{:lang => "en"}
+  %head
+    %meta{:charset => "utf-8"}
+      %meta{:content => "IE=edge", "http-equiv" => "X-UA-Compatible"}
+        %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}
+          %meta{:content => "", :name => "description"}
+            %meta{:content => "", :name => "author"}
+              %link{:href => "/img/logo.png", :rel => "icon"}
+                %title Edutech
+                %link{:href => "/css/bootstrap.min.css", :rel => "stylesheet"}
+                  %link{:href => "/css/jumbotron-narrow.css", :rel => "stylesheet"}
+                    %link{:href => "http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}
+                      %link{:href => "/css/style.css", :rel => "stylesheet", :type => "text/css"}
+                        %script{:src => "/js/ie-emulation-modes-warning.js"}
+  %body
+    .container.col-sm-12.col-lg-12.col-xs-12
+      .header.col-sm-12.col-lg-12.col-xs-12
+        %nav.mynav.col-xs-12.col-sm-12.col-lg-12
+          %form.form-inline{:action => "/login", :method => "post", :role => "form"}
+            .form-group
+              %label.sr-only Nombre de usuario
+              %input#usern.form-control{:name => "username", :placeholder => "Nombre Usuario", :type => "text"}
+            .form-group
+              %label.sr-only Contraseña
+              %input#passr.form-control{:name => "pass", :placeholder => "Contraseña", :type => "password"}
+            %button.btn.btn-primary{:type => "submit"} Entrar
+      .jumbotron.main.col-sm-12.col-lg-12.col-xs-12
+        .myform.col-sm-6.col-lg-6.col-xs-12.col-sm-offset-6.col-lg-offset-6
+          %h1.col-sm-12.col-lg-12.col-xs-12 Edutech
+          %p.lead.col-sm-12.col-lg-12.col-xs-12 Aprende con nosotros, registrate!
+          %form.col-sm-12.col-lg-12.col-xs-12{:action => "/registro", :method => "post", :role => "form"}
+            .form-group.col-sm-6.col-lg-6.col-xs-12
+              %label Nombre
+              %input#name.form-control{:name => "nombre", :placeholder => "Nombre", :type => "text"}
+            .form-group.col-sm-6.col-lg-6.col-xs-12
+              %label Apellidos
+              %input#lastname.form-control{:name => "apellidos", :placeholder => "Apellidos", :type => "text"}
+            .form-group.col-sm-6.col-lg-6.col-xs-12
+              %label Contraseña
+              %input#pass.form-control{:name => "pass", :placeholder => "Constraseña", :type => "password"}
+            .form-group.col-sm-6.col-lg-6.col-xs-12
+              %label Repetir contraseña
+              %input#pass1.form-control{:name => "pass1", :placeholder => "Contraseña", :type => "password"}
+            .form-group.col-sm-12.col-lg-12.col-xs-12
+              %label Nombre de Usuario
+              %input#username.form-control{:name => "username", :placeholder => "nombre de usuario", :type => "text"}
+            %button.btn.btn-primary.col-sm-12.col-lg-12.col-xs-12{:type => "submit"} Registrarse
+    / /container
+    .footer
+      .container
+        %p.text-muted
+          Edutech 2014. Todos los derechos reservados
+    %script{:src => "/js/ie10-viewport-bug-workaround.js"}
