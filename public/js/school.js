@@ -10,11 +10,11 @@ function schools(){
   }
 
   this.create_game = function(){
-    this.school = Math.floor(Math.random() * 10);
+    this.school = Math.floor(Math.random() * 16);
     for(var i=0; i<this.options.length; i++){
       var rand = 0;
       do{
-        rand = Math.floor(Math.random() * 10);
+        rand = Math.floor(Math.random() * 16);
       }while(rand == this.school || this.options.repeat(rand));
       this.options[i] = rand;
     }
