@@ -12,23 +12,14 @@
       .btn-compose.pull-left
         %a.btn.btn-danger.navbar-btn{"data-toggle" => "tab", :href => "#compose", :role => "tab", :type => "button"}
           %span.glyphicon.glyphicon-pencil
-          Compose
+          Nuevo
       %ul.nav.navbar-nav
         %li
           %a{"data-toggle" => "tab", :href => "#inbox", :role => "tab"}
-            Inbox
-            %span.label.label-success 10
+            Bandeja de entrada
+            %span.label.label-success #{@recibidos.size}
         %li
-          %a{"data-toggle" => "tab", :href => "#sent-mail", :role => "tab"} Sent mail
-        %li
-          %a{"data-toggle" => "tab", :href => "#draft", :role => "tab"} Draft
-        %li
-          %a{"data-toggle" => "tab", :href => "#trash", :role => "tab"} Trash
-      %ul.nav.navbar-nav.navbar-right
-        %li
-          %a{:href => "#"}
-            %span.glyphicon.glyphicon-user
-            Username
+          %a{"data-toggle" => "tab", :href => "#sent-mail", :role => "tab"} Mensajes enviados
     / /.navbar-collapse
   / /.container-fluid
 .tab-content
@@ -42,6 +33,7 @@
             - @recibidos.each do |mensaje|
               %li
                 %a{:href => ""}
+                  %span.mail-created_at #{mensaje.created_at}
                   %span.mail-sender #{mensaje.from_user}
                   %span.mail-subject #{mensaje.description}
                   %span.mail-message-preview #{mensaje.message}
@@ -70,70 +62,7 @@
             - @enviados.each do |mensaje|
               %li
                 %a{:href => ""}
+                  %span.mail-created_at #{mensaje.created_at}
                   %span.mail-sender #{mensaje.from_user}
                   %span.mail-subject #{mensaje.description}
                   %span.mail-message-preview #{mensaje.message}
-  #draft.tab-pane
-    .container
-      .content-container.clearfix
-        .col-md-12
-          %h1.content-title Draft
-          %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
-          %ul.mail-list
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview You have ten more subscriptions click her...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-  #trash.tab-pane
-    .container
-      .content-container.clearfix
-        .col-md-12
-          %h1.content-title Trash
-          %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
-          %ul.mail-list
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview You have ten more subscriptions click her...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...

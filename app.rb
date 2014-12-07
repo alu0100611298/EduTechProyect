@@ -225,6 +225,7 @@ post '/message' do
 	if current_user
 		#buscar el usuario
 		usuario_recibe = User.first(:username => params[:username])
+		redirect '/message' unless usuario_recibe
 		usuario_envia = User.first(:username => session[:username])
 		#Guarda el mensaje recibido
 		Message.first_or_create(:from_user => session[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :tipo => "true", :user =>usuario_recibe)
