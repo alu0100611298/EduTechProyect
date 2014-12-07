@@ -17,7 +17,7 @@ function numbers(){
       var rand = 0;
       do{
         rand = Math.floor(Math.random() * this.LIMIT);
-      }while(this.options.repeat(rand) && rand == this.number);
+      }while(this.options.repeat(rand) || rand == this.number);
       this.options[i] = rand;
     }
     this.options[Math.floor(Math.random() * 4)] = this.number;
