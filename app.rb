@@ -246,9 +246,23 @@ end
 get '/message' do
 	if current_user
 		user = User.first(:username => session[:username])
-		@recibidos = Message.all(:user => user, :tipo => "true")
-		@enviados = Message.all(:user => user, :tipo => "false")
+		@recibidos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ])
+		@enviados = Message.all(:user => user, :tipo => "false", :order => [ :created_at.desc ])
+		@nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
   		haml :message, :layout => :index
+  	else
+  		redirect '/'
+  	end
+end
+get '/message/open/:identifier' do
+	if current_user
+		#buscar el mensaje
+		puts "--------------------------"
+		puts params[:identifier]
+		message = Message.first(:id => params[:identifier])
+		message.status =  "true"
+		message.save
+		redirect '/message'
   	else
   		redirect '/'
   	end
