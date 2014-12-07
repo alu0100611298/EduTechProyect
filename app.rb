@@ -213,7 +213,8 @@ end
 get '/message' do
 	if current_user
 		user = User.first(:username => session[:username])
-		@mensajes = Message.all(:user => user)
+		@recibidos = Message.all(:user => user, :tipo => "true")
+		@enviados = Message.all(:user => user, :tipo => "false")
   		haml :message, :layout => :index
   	else
   		redirect '/'
@@ -223,11 +224,13 @@ end
 post '/message' do
 	if current_user
 		#buscar el usuario
-		user = User.first(:username => params[:username])
-
-		#Guardar la nota
-		nota = Message.first_or_create(:from_user => session[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :user =>user)
-  		redirect '/notes'
+		usuario_recibe = User.first(:username => params[:username])
+		usuario_envia = User.first(:username => session[:username])
+		#Guarda el mensaje recibido
+		Message.first_or_create(:from_user => session[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :tipo => "true", :user =>usuario_recibe)
+		#Guarda el mensaje enviado
+		Message.first_or_create(:from_user => params[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :tipo => "false", :user =>usuario_envia)
+  		redirect '/message'
   	else
   		redirect '/'
   	end

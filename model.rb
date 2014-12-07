@@ -50,6 +50,7 @@ class Message
 	property :message, Text
 	property :created_at, DateTime
 	property :status, Boolean
+	property :tipo, Boolean
 
 	belongs_to :user
 end

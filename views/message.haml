@@ -39,45 +39,27 @@
           %h1.content-title Bandeja de entrada
           %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
           %ul.mail-list
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview You have ten more subscriptions click her...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
+            - @recibidos.each do |mensaje|
+              %li
+                %a{:href => ""}
+                  %span.mail-sender #{mensaje.from_user}
+                  %span.mail-subject #{mensaje.description}
+                  %span.mail-message-preview #{mensaje.message}
   #compose.tab-pane
     .container
       .content-container.clearfix
         %h1.content-title Nuevo
         .col-md-12
-          .form-group
-            %input#tokenfield.form-control{:placeholder => "Para",:id => "username", :name => "username", :type => "text"}/
-          .form-group
-            %input.form-control{:placeholder => "Asunto", :id => "description", :name => "description", :type => "text"}/
-          %textarea.form-control{:placeholder => "mensaje" ,:id => "message", :name => "message"}
-          .btn-send
-            %button.btn.btn-success.btn-lg
-              %span.glyphicon.glyphicon-send
-              Enviar
+          %form{:role => "form", :action => "/message", :method => "post"}
+            .form-group
+              %input#tokenfield.form-control{:placeholder => "Para",:id => "username", :name => "username", :type => "text"}/
+            .form-group
+              %input.form-control{:placeholder => "Asunto", :id => "description", :name => "description", :type => "text"}/
+            %textarea.form-control{:placeholder => "mensaje" ,:id => "message", :name => "message"}
+            .btn-send
+              %button.btn.btn-success.btn-lg{:type => "submit"}
+                %span.glyphicon.glyphicon-send
+                Enviar
   #sent-mail.tab-pane
     .container
       .content-container.clearfix
@@ -85,31 +67,12 @@
           %h1.content-title Mensajes enviados
           %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
           %ul.mail-list
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview You have ten more subscriptions click her...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
-            %li
-              %a{:href => ""}
-                %span.mail-sender You Tube
-                %span.mail-subject New subscribers!
-                %span.mail-message-preview Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil eveniet ipsum nisi? Eaque odio quae debitis saepe explicabo alias sit tenetur animi...
+            - @enviados.each do |mensaje|
+              %li
+                %a{:href => ""}
+                  %span.mail-sender #{mensaje.from_user}
+                  %span.mail-subject #{mensaje.description}
+                  %span.mail-message-preview #{mensaje.message}
   #draft.tab-pane
     .container
       .content-container.clearfix
