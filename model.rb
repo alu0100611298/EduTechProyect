@@ -21,8 +21,8 @@ class Game
   property  :level,       Integer, :key => true
   property  :created_at,   DateTime
 
-  def self.score(game)
-    DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' GROUP BY name")
+  def self.score(game, id)
+    DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' AND user_id = '" + id + "' GROUP BY name")
   end
 
   belongs_to :user
