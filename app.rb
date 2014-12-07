@@ -106,7 +106,8 @@ post '/login' do
 end
 
 get '/logout' do
-	session.clear
+  session.clear
+  session = nil
 	redirect '/'
 end
 
@@ -130,12 +131,12 @@ get '/game' do
 	if current_user
       game = Game.all(:user => current_user)
       @score = Hash.new
-      @score['pintamatematicas'] = game.score('pintamatematicas')[0] || 0
-      @score['memoria'] = game.score('memoria')[0] || 0
-      @score['numbers'] = game.score('numbers')[0] || 0
-      @score['colors'] = game.score('colors')[0] || 0
-      @score['school'] = game.score('school')[0] || 0
-      @score['calculator'] = game.score('calculator')[0] || 0
+      @score['pintamatematicas'] = game.score('pintamatematicas',current_user.id.to_s)[0] || 0
+      @score['memoria'] = game.score('memoria',current_user.id.to_s)[0] || 0
+      @score['numbers'] = game.score('numbers',current_user.id.to_s)[0] || 0
+      @score['colors'] = game.score('colors',current_user.id.to_s)[0] || 0
+      @score['school'] = game.score('school',current_user.id.to_s)[0] || 0
+      @score['calculator'] = game.score('calculator',current_user.id.to_s)[0] || 0
   		haml :game, :layout => :index
   	else
   		redirect '/'
