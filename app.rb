@@ -105,6 +105,11 @@ post '/login' do
 	end
 end
 
+get '/logout' do
+	session.clear
+	redirect '/'
+end
+
 get '/home' do
 	if current_user
 
@@ -136,7 +141,16 @@ get '/game' do
   		redirect '/'
   	end
 end
-
+get '/notes/delete' do
+	if current_user
+		user = User.first(:username => session[:username])
+		Note.all(:user => user).destroy
+		@notas = Note.all(:user => user)
+  		redirect '/notes'
+  	else
+  		redirect '/'
+  	end
+end
 #PintaMatematicas
 get '/game/mathematics/draw' do
   #Para enlazar con el dibujo correspondiente
