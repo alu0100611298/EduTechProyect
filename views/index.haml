@@ -16,6 +16,7 @@
     %link{:href => "/css/games.css", :rel => "stylesheet"}
     %link{:href => "/css/notes.css", :rel => "stylesheet"}
     %link{:href => "/css/message.css", :rel => "stylesheet"}
+    %link{:href => "/css/alert.css", :rel => "stylesheet"}
     %link{:href => "/img/logo.png", :rel => "icon"}
     %script{:src => "/js/ie-emulation-modes-warning.js"}
     %script{:src => "/js/message.js"}
@@ -27,7 +28,7 @@
         .col-sm-2.col-md-2.sidebar
           %ul.nav.nav-sidebar
             %li.active
-              %a{:href => "#"}
+              %a{:href => "/home"}
             %li
               %a{:href => "/notes"}
                 %i.fa.fa-file-text
@@ -46,20 +47,22 @@
               #icons
                 %a.btn{:href => "/message"}
                   %i.fa.fa-envelope
-                - if (@alerts.to_i > 0)
+                - if (@alerts.length  > 0)
                   .btn-group
                     %a.btn.dropdown-toggle{:href => "#", "data-toggle"=>"dropdown"}
                       %i.fa.fa-bell
                       %span.caret
-                    %ul.dropdown-menu
-                      %li.message-preview
-                        %a{:href => "#"}
-                          %h5.media-heading
-                            %strong Memoria
-                          %p.small.text-muted
-                            %i.fa.fa-clock-o
-                            4:32 PM
-                          %p No crees que vas necesitas mejorar en memoria
+                    %ul.dropdown-menu.ul-alert
+                      - @alerts.each do |alert|
+                        %li.message-preview
+                          %form{:id => "form#{alert.id}", :action => "/clear/alert/#{alert.id}", :method => "POST"}
+                            %btn{:onclick => "document.getElementById(\'form#{alert.id}\').submit();", :title => "Marcar como visto", :type => "submit"}
+                              %h5.media-heading
+                                %strong #{alert.game.upcase}
+                              %p.small.text-muted
+                                %i.fa.fa-clock-o
+                                #{alert.created_at.strftime("%d / %b / %Y")}
+                              %p #{alert.message}
                 - else
                   %a.btn.dropdown-toggle{:href => "#"}
                     %i.fa.fa-bell-slash

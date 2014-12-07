@@ -14,6 +14,7 @@ require 'chartkick'
 require 'dm-core'
 require 'dm-timestamps'
 require 'dm-types'
+require 'time_difference'
 
 configure :development do
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
@@ -112,7 +113,7 @@ end
 get '/home' do
 	if current_user
     alerts(current_user.id.to_s)
-    @alerts = Alert.count(:to_user => current_user.id.to_s, :game => 'memoria', :status => false)
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		haml :home, :layout => :index
 	else
     redirect '/'
@@ -134,6 +135,7 @@ end
 # URLs para los juegos
 get '/game' do
 	if current_user
+      @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
       game = Game.all(:user_id => current_user.id)
       @score = Hash.new
       @score['pintamatematicas'] = game.score('pintamatematicas',current_user.id.to_s)[0] || 0
@@ -163,6 +165,7 @@ get '/game/mathematics/draw' do
   #al nivel hay que extraer el curso del alumno
   #Provisionalmente se pone por defecto el mismo
   if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   	haml :mth_draw1, :layout => :index
   else
   	redirect '/'
@@ -172,6 +175,7 @@ end
 #Memory
 get '/game/memory' do
 	if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
  		haml :memory, :layout => :index
  	else
  		redirect '/'
@@ -180,6 +184,7 @@ end
 
 get '/game/english/numbers' do
 	if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :numbers, :layout => :index
   	else
   		redirect '/'
@@ -188,6 +193,7 @@ end
 
 get '/game/english/colors' do
 	if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :colors, :layout => :index
   	else
   		redirect '/'
@@ -196,6 +202,7 @@ end
 
 get '/game/english/school' do
 	if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :school, :layout => :index
   	else
   		redirect '/'
@@ -204,6 +211,7 @@ end
 
 get '/game/mathematics/calculator' do
 	if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
  		haml :calculator, :layout => :index
  	else
  		redirect '/'
@@ -224,6 +232,7 @@ end
 
 get '/notes' do
 	if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		user = User.first(:username => session[:username])
 		@notas = Note.all(:user => user, :order => [ :created_at.desc ])
   		haml :notes, :layout => :index
@@ -257,6 +266,7 @@ end
 
 get '/message' do
 	if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		user = User.first(:username => session[:username])
 		@recibidos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ])
 		@enviados = Message.all(:user => user, :tipo => "false", :order => [ :created_at.desc ])
@@ -296,17 +306,40 @@ post '/message' do
   	end
 end
 
+post "/clear/alert/:id" do
+  alert = Alert.first(:id => params['id'])
+  alert.update(:status => true)
+  redirect '/game'
+end
+
 def alerts(id)
-  game = Game.all
-  better_memory = game.better('memoria')[0]
-  me_memory = game.score('memoria', id)[0]
-  if((better_memory.to_i - me_memory.to_i) >= 500)
-    alerts = Alert.count(:to_user => id, :game => 'memoria', :status => false)
-    if(alerts < 1)
-      Alert.create(:to_user => id, :game => 'memoria', :message => "No crees que vas necesitas mejorar en memoria", :status => false, :created_at => Time.now)
-      return alerts
-    else
-      return 0
+  alerts_games = [
+    ['memoria',500,'No crees que necesitas mejorar en memoria'],
+    ['pintamatematicas',250,'¿Una partida a pintamatematicas?'],
+    ['colors',30,'Yo que tu repasaría los colores'],
+    ['numbers',30,'¿Cómo llevas los números en inglés?'],
+    ['school',30,'¿Sabes como se dice en inglés las cosas del cole?'],
+    ['calculator',30,'Esas matemáticas...'],
+  ]
+  alerts_games.each do |al_game|
+    puts al_game
+    game = Game.all
+    better = game.better(al_game[0])[0]
+    me = game.score(al_game[0], id)[0] || 0
+    if((better - me) >= al_game[1])
+      alerts = Alert.count(:to_user => id, :game => al_game[0], :status => false)
+      alerts_mark = Alert.all(:to_user => id, :game => al_game[0], :status => true)
+      if(alerts_mark.length != 0)
+        newest = alerts_mark.all(:order => [:created_at.desc], :limit => 1)
+        diference =  TimeDifference.between(newest[0].created_at,Time.now).in_days
+        if(alerts == 0 && diference > 7)
+          Alert.create(:to_user => id, :game => al_game[0], :message => al_game[2], :status => false, :created_at => Time.now)
+        end
+      else
+        if(alerts == 0)
+          Alert.create(:to_user => id, :game => al_game[0], :message => al_game[2], :status => false, :created_at => Time.now)
+        end
+      end
     end
   end
 end
