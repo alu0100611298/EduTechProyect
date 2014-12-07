@@ -40,8 +40,8 @@ $(document).ready(function(){
 
 function check(id,origin){
   if (id == origin){
-    $('#or'+origin).addClass('win');
-    $('#'+id).addClass('win');
+    $('#or'+origin).parent().addClass('win');
+    $('#'+id).parent().addClass('win');
     cont++;
     score++;
     if(cont < 5){
@@ -61,11 +61,11 @@ function check(id,origin){
     }
   }
   else{
-    $('#or'+origin).addClass('wrong');
-    $('#'+id).addClass('wrong');
+    $('#or'+origin).parent().addClass('wrong');
+    $('#'+id).parent().addClass('wrong');
     setTimeout(function(){
-      $('#or'+origin).removeClass('wrong');
-      $('#'+id).removeClass('wrong');
+      $('#or'+origin).parent().removeClass('wrong');
+      $('#'+id).parent().removeClass('wrong');
     },1000);
     score--;
   }

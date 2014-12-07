@@ -1,4 +1,4 @@
-.container
+.container#game
   .page-header
     %h1 Sección de juegos
   .row
@@ -6,9 +6,9 @@
       .panel.panel-primary
         .panel-heading
           %h2 
-            Colors in English
+            Colors, English
             %span.badge
-              #{@score['colors']}
+              #{@score['colors']} puntos
         .panel-body
           %a.thumbnail{:href=>"/game/english/colors"}
             %img{:src=>"/img/games/colors.png"}
@@ -21,7 +21,7 @@
           %h2 
             Memoria
             %span.badge
-              #{@score['memoria']}
+              #{@score['memoria']} puntos
         .panel-body
           %a.thumbnail{:href=>"/game/memory"}
             %img{:src=>"/img/games/memory.png"}
@@ -32,9 +32,9 @@
       .panel.panel-primary
         .panel-heading
           %h2 
-            Numbers in English
+            Numbers, English
             %span.badge
-              #{@score['numbers']}
+              #{@score['numbers']} puntos
         .panel-body
           %a.thumbnail{:href=>"/game/english/numbers"}
             %img{:src=>"/img/games/numbers.png"}
@@ -48,10 +48,23 @@
           %h2 
             PintaMatemáticas
             %span.badge
-              #{@score['pintamatematicas']}
+              #{@score['pintamatematicas']} puntos
         .panel-body
           %a.thumbnail{:href=>"/game/mathematics/draw"}
             %img{:src=>"/img/games/mathematics_draw_partial.png"}
         .panel-footer
           %p 
             %strong Completa los colores usando las matemáticas
+    .col-md-4
+      .panel.panel-primary
+        .panel-heading
+          %h2 
+            School, English
+            %span.badge
+              #{@score['school']} puntos
+        .panel-body
+          %a.thumbnail{:href=>"/game/english/school"}
+            %img{:src=>"/img/games/school.png"}
+        .panel-footer
+          %p 
+            %strong ¿Cómo se dice lo que utilizas en clase en inglés?

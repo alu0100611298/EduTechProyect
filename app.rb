@@ -125,10 +125,11 @@ get '/game' do
 	if current_user
       game = Game.all(:user => current_user)
       @score = Hash.new
-      @score['pintamatematicas'] = game.score('pintamatematicas')[0]
-      @score['memoria'] = game.score('memoria')[0]
-      @score['numbers'] = game.score('numbers')[0]
-      @score['colors'] = game.score('colors')[0]
+      @score['pintamatematicas'] = game.score('pintamatematicas')[0] || 0
+      @score['memoria'] = game.score('memoria')[0] || 0
+      @score['numbers'] = game.score('numbers')[0] || 0
+      @score['colors'] = game.score('colors')[0] || 0
+      @score['school'] = game.score('school')[0] || 0
   		haml :game, :layout => :index
   	else
   		redirect '/'
@@ -154,6 +155,10 @@ end
 
 get '/game/english/colors' do
   haml :colors, :layout => :index
+end
+
+get '/game/english/school' do
+  haml :school, :layout => :index
 end
 
 #Salvar el resultado de un juego en la BD
