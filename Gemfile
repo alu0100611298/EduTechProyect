@@ -11,7 +11,7 @@ gem 'sinatra-contrib'
 gem 'haml'
 gem 'chartkick'
 gem 'dm-core'
-
+gem 'time_difference'
 gem 'dm-timestamps'
 
 gem 'dm-types' 
