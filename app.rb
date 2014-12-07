@@ -119,8 +119,13 @@ get '/home' do
 end
 
 post '/home' do
+	if current_user
 
+	else
+		redirect '/'
+	end
 end
+
 get '/register' do
 	erb :register
 end
@@ -128,7 +133,7 @@ end
 # URLs para los juegos
 get '/game' do
 	if current_user
-      game = Game.all(:user => current_user)
+      game = Game.all(:user_id => current_user.id)
       @score = Hash.new
       @score['pintamatematicas'] = game.score('pintamatematicas')[0] || 0
       @score['memoria'] = game.score('memoria')[0] || 0
@@ -156,35 +161,63 @@ get '/game/mathematics/draw' do
   #Para enlazar con el dibujo correspondiente
   #al nivel hay que extraer el curso del alumno
   #Provisionalmente se pone por defecto el mismo
-  haml :mth_draw1, :layout => :index
+  if current_user
+  	haml :mth_draw1, :layout => :index
+  else
+  	redirect '/'
+  end
 end
 
 #Memory
 get '/game/memory' do
-  haml :memory, :layout => :index
+	if current_user
+ 		haml :memory, :layout => :index
+ 	else
+ 		redirect '/'
+ 	end
 end
 
 get '/game/english/numbers' do
-  haml :numbers, :layout => :index
+	if current_user
+  		haml :numbers, :layout => :index
+  	else
+  		redirect '/'
+  	end
 end
 
 get '/game/english/colors' do
-  haml :colors, :layout => :index
+	if current_user
+  		haml :colors, :layout => :index
+  	else
+  		redirect '/'
+  	end
 end
 
 get '/game/english/school' do
-  haml :school, :layout => :index
+	if current_user
+  		haml :school, :layout => :index
+  	else
+  		redirect '/'
+  	end
 end
 
 get '/game/mathematics/calculator' do
-  haml :calculator, :layout => :index
+	if current_user
+ 		haml :calculator, :layout => :index
+ 	else
+ 		redirect '/'
+ 	end
 end
 
 #Salvar el resultado de un juego en la BD
 post '/game/save' do
-  #Por defecto el nivel será 1
-  user = User.first(:username => session[:username])
-  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => 1, :created_at => Time.now)
+	if current_user
+	  #Por defecto el nivel será 1
+	  user = User.first(:username => session[:username])
+	  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => 1, :created_at => Time.now)
+	else
+		redirect '/'
+	end
 end
 
 
@@ -235,4 +268,40 @@ post '/message' do
   	else
   		redirect '/'
   	end
+end
+
+get '/puntuation' do 
+	if current_user
+
+	else
+		redirect '/'
+	end
+
+end
+
+post '/puntuation' do
+
+end
+
+
+get '/messages' do 
+	if current_user
+
+	else
+		redirect '/'
+	end
+end
+
+post '/messages' do
+
+end
+
+
+get '/logout' do
+	if current_user
+		session.clear
+		redirect '/'
+	else
+		redirect '/'
+	end
 end
