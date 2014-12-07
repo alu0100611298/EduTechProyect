@@ -31,8 +31,8 @@ function memory(){
       COLS = Math.floor(Math.random() * (9-3) + 3);
     }while(ROWS*COLS%2 != 0)
     matriz = new Array(ROWS*COLS);
-    var folders = ['animals','flags']
-    var folder = Math.floor(Math.random() * 2);
+    var folders = ['animals','flags','sports']
+    var folder = Math.floor(Math.random() * 3);
     for(var i=0; i<ROWS; i++){
       for(var j=0; j<COLS; j++){
         var rand = 0;
