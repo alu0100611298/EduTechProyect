@@ -25,7 +25,6 @@ class Game
     DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' GROUP BY name")
   end
 
-  belongs_to  :user
 end
 
 class Note
