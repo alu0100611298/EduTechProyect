@@ -46,6 +46,7 @@ class Message
 
 	property :id, Serial
 	property :from_user, String
+	property :description, Text
 	property :message, Text
 	property :created_at, DateTime
 	property :status, Boolean

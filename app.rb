@@ -209,3 +209,26 @@ post '/notes' do
   		redirect '/'
   	end
 end
+
+get '/message' do
+	if current_user
+		user = User.first(:username => session[:username])
+		@mensajes = Message.all(:user => user)
+  		haml :message, :layout => :index
+  	else
+  		redirect '/'
+  	end
+end
+
+post '/message' do
+	if current_user
+		#buscar el usuario
+		user = User.first(:username => params[:username])
+
+		#Guardar la nota
+		nota = Message.first_or_create(:from_user => session[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :user =>user)
+  		redirect '/notes'
+  	else
+  		redirect '/'
+  	end
+end
