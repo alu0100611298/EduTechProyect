@@ -29,7 +29,7 @@
             %li.active
               %a{:href => "#"}
             %li
-              %a{:href => "#"}
+              %a{:href => "/notes"}
                 %i.fa.fa-file-text
             %li
               %a{:href => "/game"}
@@ -40,22 +40,37 @@
         .col-sm-12.col-md-12.col-xs-12.header
           .col-sm-12.col-lg-12.col-md-12.col-xs-12.user
             .col-sm-4.col-md-4.col-sm-offset-7.col-md-offset-7.col-xs-9.info
-              %p#nombre
+              #nombre
                 = current_user.name
                 = current_user.last_name
-              %p#icons
-                %a{:href => "#"}
-                  %i.fa.fa-envelope.myfa
-                %a{:href => "#"}
-                  %i.fa.fa-inbox.myfa
-                %a{:href => "#"}
-                  %i.fa.fa-cog.myfa
-                %a{:href => "#"}
-                  %i.fa.fa-power-off.myfa
+              #icons
+                %a.btn{:href => "/message"}
+                  %i.fa.fa-envelope
+                - if (@alerts.to_i > 0)
+                  .btn-group
+                    %a.btn.dropdown-toggle{:href => "#", "data-toggle"=>"dropdown"}
+                      %i.fa.fa-bell
+                      %span.caret
+                    %ul.dropdown-menu
+                      %li.message-preview
+                        %a{:href => "#"}
+                          %h5.media-heading
+                            %strong Memoria
+                          %p.small.text-muted
+                            %i.fa.fa-clock-o
+                            4:32 PM
+                          %p No crees que vas necesitas mejorar en memoria
+                - else
+                  %a.btn.dropdown-toggle{:href => "#"}
+                    %i.fa.fa-bell-slash
+                %a.btn{:href => "#"}
+                  %i.fa.fa-cog
+                %a.btn{:href => "/logout"}
+                  %i.fa.fa-power-off
             .col-sm-1.col-md-1.col-xs-3.imagen
               %img.img-responsive.img-circle.avatar{:src => "/img/kid_girl.png"}/
             
-          .col-sm-12.col-md-12.col-xs-12.main 
-            =yield
+        .col-sm-12.col-md-12.col-xs-12.main 
+          =yield
 
     

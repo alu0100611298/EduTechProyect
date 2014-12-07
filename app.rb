@@ -15,8 +15,6 @@ require 'dm-core'
 require 'dm-timestamps'
 require 'dm-types'
 
-
-
 configure :development do
     DataMapper.setup(:default, "sqlite3://#{Dir.pwd}/development.db")
 end
@@ -53,7 +51,7 @@ end
 get '/' do
 
 	if current_user
-		erb :index
+		redirect '/home'
 	else
 		erb :login
 	end
@@ -113,15 +111,22 @@ end
 
 get '/home' do
 	if current_user
-
-		erb :index
-
-	end
+    alerts(current_user.id.to_s)
+    @alerts = Alert.count(:to_user => current_user.id.to_s, :game => 'memoria', :status => false)
+		haml :home, :layout => :index
+	else
+    redirect '/'
+  end
 end
 
 post '/home' do
+	if current_user
 
+	else
+		redirect '/'
+	end
 end
+
 get '/register' do
 	erb :register
 end
@@ -129,7 +134,7 @@ end
 # URLs para los juegos
 get '/game' do
 	if current_user
-      game = Game.all(:user => current_user)
+      game = Game.all(:user_id => current_user.id)
       @score = Hash.new
       @score['pintamatematicas'] = game.score('pintamatematicas',current_user.id.to_s)[0] || 0
       @score['memoria'] = game.score('memoria',current_user.id.to_s)[0] || 0
@@ -157,35 +162,63 @@ get '/game/mathematics/draw' do
   #Para enlazar con el dibujo correspondiente
   #al nivel hay que extraer el curso del alumno
   #Provisionalmente se pone por defecto el mismo
-  haml :mth_draw1, :layout => :index
+  if current_user
+  	haml :mth_draw1, :layout => :index
+  else
+  	redirect '/'
+  end
 end
 
 #Memory
 get '/game/memory' do
-  haml :memory, :layout => :index
+	if current_user
+ 		haml :memory, :layout => :index
+ 	else
+ 		redirect '/'
+ 	end
 end
 
 get '/game/english/numbers' do
-  haml :numbers, :layout => :index
+	if current_user
+  		haml :numbers, :layout => :index
+  	else
+  		redirect '/'
+  	end
 end
 
 get '/game/english/colors' do
-  haml :colors, :layout => :index
+	if current_user
+  		haml :colors, :layout => :index
+  	else
+  		redirect '/'
+  	end
 end
 
 get '/game/english/school' do
-  haml :school, :layout => :index
+	if current_user
+  		haml :school, :layout => :index
+  	else
+  		redirect '/'
+  	end
 end
 
 get '/game/mathematics/calculator' do
-  haml :calculator, :layout => :index
+	if current_user
+ 		haml :calculator, :layout => :index
+ 	else
+ 		redirect '/'
+ 	end
 end
 
 #Salvar el resultado de un juego en la BD
 post '/game/save' do
-  #Por defecto el nivel será 1
-  user = User.first(:username => session[:username])
-  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => 1, :created_at => Time.now)
+	if current_user
+	  #Por defecto el nivel será 1
+	  user = User.first(:username => session[:username])
+	  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => 1, :created_at => Time.now)
+	else
+		redirect '/'
+	end
 end
 
 
@@ -214,7 +247,8 @@ end
 get '/message' do
 	if current_user
 		user = User.first(:username => session[:username])
-		@mensajes = Message.all(:user => user)
+		@recibidos = Message.all(:user => user, :tipo => "true")
+		@enviados = Message.all(:user => user, :tipo => "false")
   		haml :message, :layout => :index
   	else
   		redirect '/'
@@ -224,12 +258,44 @@ end
 post '/message' do
 	if current_user
 		#buscar el usuario
-		user = User.first(:username => params[:username])
-
-		#Guardar la nota
-		nota = Message.first_or_create(:from_user => session[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :user =>user)
-  		redirect '/notes'
+		usuario_recibe = User.first(:username => params[:username])
+		redirect '/message' unless usuario_recibe
+		usuario_envia = User.first(:username => session[:username])
+		#Guarda el mensaje recibido
+		Message.first_or_create(:from_user => session[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :tipo => "true", :user =>usuario_recibe)
+		#Guarda el mensaje enviado
+		Message.first_or_create(:from_user => params[:username], :description => params[:description], :message => params[:message], :created_at => Time.now, :status => "false", :tipo => "false", :user =>usuario_envia)
+  		redirect '/message'
   	else
   		redirect '/'
   	end
 end
+
+def alerts(id)
+  game = Game.all
+  better_memory = game.better('memoria')[0]
+  me_memory = game.score('memoria', id)[0]
+  if((better_memory.to_i - me_memory.to_i) >= 500)
+    alerts = Alert.count(:to_user => id, :game => 'memoria', :status => false)
+    if(alerts < 1)
+      Alert.create(:to_user => id, :game => 'memoria', :message => "No crees que vas necesitas mejorar en memoria", :status => false, :created_at => Time.now)
+      return alerts
+    else
+      return 0
+    end
+  end
+end
+
+get '/puntuation' do 
+	if current_user
+
+	else
+		redirect '/'
+	end
+
+end
+
+post '/puntuation' do
+
+end
+
