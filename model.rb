@@ -21,7 +21,7 @@ class Game
   property  :level,       Integer
   property  :update_at,   DateTime
 
-rend
+end
 
 class Note
 	include DataMapper::Resource

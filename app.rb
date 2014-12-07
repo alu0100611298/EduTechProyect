@@ -197,6 +197,7 @@ end
 get '/logout' do
 	if current_user
 		session.clear
+		redirect '/'
 	else
 		redirect '/'
 	end
