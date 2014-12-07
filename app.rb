@@ -224,8 +224,19 @@ end
 get '/notes' do
 	if current_user
 		user = User.first(:username => session[:username])
-		@notas = Note.all(:user => user)
+		@notas = Note.all(:user => user, :order => [ :created_at.desc ])
   		haml :notes, :layout => :index
+  	else
+  		redirect '/'
+  	end
+end
+
+get '/notes/delete/:identifier' do
+	if current_user
+		#buscar la nota
+		message = Note.first(:id => params[:identifier])
+		message.destroy
+		redirect '/notes'
   	else
   		redirect '/'
   	end

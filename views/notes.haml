@@ -4,8 +4,9 @@
     .col-xs-12.col-sm-6.col-md-4.col-lg-3
       .offer.offer-default
         .shape
-          .shape-text
-            #{nota.status}
+          %a{:href => "/notes/delete/#{nota.id}"}
+            .shape-text
+              borrar
         .offer-content
           %h3.lead
             #{nota.name}
