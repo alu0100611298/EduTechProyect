@@ -324,7 +324,8 @@ def alerts(id)
   alerts_games.each do |al_game|
     puts al_game
     game = Game.all
-    better = game.better(al_game[0])[0]
+    #toque esta linea, me daba un error
+    better = game.better(al_game[0])[0] || 0
     me = game.score(al_game[0], id)[0] || 0
     if((better - me) >= al_game[1])
       alerts = Alert.count(:to_user => id, :game => al_game[0], :status => false)
