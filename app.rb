@@ -279,12 +279,21 @@ end
 get '/message/open/:identifier' do
 	if current_user
 		#buscar el mensaje
-		puts "--------------------------"
-		puts params[:identifier]
 		message = Message.first(:id => params[:identifier])
 		message.status =  "true"
 		message.save
-		redirect '/message'
+		return message.message
+  	else
+  		redirect '/'
+  	end
+end
+
+get '/message/delete/:identifier' do
+	if current_user
+		#buscar la nota
+		message = Message.first(:id => params[:identifier])
+		message.destroy
+		return nil
   	else
   		redirect '/'
   	end
@@ -324,8 +333,11 @@ def alerts(id)
   alerts_games.each do |al_game|
     puts al_game
     game = Game.all
-    better = game.better(al_game[0])[0].to_i
-    me = game.score(al_game[0], id)[0].to_i || 0
+
+    better = game.better(al_game[0])[0].to_i #toque esta linea, me daba un error, puse to_i
+    me = game.score(al_game[0], id)[0].to_i || 0 #toque esta linea, me daba un error, puse to_i
+
+        
     if((better - me) >= al_game[1])
       alerts = Alert.count(:to_user => id, :game => al_game[0], :status => false)
       alerts_mark = Alert.all(:to_user => id, :game => al_game[0], :status => true)
@@ -346,6 +358,18 @@ end
 
 get '/puntuation' do 
 	if current_user
+      if current_user
+    user = User.first(:username => session[:username])
+    @game = Game.all(:user => user)
+
+    @usuarios = Hash.new
+
+    usuarios = @game.self.score("numbers")
+    usuarios.each |i| do
+      @usuarios[i.user_id] = i.total_score
+    end
+
+    haml :puntuation, :layout => :index
 
 	else
 		redirect '/'
