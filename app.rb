@@ -356,6 +356,18 @@ end
 
 get '/puntuation' do 
 	if current_user
+      if current_user
+    user = User.first(:username => session[:username])
+    @game = Game.all(:user => user)
+
+    @usuarios = Hash.new
+
+    usuarios = @game.self.score("numbers")
+    usuarios.each |i| do
+      @usuarios[i.user_id] = i.total_score
+    end
+
+    haml :puntuation, :layout => :index
 
 	else
 		redirect '/'

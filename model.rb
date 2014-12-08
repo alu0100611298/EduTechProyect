@@ -26,7 +26,7 @@ class Game
   end
 
   def self.better(game)
-    DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' GROUP BY user_id")
+    DataMapper.repository.adapter.select("SELECT SUM(score) AS total_score FROM games WHERE name = '" + game + "' GROUP BY user_id")
   end
   belongs_to  :user
 end
