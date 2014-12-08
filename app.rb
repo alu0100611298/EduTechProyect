@@ -268,8 +268,6 @@ end
 get '/message/open/:identifier' do
 	if current_user
 		#buscar el mensaje
-		puts "--------------------------"
-		puts params[:identifier]
 		message = Message.first(:id => params[:identifier])
 		message.status =  "true"
 		message.save

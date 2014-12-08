@@ -28,15 +28,15 @@
       .content-container.clearfix
         .col-md-12
           %h1.content-title Bandeja de entrada
-          %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
-          %ul.mail-list
+          %input.form-control.mail-search{:placeholder => "Mensajes enviados", :type => "search"}/
+          %ul.mail-list#mensaje
             - @recibidos.each do |mensaje|
-              %li{:id => "#{mensaje.id}"}
-                %a{:id => "#{mensaje.status}"}
+              %li{:id => "#{mensaje.id}" }
+                %a{:id => "#{mensaje.status}", :onclick => "myFunction(#{mensaje.id})"}
                   %span.mail-created_at #{mensaje.created_at}
                   %span.mail-sender #{mensaje.from_user}
                   %span.mail-subject #{mensaje.description}
-                  %span.mail-message-preview #{mensaje.message}
+                  %span.mail-message-preview{:class => "#{mensaje.id}"}
                   %a.btn.btn-primary.btn-lg{:onclick => "borrarMensaje(#{mensaje.id})", :role => "button"} Borrar
   #compose.tab-pane
     .container
@@ -61,9 +61,10 @@
           %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
           %ul.mail-list
             - @enviados.each do |mensaje|
-              %li{:onclick => "myFunction(#{mensaje.id})"}
-                %a
+              %li{:id => "#{mensaje.id}" }
+                %a{:onclick => "myFunction(#{mensaje.id})"}
                   %span.mail-created_at #{mensaje.created_at}
                   %span.mail-sender #{mensaje.from_user}
                   %span.mail-subject #{mensaje.description}
-                  %span.mail-message-preview{:id => "#{mensaje.id}"}
+                  %span.mail-message-preview{:class => "#{mensaje.id}"}
+                  %a.btn.btn-primary.btn-lg{:onclick => "borrarMensaje(#{mensaje.id})", :role => "button"} Borrar

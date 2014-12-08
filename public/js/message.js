@@ -22,7 +22,7 @@ $(document).ready(function(){
 function myFunction(id) {
 	$.get('/message/open/' + id,
         function(response){
-          $('#' + id).replaceWith(response);
+          $('.' + id).replaceWith(response);
        }
     );
 }
