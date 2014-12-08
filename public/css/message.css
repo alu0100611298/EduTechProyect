@@ -75,6 +75,9 @@ ul.mail-list li:last-child a{
 ul.mail-list li a:hover{
     background-color:#DBF9FF;
 }
+.btn:hover{
+    background-color:red!important;
+}
 ul.mail-list li span{
     display:block;
 }
@@ -95,3 +98,4 @@ ul.mail-list li span.mail-message-preview{
 #false{
     background-color:#F2F2F2!important;
 }
+
