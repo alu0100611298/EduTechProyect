@@ -18,3 +18,27 @@ $(document).ready(function(){
         labelEndTop: 5
     });
 });
+
+function myFunction(id) {
+	$.get('/message/open/' + id,
+        function(response){
+          $('#' + id).replaceWith(response);
+       }
+    );
+}
+
+function notas(id) {
+	$.get('/notes/delete/' + id,
+        function(response){
+          $('#' + id).replaceWith();
+       }
+    );
+}
+
+function borrarMensaje(id) {
+  $.get('/message/delete/' + id,
+        function(response){
+          $('#' + id).replaceWith();
+       }
+    );
+}

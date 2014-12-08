@@ -273,7 +273,18 @@ get '/message/open/:identifier' do
 		message = Message.first(:id => params[:identifier])
 		message.status =  "true"
 		message.save
-		redirect '/message'
+		return message.message
+  	else
+  		redirect '/'
+  	end
+end
+
+get '/message/delete/:identifier' do
+	if current_user
+		#buscar la nota
+		message = Message.first(:id => params[:identifier])
+		message.destroy
+		return nil
   	else
   		redirect '/'
   	end

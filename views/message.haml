@@ -31,12 +31,13 @@
           %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
           %ul.mail-list
             - @recibidos.each do |mensaje|
-              %li{:id => "#{mensaje.status}"}
-                %a{:href => "/message/open/#{mensaje.id}"}
+              %li{:id => "#{mensaje.id}"}
+                %a{:id => "#{mensaje.status}"}
                   %span.mail-created_at #{mensaje.created_at}
                   %span.mail-sender #{mensaje.from_user}
                   %span.mail-subject #{mensaje.description}
                   %span.mail-message-preview #{mensaje.message}
+                  %a.btn.btn-primary.btn-lg{:onclick => "borrarMensaje(#{mensaje.id})", :role => "button"} Borrar
   #compose.tab-pane
     .container
       .content-container.clearfix
@@ -60,9 +61,9 @@
           %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
           %ul.mail-list
             - @enviados.each do |mensaje|
-              %li
-                %a{:href => ""}
+              %li{:onclick => "myFunction(#{mensaje.id})"}
+                %a
                   %span.mail-created_at #{mensaje.created_at}
                   %span.mail-sender #{mensaje.from_user}
                   %span.mail-subject #{mensaje.description}
-                  %span.mail-message-preview #{mensaje.message}
+                  %span.mail-message-preview{:id => "#{mensaje.id}"}
