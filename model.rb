@@ -26,13 +26,16 @@ class Game
   end
 
   def self.puntos(id)
-  	puts "hola"
     DataMapper.repository.adapter.select("SELECT name AS juego, SUM(score) AS total_score FROM games WHERE user_username like '#{id}' GROUP BY name")
 
   end
 
+  def self.puntos_juego(game)
+    DataMapper.repository.adapter.select("SELECT user_username AS usuario, SUM(score) AS total_score FROM games WHERE name = '" + game + "' GROUP BY user_username")
+  end
+
   def self.better(game)
-    DataMapper.repository.adapter.select("SELECT SUM(score) AS total_score FROM games WHERE name = '" + game + "' GROUP BY user_id")
+    DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' GROUP BY user_id")
   end
   belongs_to  :user
 end
