@@ -2,6 +2,7 @@ function colors(){
   this.color = 0;
   this.colors = ['Blue','Black','Orange','Purple','Brown','Green','Red','Yellow','Pink','White','Gray'];
   this.options = [0,0,0,0];
+  this.states = [];
 
   Array.prototype.repeat = function(elem){
     for (var i in this)
@@ -10,12 +11,17 @@ function colors(){
   }
 
   this.create_game = function(){
-    this.color = Math.floor(Math.random() * 10);
+    do{
+      this.color = Math.floor(Math.random() * 10);
+    }while(this.states.repeat(this.color));
+
+    this.states.push(this.color);
+    
     for(var i=0; i<this.options.length; i++){
       var rand = 0;
       do{
         rand = Math.floor(Math.random() * 10);
-      }while(rand == this.color || this.options.repeat(rand));
+      }while(this.options.repeat(rand) || rand == this.color);
       this.options[i] = rand;
     }
     this.options[Math.floor(Math.random() * 4)] = this.color;

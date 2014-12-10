@@ -3,6 +3,7 @@ function numbers(){
   this.number = 0;
   this.numbers = ['One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen','Twenty'];
   this.options = [];
+  this.states = [];
 
   Array.prototype.repeat = function(elem){
     for (var i in this)
@@ -11,7 +12,12 @@ function numbers(){
   }
 
   this.create_game = function(){
-    this.number = Math.floor(Math.random() * this.LIMIT);
+    do{
+      this.number = Math.floor(Math.random() * this.LIMIT);
+    }while(this.states.repeat(this.number));
+
+    this.states.push(this.number);
+    
     this.options = new Array(4);
     for(var i=0; i<this.options.length; i++){
       var rand = 0;

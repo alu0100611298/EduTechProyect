@@ -1,6 +1,6 @@
 function calculator(){
   this.max = 30;
-  this.min = -10;
+  this.min = 1;
   this.operands = [0,0];
   this.operation = 0;
   this.result = 0;
@@ -26,13 +26,13 @@ function calculator(){
     this.options = new Array(4);
     if(this.operation == '÷'){
       do{
-        this.operands = [this.simple_random(),this.simple_random()];
-      }while(this.operands[0] < this.operands[1])
+        this.operands = [this.random(),this.random()];
+      }while(this.operands[0]%this.operands[1] != 0 || this.operands[0] < this.operands[1])
       for(var i=0; i<this.options.length; i++){
         var rand = [];
         do{
-          rand = [this.simple_random(),this.simple_random()];
-        }while(rand[0] < rand[1] || this.options.repeat(rand) && rand == this.operands);
+          rand = [this.random(),this.random()];
+        }while(rand[0]%rand[1] != 0 || rand[0] < rand[1] || this.options.repeat(rand) || this.operation == rand);
         this.options[i] = rand;
       }
     }
@@ -42,7 +42,7 @@ function calculator(){
         var rand = 0;
         do{
           rand = [this.random(),this.random()];
-        }while(this.options.repeat(rand) && rand == this.operands);
+        }while(this.options.repeat(rand) || rand == this.operands);
         this.options[i] = rand;
       }
     }
@@ -75,11 +75,11 @@ function calculator(){
 
   this.create_table = function(){
     var table = $('#matriz');
-    table.append('<div class="big"><div class="vcenter" id="or' + String(this.result).split(".").join("") + '">(' + this.operands[0] + ") " + this.operation + " (" + this.operands[1] + ')</div></div>');
-    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[0]).split(".").join("") + '" onclick="check(' + this.options[0]+','+this.result + ')">' + this.options[0] + '</div></div>');
-    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[1]).split(".").join("") + '" onclick="check(' + this.options[1]+','+this.result + ')">' + this.options[1] + '</div></div>');
-    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[2]).split(".").join("") + '" onclick="check(' + this.options[2]+','+this.result + ')">' + this.options[2] + '</div></div>');
-    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[3]).split(".").join("") + '" onclick="check(' + this.options[3]+','+this.result + ')">' + this.options[3] + '</div></div>');
+    table.append('<div class="big"><div class="vcenter" id="or' + String(this.result).split(".").join("") + '">' + this.operands[0] + " " + this.operation + " " + this.operands[1] + '</div></div>');
+    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[0]).split(".").join("") + '" onclick="check(' + String(this.options[0]).split(".").join("")+','+this.result + ')">' + this.options[0] + '</div></div>');
+    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[1]).split(".").join("") + '" onclick="check(' + String(this.options[1]).split(".").join("")+','+this.result + ')">' + this.options[1] + '</div></div>');
+    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[2]).split(".").join("") + '" onclick="check(' + String(this.options[2]).split(".").join("")+','+this.result + ')">' + this.options[2] + '</div></div>');
+    table.append('<div class="small"><div class="vcenter" id="'+ String(this.options[3]).split(".").join("") + '" onclick="check(' + String(this.options[3]).split(".").join("")+','+this.result + ')">' + this.options[3] + '</div></div>');
   }
 }
 var calc = new calculator();
