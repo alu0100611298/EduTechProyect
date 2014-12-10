@@ -17,7 +17,7 @@
         %li
           %a{"data-toggle" => "tab", :href => "#inbox", :role => "tab"}
             Bandeja de entrada
-            %span.label.label-success #{@nuevos.size}
+            %span.label.label-success#new #{@nuevos.size}
         %li
           %a{"data-toggle" => "tab", :href => "#sent-mail", :role => "tab"} Mensajes enviados
     / /.navbar-collapse
@@ -31,13 +31,16 @@
           %input.form-control.mail-search{:placeholder => "Mensajes enviados", :type => "search"}/
           %ul.mail-list#mensaje
             - @recibidos.each do |mensaje|
-              %li{:id => "#{mensaje.id}" }
-                %a{:id => "#{mensaje.status}", :onclick => "myFunction(#{mensaje.id})"}
-                  %span.mail-created_at #{mensaje.created_at}
-                  %span.mail-sender #{mensaje.from_user}
-                  %span.mail-subject #{mensaje.description}
-                  %span.mail-message-preview{:class => "#{mensaje.id}"}
-                  %a.btn.btn-primary.btn-lg{:onclick => "borrarMensaje(#{mensaje.id})", :role => "button"} Borrar
+              .row
+                .col-xs-10
+                  %li{:id => "#{mensaje.id}" }
+                    %a{:class => "#{mensaje.status}", :onclick => "visit(#{mensaje.id});visitado()"}
+                      %span.mail-created_at #{mensaje.created_at}
+                      %span.mail-sender #{mensaje.from_user}
+                      %span.mail-subject #{mensaje.description}
+                      %span.mail-message-preview{:class => "#{mensaje.id}"}
+                .col-xs-2
+                  %a.btn.btn-primary.btn-lg.borrar{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button"} Borrar
   #compose.tab-pane
     .container
       .content-container.clearfix
@@ -61,10 +64,13 @@
           %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
           %ul.mail-list
             - @enviados.each do |mensaje|
-              %li{:id => "#{mensaje.id}" }
-                %a{:onclick => "myFunction(#{mensaje.id})"}
-                  %span.mail-created_at #{mensaje.created_at}
-                  %span.mail-sender #{mensaje.from_user}
-                  %span.mail-subject #{mensaje.description}
-                  %span.mail-message-preview{:class => "#{mensaje.id}"}
-                  %a.btn.btn-primary.btn-lg{:onclick => "borrarMensaje(#{mensaje.id})", :role => "button"} Borrar
+              .row
+                .col-xs-10
+                  %li{:id => "#{mensaje.id}" }
+                    %a
+                      %span.mail-created_at #{mensaje.created_at}
+                      %span.mail-sender #{mensaje.from_user}
+                      %span.mail-subject #{mensaje.description}
+                      %span.mail-message-preview{:class => "#{mensaje.id}"}
+                .col-xs-2
+                  %a.btn.btn-primary.btn-lg.borrar{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button"} Borrar

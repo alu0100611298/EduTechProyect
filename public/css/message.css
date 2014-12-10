@@ -75,7 +75,7 @@ ul.mail-list li:last-child a{
 ul.mail-list li a:hover{
     background-color:#DBF9FF;
 }
-.btn:hover{
+.btn.borrar:hover{
     background-color:red!important;
 }
 ul.mail-list li span{
@@ -95,7 +95,7 @@ ul.mail-list li span.mail-message-preview{
 .mail-search{
     border-bottom-color:#7FBCC9!important; 
 }
-#false{
+.false{
     background-color:#F2F2F2!important;
 }
 

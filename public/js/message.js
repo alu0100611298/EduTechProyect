@@ -19,13 +19,24 @@ $(document).ready(function(){
     });
 });
 
-function myFunction(id) {
+function visit(id) {
 	$.get('/message/open/' + id,
         function(response){
           $('.' + id).replaceWith(response);
+          $('#' + id + ">a").removeClass('false');
+          
        }
     );
+  
 }
+function visitado() {
+  $.get('/message/opened',
+        function(response){
+          console.log(response)
+          $('#new').html(response)
+       }
+    );
+  }
 
 function notas(id) {
 	$.get('/notes/delete/' + id,
@@ -38,7 +49,7 @@ function notas(id) {
 function borrarMensaje(id) {
   $.get('/message/delete/' + id,
         function(response){
-          $('#' + id).replaceWith();
+          $('#' + id).parent().parent().replaceWith();
        }
     );
 }

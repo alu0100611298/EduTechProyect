@@ -288,6 +288,19 @@ get '/message/open/:identifier' do
   	end
 end
 
+get '/message/opened' do
+  if current_user
+    #buscar el mensaje
+    user = User.first(:username => session[:username])
+    nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
+    puts nuevos.size
+    puts "-----------------------------------------"
+    return nuevos.size.to_s
+  else
+      redirect '/'
+  end
+end
+
 get '/message/delete/:identifier' do
 	if current_user
 		#buscar la nota
