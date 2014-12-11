@@ -8,7 +8,7 @@
           %h2 
             Colors, English
             - if @score['colors'] >= 1000
-              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['memoria']/1000).to_i}000.png"}
+              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['colors']/1000).to_i}000.png"}
             - elsif @score['colors'] >= 500
               %img.mini.pull-right{:src => "/img/games/badge_500.png"}
             - elsif @score['colors'] >= 250
@@ -46,7 +46,7 @@
           %h2 
             Numbers, English
             - if @score['numbers'] >= 1000
-              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['memoria']/1000).to_i}000.png"}
+              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['numbers']/1000).to_i}000.png"}
             - elsif @score['numbers'] >= 500
               %img.mini.pull-right{:src => "/img/games/badge_500.png"}
             - elsif @score['numbers'] >= 250
@@ -66,7 +66,7 @@
           %h2 
             PintaMatemáticas
             - if @score['pintamatematicas'] >= 1000
-              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['memoria']/1000).to_i}000.png"}
+              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['pintamatematicas']/1000).to_i}000.png"}
             - elsif @score['pintamatematicas'] >= 500
               %img.mini.pull-right{:src => "/img/games/badge_500.png"}
             - elsif @score['pintamatematicas'] >= 250
@@ -85,7 +85,7 @@
           %h2 
             School, English
             - if @score['school'] >= 1000
-              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['memoria']/1000).to_i}000.png"}
+              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['school']/1000).to_i}000.png"}
             - elsif @score['school'] >= 500
               %img.mini.pull-right{:src => "/img/games/badge_500.png"}
             - elsif @score['school'] >= 250
@@ -104,7 +104,7 @@
           %h2 
             Calculadoraa!!
             - if @score['calculator'] >= 1000
-              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['memoria']/1000).to_i}000.png"}
+              %img.mini.pull-right{:src => "/img/games/badge_#{(@score['calculator']/1000).to_i}000.png"}
             - elsif @score['calculator'] >= 500
               %img.mini.pull-right{:src => "/img/games/badge_500.png"}
             - elsif @score['calculator'] >= 250
