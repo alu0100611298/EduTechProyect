@@ -15,7 +15,7 @@ function schools(){
       var rand = 0;
       do{
         rand = Math.floor(Math.random() * 16);
-      }while(rand == this.school || this.options.repeat(rand));
+      }while(this.options.repeat(rand) || rand == this.school);
       this.options[i] = rand;
     }
     this.options[Math.floor(Math.random() * 4)] = this.school;
@@ -43,7 +43,7 @@ function check(id,origin){
     $('#or'+origin).parent().addClass('win');
     $('#'+id).parent().addClass('win');
     cont++;
-    score++;
+    score += 10;
     if(cont < 5){
       setTimeout(function(){
         $('#matriz').html("");

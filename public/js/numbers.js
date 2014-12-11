@@ -51,7 +51,7 @@ function check(id,origin){
     $('#or'+origin).addClass('win');
     $('#'+id).addClass('win');
     cont++;
-    score++;
+    score += 10;
     if(cont < 5){
       setTimeout(function(){
         $('#matriz').html("");

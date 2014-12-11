@@ -176,10 +176,20 @@ end
 get '/game/memory' do
 	if current_user
     @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
- 		haml :memory, :layout => :index
+ 		haml :memory_level, :layout => :index
  	else
  		redirect '/'
  	end
+end
+
+get '/game/memory/:level' do
+  if current_user
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+    @level = params['level']
+    haml :memory, :layout => :index
+  else
+    redirect '/'
+  end
 end
 
 get '/game/english/numbers' do
@@ -223,7 +233,8 @@ post '/game/save' do
 	if current_user
 	  #Por defecto el nivel será 1
 	  user = User.first(:username => session[:username])
-	  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => 1, :created_at => Time.now)
+    level = params['level'] || 1
+	  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => level, :created_at => Time.now)
 	else
 		redirect '/'
 	end
@@ -338,10 +349,10 @@ def alerts(id)
   alerts_games = [
     ['memoria',500,'No crees que necesitas mejorar en memoria'],
     ['pintamatematicas',250,'¿Una partida a pintamatematicas?'],
-    ['colors',30,'Yo que tu repasaría los colores'],
-    ['numbers',30,'¿Cómo llevas los números en inglés?'],
-    ['school',30,'¿Sabes como se dice en inglés las cosas del cole?'],
-    ['calculator',30,'Esas matemáticas...'],
+    ['colors',250,'Yo que tu repasaría los colores'],
+    ['numbers',250,'¿Cómo llevas los números en inglés?'],
+    ['school',250,'¿Sabes como se dice en inglés las cosas del cole?'],
+    ['calculator',250,'Esas matemáticas...'],
   ]
   alerts_games.each do |al_game|
     puts al_game

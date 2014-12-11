@@ -1,9 +1,11 @@
 function memory(){
 
-  var ROWS = Math.floor(Math.random() * (9-4) + 4);
+  var ROWS = 0;
   var COLS = 0;
   this.matriz = undefined;
   this.clicks = 0;
+  this.lvl = 1;
+  this.score = 0;
   Array.prototype.repeat = function(elem){
     var cont = 0;
     for (var i in this){
@@ -26,10 +28,30 @@ function memory(){
     }
     return [a,b];
   }
+  this.level = function(lvl){
+    if(lvl == "1"){
+      ROWS = 4;
+      COLS = 4;
+    }
+    else if(lvl == "2"){
+      ROWS = 8;
+      COLS = 4;
+    }
+    else if(lvl == "3"){
+      ROWS = 6;
+      COLS = 6;
+    }
+    else if(lvl == "4"){
+      ROWS = 8;
+      COLS = 6;
+    }
+    else if(lvl == "5"){
+      ROWS = 8;
+      COLS = 8;
+    }
+    this.lvl = lvl;
+  }
   this.create_rand = function(){
-    do{
-      COLS = Math.floor(Math.random() * (9-3) + 3);
-    }while(ROWS*COLS%2 != 0)
     matriz = new Array(ROWS*COLS);
     var folders = ['animals','flags','sports']
     var folder = Math.floor(Math.random() * 3);
@@ -66,17 +88,21 @@ function memory(){
   this.cols = function() {
     return COLS;
   }
-  this.set_clicks = function() {
-    this.clicks += 1;
+  this.set_score_plus = function(){
+    this.score += 30;
+    $('#score>h1>span').html("" + this.score);
   }
-  this.get_clicks = function() {
-    return this.clicks;
+  this.set_score_minus = function(){
+    this.score -= 5;
+    $('#score>h1>span').html("" + this.score);
   }
 };
 var mem = new memory();
 var end = 0;
 
 $(document).ready(function(){
+  var level = $('#level').html();
+  mem.level(level[level.length-1]);
   mem.create_rand();
 });
 
@@ -88,12 +114,6 @@ function unflip(id){
   $('#flipfront'+id).removeClass('front');
   $('#flipback'+id).addClass('front');
   var pair = mem.check(mem.matriz_pos(id));
-  mem.set_clicks();
-  if($('#flipfront'+pair[0]).css('display') != 'none' && $('#flipfront'+pair[1]).css('display') != 'none'){
-    $('#flipfront'+pair[0]).attr('data-check','true').removeAttr("onclick");
-    $('#flipfront'+pair[1]).attr('data-check','true').removeAttr("onclick");
-    end++;
-  }
   var cont = 0;
   for(var i=0; i<mem.rows(); i++){
     for(var j=0; j<mem.cols(); j++){
@@ -113,11 +133,17 @@ function unflip(id){
       }
     },500);
   }
+  if($('#flipfront'+pair[0]).css('display') != 'none' && $('#flipfront'+pair[1]).css('display') != 'none'){
+    $('#flipfront'+pair[0]).attr('data-check','true').removeAttr("onclick");
+    $('#flipfront'+pair[1]).attr('data-check','true').removeAttr("onclick");
+    mem.set_score_plus();
+    end++;
+  }
+  else if(cont == 2){
+    mem.set_score_minus();
+  }
   if(end == (mem.rows()*mem.cols()/2)){
-    var plus = (mem.get_clicks()-(mem.rows()*mem.cols()));
-    var final_score = (mem.rows()*mem.cols())*10 - plus*5;
-    $('#score>h1>span').html(final_score);
-    $.post('/game/save',{score:final_score, name:'memoria'}, function(){
+    $.post('/game/save',{score:mem.score, name:'memoria', level:mem.lvl}, function(){
       window.location.href = "/game";
     });
   }
