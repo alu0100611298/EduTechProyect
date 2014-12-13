@@ -388,14 +388,83 @@ get '/puntuation' do
 	    user = User.first(:username => session[:username])
 	    @game = Game.all(:user => user)
 
+
 	    @usuarios = Hash.new
+	    
+	    @numeros =Hash.new
+	    @calculadora= Hash.new
+	    @colores= Hash.new
+	    @memory= Hash.new
+	    @pinta= Hash.new
+	    @ingles= Hash.new
 
 	    users = @game.puntos(user.username)
+		users.each do |i|
+			puts "#{i.juego} -- #{i.total_score}"
+			@usuarios[i.juego.to_s] = i.total_score.to_i
+			puts "#{ @usuarios[i.juego]}"
+		end
+
+	    puts "-- ESTADISTICAS NUMBERS --"
+
+	    users = @game.puntos_juego("numbers")
 	    users.each  do |i|
-	    	puts "#{i.juego} -- #{i.total_score}"
-	      @usuarios[i.juego.to_s] = i.total_score.to_i
-	      puts "#{ @usuarios[i.juego]}"
+	    	puts "ITERACIÓN #{i}"
+	    	puts "#{i.usuario} -- #{i.total_score}"
+	      @numeros[i.usuario.to_s] = i.total_score.to_i
+	      #puts "#{ @usuarios[i.juego]}"
 	    end
+
+	    puts "-- ESTADISTICAS CALCULATOR--"
+
+	    users = @game.puntos_juego("calculator")
+	    users.each  do |i|
+	    	puts "ITERACIÓN #{i}"
+	    	puts "#{i.usuario} -- #{i.total_score}"
+	      @calculadora[i.usuario.to_s] = i.total_score.to_i
+	      #puts "#{ @usuarios[i.juego]}"
+	    end
+
+	    puts "-- ESTADISTICAS COLORS--"
+
+	    users = @game.puntos_juego("colors")
+	    users.each  do |i|
+	    	puts "ITERACIÓN #{i}"
+	    	puts "#{i.usuario} -- #{i.total_score}"
+	      @colores[i.usuario.to_s] = i.total_score.to_i
+	      #puts "#{ @usuarios[i.juego]}"
+	    end
+
+	    puts "-- ESTADISTICAS MEMORIA--"
+
+	    users = @game.puntos_juego("memoria")
+	    users.each  do |i|
+	    	puts "ITERACIÓN #{i}"
+	    	puts "#{i.usuario} -- #{i.total_score}"
+	      @memory[i.usuario.to_s] = i.total_score.to_i
+	      #puts "#{ @usuarios[i.juego]}"
+	    end
+
+	    puts "-- ESTADISTICAS PINTAMATEMATICAS--"
+
+	    users = @game.puntos_juego("pintamatematicas")
+	    users.each  do |i|
+	    	puts "ITERACIÓN #{i}"
+	    	puts "#{i.usuario} -- #{i.total_score}"
+	      @pinta[i.usuario.to_s] = i.total_score.to_i
+	      #puts "#{ @usuarios[i.juego]}"
+	    end
+
+	    puts "-- ESTADISTICAS SCHOOL--"
+
+	    users = @game.puntos_juego("school")
+	    users.each  do |i|
+	    	puts "ITERACIÓN #{i}"
+	    	puts "#{i.usuario} -- #{i.total_score}"
+	      @ingles[i.usuario.to_s] = i.total_score.to_i
+	      #puts "#{ @usuarios[i.juego]}"
+	    end
+
 
 	    haml :puntuation, :layout => :index
 
