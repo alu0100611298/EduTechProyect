@@ -9,13 +9,13 @@
 
 
 .panel-primary > .panel-heading {
-    background-color: sandybrown;
-    border-color: sandybrown;
+    background-color: #6666FF;
+    border-color: #6666FF;
     color: #fff;
 }
 
 .panel-primary {
-    border-color: sandybrown;
+    border-color: #6666FF;
 }
 .container#game{
 	margin-top: 2%;
@@ -23,7 +23,7 @@
 
 .panel-primary > .panel-heading .badge {
     background-color: #fff;
-    color: sandybrown;
+    color: #6666FF;
 }
 
 img{
@@ -31,9 +31,9 @@ img{
 }
 
 a{
-	color: sandybrown;
+	color: #6666FF;
 }
 a:hover, a:focus{
-	color: sandybrown;
+	color: #6666FF;
 }
 
