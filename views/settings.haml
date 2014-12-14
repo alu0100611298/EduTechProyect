@@ -1,0 +1,21 @@
+.col-sm-12.col-md-12.col-xs-12.main 
+	.col-sm-12.col-md-6.col-xs-12.col-lg-6.col-lg-offset-3.col-md-offset-3.datos
+		%p 
+			%strong 
+				%i Nombre: 
+			= current_user.name 
+		%p 
+			%strong 
+				%i Apellidos: 
+			= current_user.last_name
+		%p 
+			%strong 
+				%i Username: 
+			= current_user.username  
+		%p 
+			%strong 
+				%i Creacion de Cuenta: 
+			= current_user.created_at.to_date.to_s
+
+		.borrar
+			%a{:href => "/borrar"} borrar cuenta

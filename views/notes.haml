@@ -1,7 +1,6 @@
-.container
-  .row
+.col-sm-12.col-md-12.col-xs-12.main 
   - @notas.each do |nota|
-    .col-xs-12.col-sm-6.col-md-4.col-lg-3
+    .col-xs-12.col-sm-12.col-md-3.col-lg-3
       .ampliar.offer.offer-default{:id => "#{nota.id}"}
         .shape
           %a{:onclick => "notas(#{nota.id})"}
@@ -14,17 +13,17 @@
             #{nota.description}
             %br
               #{nota.created_at}
-.container
-  .col-xs-12.col-sm-6.col-md-12.col-lg-12
-    .offer.offer-default
-      %form{:role => "form", :style => "width:400px; margin: 0 auto;", :action => "/notes", :method => "post"}
-        %h1 Nota
-        .required-field-block
-          %input.form-control{:placeholder => "Asunto", :type => "text", :id => "asunto", :name => "asunto"}
-            .required-icon
-        %br
-        .required-field-block
-          %textarea.form-control{:placeholder => "Escribe el texto aquí", :rows => "3", :type => "Text", :id => "texto", :name => "texto"}
+
+
+  .offer.offer-default.col-xs-12.col-sm-12.col-md-6.col-lg-6
+    %form.col-xs-12.col-sm-12.col-md-12.col-lg-12{:role => "form" , :action => "/notes", :method => "post" }
+      %h1 Nota
+      .required-field-block
+        %input.form-control.col-xs-12.col-sm-12.col-md-12.col-lg-12{:placeholder => "Asunto", :type => "text", :id => "asunto", :name => "asunto"}
           .required-icon
-        %br
-        %button.btn.btn-primary Guardar
+      %br
+      .required-field-block
+        %textarea.form-control.col-xs-12.col-sm-12.col-md-12.col-lg-12{:placeholder => "Escribe el texto aquí", :type => "Text", :id => "texto", :name => "texto"}
+        .required-icon
+      %br
+      %button.btn.btn-primary.col-xs-12-col-sm-12.col-md-12.col-lg-12.guardar Guardar

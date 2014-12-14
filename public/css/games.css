@@ -1,9 +1,38 @@
 #game .panel>.panel-body>a>img{
-  height: 280px;
+  
+  width: 150px;
+  height: 150px;
 }
 #game .panel>.panel-footer{
   font-size: 0.9em;
 }
-.mini{
-  width: 48px;
+
+
+.panel-primary > .panel-heading {
+    background-color: sandybrown;
+    border-color: sandybrown;
+    color: #fff;
+}
+
+.panel-primary {
+    border-color: sandybrown;
+}
+.container#game{
+	margin-top: 2%;
+}
+
+.panel-primary > .panel-heading .badge {
+    background-color: #fff;
+    color: sandybrown;
+}
+
+img{
+	max-width: 50px;
+}
+
+a{
+	color: sandybrown;
+}
+a:hover, a:focus{
+	color: sandybrown;
 }

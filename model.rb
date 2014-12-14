@@ -6,12 +6,24 @@ class User
   property :name, String
   property :last_name, String  
   property :password, String
+  property :sexo, String
   property :profile_picture, Text
   property :created_at,  DateTime
 
   has n, :games, :notes
   #belongs_to :grade
 end
+
+class Admin
+  include DataMapper::Resource
+
+  property :id, Serial
+  property :username, String, :key => true
+  property :password, String
+  
+
+end
+
 class Game
   include DataMapper::Resource
   
@@ -23,6 +35,10 @@ class Game
 
   def self.score(game, id)
     DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' AND user_id = '" + id + "' GROUP BY name")
+  end
+
+  def self.calificaciones()
+    DataMapper.repository.adapter.select("SELECT user_username, name, score FROM games ORDER BY user_username")
   end
 
   def self.puntos(id)

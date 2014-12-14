@@ -10,6 +10,7 @@ body {
   margin-bottom: 60px;
   font-family: Verdana;
 	height: 100%;
+  text-align: center;
 	
 }
 .footer {
@@ -36,35 +37,11 @@ body {
 }
 
 .header{
-	
-	background-image: url("/img/logo.png");
-	background-size: 45px 45px;
-	background-repeat: no-repeat;
-	padding-bottom: 10px;
-}
-.mynav{
-	margin-bottom: 0.5%;
-	text-align: right;
-}
-.tit{
-	text-align: right;
+
+ margin-top: 10%;
 }
 
-.main{
-	background-image: url("/img/fondo_vectorized.png");
-	background-position: left;
-	background-size: 50% auto;
-	background-repeat: no-repeat;
-	border-radius: 0px;
-	text-align: right;
-	background-color: transparent;
-	margin-bottom: 0;
+img{
+  width: 100px;
+  height: 100px;
 }
-
-.myform{
-
-	border-radius: 5px;
-	background-color: #dbe7f2;
-	padding: 2%;
-}
-
