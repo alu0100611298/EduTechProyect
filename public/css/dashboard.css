@@ -9,7 +9,9 @@
 /*
  * Global add-ons
  */
-
+body{
+  font-family: "Comic Sans"; 
+}
 .sub-header {
   padding-bottom: 10px;
   border-bottom: 1px solid #eee;
@@ -88,7 +90,7 @@
   .nav-sidebar > .active > a:hover,
   .nav-sidebar > .active > a:focus {
     color: #fff;
-    background-color: coral;
+    background-color: snow;
     border-bottom: 1px dotted grey;
     background-image: url("/img/logo.png");
     background-size: 100%;
@@ -149,23 +151,28 @@
 }
 
 .user{
-  text-align: right;
+  text-align: left;
   padding: 7px;
+}
+.titulo{
+  text-align: left;
+   padding-left: 5%;
+   color: green;
+   font-style: italic;
 }
 
 @media (min-width: 768px) {
   .main {
     padding-right: 100px;
     padding-left: 100px;
-
+    top: 0px;
   }
 }
 
 @media (max-width: 768px) {
   .main {
-    padding-right: 80px;
     padding-left: 80px;
-    top: -40px;
+    
   }
 }
 
@@ -185,6 +192,8 @@
 
 #nombre{
   border-bottom: 1px solid grey;
+  font-style: italic;
+  font-weight: bold;
 }
 
 .info{
@@ -205,6 +214,12 @@
 }
 
 @media (max-width: 768px) {
+  .titulo{
+    display: none;
+  }
+  .imagen{
+    display: none;
+  }
   .header {
     height: 100px;
   }
@@ -226,4 +241,25 @@
   color:#3333CC;
 }
 
+.datos{
+  margin-top: 5%;
+  text-align: left;
+  font-size: 18px;
+  border-radius: 5px;
+  border: dotted 1px indianred;
+  background-color: lightsalmon;
+}
 
+.borrar{
+  margin-bottom: 2%;
+  margin-top: 2%;
+  color: black;
+}
+
+.borrar a{
+  color: white;
+}
+
+.borrar a:hover{
+  color: grey;
+}

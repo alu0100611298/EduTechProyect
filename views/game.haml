@@ -1,11 +1,9 @@
-.container#game
-  .page-header
-    %h1 Sección de juegos
+.container#game    
   .row
-    .col-md-4
+    .col-md-4.col-xs-12.col-lg-4.col-sm-12
       .panel.panel-primary
         .panel-heading
-          %h2 
+          %h3 
             Colors, English
             - if @score['colors'] >= 1000
               %img.mini.pull-right{:src => "/img/games/badge_#{(@score['colors']/1000).to_i}000.png"}
@@ -21,10 +19,10 @@
         .panel-footer
           %p 
             %strong ¿Te sabes los colores en inglés?
-    .col-md-4
+    .col-md-4.col-xs-12.col-lg-4.col-sm-12
       .panel.panel-primary
         .panel-heading
-          %h2 
+          %h3 
             Memoria
             - if @score['memoria'] >= 1000
               %img.mini.pull-right{:src => "/img/games/badge_#{(@score['memoria']/1000).to_i}000.png"}
@@ -40,10 +38,10 @@
         .panel-footer
           %p 
             %strong Memoriza las parejas para completar el juego
-    .col-md-4
+    .col-md-4.col-xs-12.col-lg-4.col-sm-12
       .panel.panel-primary
         .panel-heading
-          %h2 
+          %h3 
             Numbers, English
             - if @score['numbers'] >= 1000
               %img.mini.pull-right{:src => "/img/games/badge_#{(@score['numbers']/1000).to_i}000.png"}
@@ -59,11 +57,11 @@
         .panel-footer
           %p 
             %strong ¿Te sabes los números en inglés?
-  .row
-    .col-md-4
+  
+    .col-md-4.col-xs-12.col-lg-4.col-sm-12
       .panel.panel-primary
         .panel-heading
-          %h2 
+          %h3 
             PintaMatemáticas
             - if @score['pintamatematicas'] >= 1000
               %img.mini.pull-right{:src => "/img/games/badge_#{(@score['pintamatematicas']/1000).to_i}000.png"}
@@ -79,10 +77,10 @@
         .panel-footer
           %p 
             %strong Completa los colores usando las matemáticas
-    .col-md-4
+    .col-md-4.col-xs-12.col-lg-4.col-sm-12
       .panel.panel-primary
         .panel-heading
-          %h2 
+          %h3 
             School, English
             - if @score['school'] >= 1000
               %img.mini.pull-right{:src => "/img/games/badge_#{(@score['school']/1000).to_i}000.png"}
@@ -98,10 +96,10 @@
         .panel-footer
           %p 
             %strong ¿Cómo se dice lo que utilizas en clase en inglés?
-    .col-md-4
+    .col-md-4.col-xs-12.col-lg-4.col-sm-12
       .panel.panel-primary
         .panel-heading
-          %h2 
+          %h3 
             Calculadoraa!!
             - if @score['calculator'] >= 1000
               %img.mini.pull-right{:src => "/img/games/badge_#{(@score['calculator']/1000).to_i}000.png"}

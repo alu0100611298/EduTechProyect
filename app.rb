@@ -47,9 +47,14 @@ helpers do
 		@current_user ||= User.get(session[:user_id], session[:username]) if session[:user_id] && session[:username]
 	end
 end
-
+helpers do
+	def current_admin
+		@current_admin ||= Admin.get(session[:admin_id], session[:admin_username]) if session[:admin_id] && session[:admin_username]
+	end
+end
 
 get '/' do
+	@titulo = ""
 
 	if current_user
 		redirect '/home'
@@ -60,7 +65,41 @@ get '/' do
 end
 
 post '/' do
+	@titulo = ""
+end
 
+get '/admin' do
+	a = "1234".to_i(32)
+	consulta = Admin.first_or_create(:username => "admin", :password => a)
+	erb :admin
+end
+
+post '/admin' do
+	user = params[:user]
+	pass = params[:pass].to_i(32)
+
+	consulta = Admin.first(:username => user, :password => pass)
+
+	if consulta
+		session[:admin_username] = consulta.username
+		session[:admin_id] = consulta.id
+		redirect '/admin/home'
+	else
+		redirect '/admin'
+	end
+
+end
+
+get '/admin/home' do
+	if current_admin
+		
+
+		@consulta = Game.calificaciones
+		puts "#{@consulta}"
+		erb :"admin-home"
+	else
+		redirect '/admin'
+	end
 end
 
 post '/registro' do
@@ -112,6 +151,7 @@ end
 
 get '/home' do
 	if current_user
+	@titulo = ""
     alerts(current_user.id.to_s)
     @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		haml :home, :layout => :index
@@ -122,7 +162,7 @@ end
 
 post '/home' do
 	if current_user
-
+		@titulo = ""
 	else
 		redirect '/'
 	end
@@ -135,15 +175,16 @@ end
 # URLs para los juegos
 get '/game' do
 	if current_user
-      @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
-      game = Game.all(:user_id => current_user.id)
-      @score = Hash.new
-      @score['pintamatematicas'] = game.score('pintamatematicas',current_user.id.to_s)[0] || 0
-      @score['memoria'] = game.score('memoria',current_user.id.to_s)[0] || 0
-      @score['numbers'] = game.score('numbers',current_user.id.to_s)[0] || 0
-      @score['colors'] = game.score('colors',current_user.id.to_s)[0] || 0
-      @score['school'] = game.score('school',current_user.id.to_s)[0] || 0
-      @score['calculator'] = game.score('calculator',current_user.id.to_s)[0] || 0
+		@titulo = "Sección de Juegos"
+		@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		game = Game.all(:user_id => current_user.id)
+		@score = Hash.new
+		@score['pintamatematicas'] = game.score('pintamatematicas',current_user.id.to_s)[0] || 0
+		@score['memoria'] = game.score('memoria',current_user.id.to_s)[0] || 0
+		@score['numbers'] = game.score('numbers',current_user.id.to_s)[0] || 0
+		@score['colors'] = game.score('colors',current_user.id.to_s)[0] || 0
+		@score['school'] = game.score('school',current_user.id.to_s)[0] || 0
+		@score['calculator'] = game.score('calculator',current_user.id.to_s)[0] || 0
   		haml :game, :layout => :index
   	else
   		redirect '/'
@@ -151,6 +192,7 @@ get '/game' do
 end
 get '/notes/delete' do
 	if current_user
+		@titulo = "Sección de Notas"
 		user = User.first(:username => session[:username])
 		Note.all(:user => user).destroy
 		@notas = Note.all(:user => user)
@@ -165,6 +207,7 @@ get '/game/mathematics/draw' do
   #al nivel hay que extraer el curso del alumno
   #Provisionalmente se pone por defecto el mismo
   if current_user
+  	@titulo = "Sección de Juegos"
     @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   	haml :mth_draw1, :layout => :index
   else
@@ -175,7 +218,8 @@ end
 #Memory
 get '/game/memory' do
 	if current_user
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		@titulo = "Sección de Juegos"
+    	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
  		haml :memory_level, :layout => :index
  	else
  		redirect '/'
@@ -184,6 +228,7 @@ end
 
 get '/game/memory/:level' do
   if current_user
+  	@titulo = "Sección de Juegos"
     @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
     @level = params['level']
     haml :memory, :layout => :index
@@ -194,7 +239,8 @@ end
 
 get '/game/english/numbers' do
 	if current_user
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		@titulo = "Sección de Juegos"
+    	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :numbers, :layout => :index
   	else
   		redirect '/'
@@ -203,7 +249,8 @@ end
 
 get '/game/english/colors' do
 	if current_user
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		@titulo = "Sección de Juegos"
+    	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :colors, :layout => :index
   	else
   		redirect '/'
@@ -212,7 +259,8 @@ end
 
 get '/game/english/school' do
 	if current_user
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		@titulo = "Sección de Juegos"
+    	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :school, :layout => :index
   	else
   		redirect '/'
@@ -221,7 +269,8 @@ end
 
 get '/game/mathematics/calculator' do
 	if current_user
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		@titulo = "Sección de Juegos"
+    	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
  		haml :calculator, :layout => :index
  	else
  		redirect '/'
@@ -231,10 +280,11 @@ end
 #Salvar el resultado de un juego en la BD
 post '/game/save' do
 	if current_user
+		@titulo = "Sección de Juegos"
 	  #Por defecto el nivel será 1
-	  user = User.first(:username => session[:username])
-    level = params['level'] || 1
-	  Game.create(:user => user, :name => params['name'], :score => params['score'], :level => level, :created_at => Time.now)
+	  	user = User.first(:username => session[:username])
+    	level = params['level'] || 1
+	  	Game.create(:user => user, :name => params['name'], :score => params['score'], :level => level, :created_at => Time.now)
 	else
 		redirect '/'
 	end
@@ -243,7 +293,8 @@ end
 
 get '/notes' do
 	if current_user
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		@titulo = "Sección de Notas"
+    	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		user = User.first(:username => session[:username])
 		@notas = Note.all(:user => user, :order => [ :created_at.desc ])
   		haml :notes, :layout => :index
@@ -255,6 +306,7 @@ end
 get '/notes/delete/:identifier' do
 	if current_user
 		#buscar la nota
+		@titulo = "Sección de Juegos"
 		message = Note.first(:id => params[:identifier])
 		message.destroy
 		redirect '/notes'
@@ -265,6 +317,7 @@ end
 
 post '/notes' do
 	if current_user
+		@titulo = "Sección de Juegos"
 		#buscar el usuario
 		user = User.first(:username => session[:username])
 		#Guardar la nota
@@ -277,7 +330,8 @@ end
 
 get '/message' do
 	if current_user
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		@titulo = "Mensajes"
+    	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		user = User.first(:username => session[:username])
 		@recibidos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ])
 		@enviados = Message.all(:user => user, :tipo => "false", :order => [ :created_at.desc ])
@@ -289,6 +343,7 @@ get '/message' do
 end
 get '/message/open/:identifier' do
 	if current_user
+		@titulo = "Mensajes"
 		#buscar el mensaje
 		message = Message.first(:id => params[:identifier])
 		message.status =  "true"
@@ -301,6 +356,7 @@ end
 
 get '/message/opened' do
   if current_user
+  	@titulo = "Mensajes"
     #buscar el mensaje
     user = User.first(:username => session[:username])
     nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
@@ -314,6 +370,7 @@ end
 
 get '/message/delete/:identifier' do
 	if current_user
+		@titulo = "Mensajes"
 		#buscar la nota
 		message = Message.first(:id => params[:identifier])
 		message.destroy
@@ -325,6 +382,7 @@ end
 
 post '/message' do
 	if current_user
+		@titulo = "Mensajes"
 		#buscar el usuario
 		usuario_recibe = User.first(:username => params[:username])
 		redirect '/message' unless usuario_recibe
@@ -340,6 +398,7 @@ post '/message' do
 end
 
 post "/clear/alert/:id" do
+	
   alert = Alert.first(:id => params['id'])
   alert.update(:status => true)
   redirect '/game'
@@ -382,6 +441,7 @@ end
 
 get '/puntuation' do 
 	if current_user
+		@titulo = "Sección de Calificaciones"
 
 		@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 
@@ -474,6 +534,14 @@ get '/puntuation' do
 
 end
 
-post '/puntuation' do
+get '/settings' do
+
+	if current_user
+
+		@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
+		haml :settings, :layout => :index
+	else
+		redirect '/'
+	end
 
 end

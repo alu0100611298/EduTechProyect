@@ -1,3 +1,22 @@
+.guardar{
+  margin-bottom: 2%;
+}
+
+.btn-primary{
+  background: mediumaquamarine;
+  border-color: mediumaquamarine;
+}
+.btn-primary:hover{
+  background: mediumaquamarine;
+  border-color: mediumaquamarine;
+  opacity: 0.5;
+}
+.btn-primary:focus{
+  background: mediumaquamarine;
+  border-color: mediumaquamarine;
+}
+
+
 .shape{    
 	border-style: solid; border-width: 0 70px 40px 0; float:right; height: 0px; width: 0px;
 	-ms-transform:rotate(360deg); /* IE 9 */
@@ -6,7 +25,11 @@
 	transform:rotate(360deg);
 }
 .offer{
-	background:#FFFF00; border:1px solid #ddd; box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); margin: 15px 0; overflow:hidden;
+	background:papayawhip;
+  border:1px solid #ddd; 
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+  margin: 15px 0; 
+  overflow:hidden;
 }
 .ampliar:hover {
     -webkit-transform: scale(1.1); 
@@ -33,13 +56,13 @@ transition: all 0.4s ease-in-out;
 .offer-success .shape{
 	border-color: transparent #5cb85c transparent transparent;
 }
-.offer-default {	border-color: #999999; }
+.offer-default {	border-color: mediumaquamarine; }
 .offer-default .shape{
-	border-color: transparent #999999 transparent transparent;
+	border-color: transparent mediumaquamarine transparent transparent;
 }
-.offer-primary {	border-color: #428bca; }
+.offer-primary {	border-color: mediumaquamarine; }
 .offer-primary .shape{
-	border-color: transparent #428bca transparent transparent;
+	border-color: transparent mediumaquamarine transparent transparent;
 }
 .offer-info {	border-color: #5bc0de; }
 .offer-info .shape{
@@ -51,38 +74,28 @@ transition: all 0.4s ease-in-out;
 }
 
 .shape-text{
-	color:#fff; font-size:12px; font-weight:bold; position:relative; right:-30px; top:1px; white-space: nowrap;
+	color:#fff; 
+  font-size:12px; 
+  font-weight:bold;
+   position:relative; 
+   right:-30px; top:1px; white-space: nowrap;
 	-ms-transform:rotate(30deg); /* IE 9 */
 	-o-transform: rotate(360deg);  /* Opera 10.5 */
 	-webkit-transform:rotate(30deg); /* Safari and Chrome */
 	transform:rotate(30deg);
 }	
+
+.shape-text:hover{
+  text-decoration: underline;
+} 
 .offer-content{
 	padding:0 20px 10px;
-}
-@media (min-width: 487px) {
-  .container {
-    max-width: 750px;
-  }
-  .col-sm-6 {
-    width: 50%;
-  }
-}
-@media (min-width: 900px) {
-  .container {
-    max-width: 970px;
-  }
-  .col-md-4 {
-    width: 33.33333333333333%;
-  }
+  text-align: left;
 }
 
-@media (min-width: 1200px) {
-  .container {
-    max-width: 1170px;
-  }
-  .col-lg-3 {
-    width: 25%;
-  }
-  }
+#asunto{
+  margin-bottom: 1%;
+}
+#texto{
+  margin-bottom: 1%;
 }

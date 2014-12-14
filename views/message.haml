@@ -1,76 +1,77 @@
-%nav.navbar.navbar-default.navbar-static-top{:role => "navigation"}
-  .container
-    / Brand and toggle get grouped for better mobile display
-    .navbar-header
-      %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
-        %span.sr-only Toggle navigation
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
-    / Collect the nav links, forms, and other content for toggling
-    #bs-example-navbar-collapse-1.collapse.navbar-collapse
-      .btn-compose.pull-left
-        %a.btn.btn-danger.navbar-btn{"data-toggle" => "tab", :href => "#compose", :role => "tab", :type => "button"}
-          %span.glyphicon.glyphicon-pencil
-          Nuevo
-      %ul.nav.navbar-nav
-        %li
-          %a{"data-toggle" => "tab", :href => "#inbox", :role => "tab"}
-            Bandeja de entrada
-            %span.label.label-success#new #{@nuevos.size}
-        %li
-          %a{"data-toggle" => "tab", :href => "#sent-mail", :role => "tab"} Mensajes enviados
-    / /.navbar-collapse
-  / /.container-fluid
-.tab-content
-  #inbox.tab-pane.active
+.col-sm-12.col-md-12.col-xs-12.main 
+  %nav.navbar.navbar-default.navbar-static-top{:role => "navigation"}
     .container
-      .content-container.clearfix
-        .col-md-12
-          %h1.content-title Bandeja de entrada
-          %input.form-control.mail-search{:placeholder => "Mensajes enviados", :type => "search"}/
-          %ul.mail-list#mensaje
-            - @recibidos.each do |mensaje|
-              .row
-                .col-xs-10
-                  %li{:id => "#{mensaje.id}" }
-                    %a{:class => "#{mensaje.status}", :onclick => "visit(#{mensaje.id});visitado()"}
-                      %span.mail-created_at #{mensaje.created_at}
-                      %span.mail-sender #{mensaje.from_user}
-                      %span.mail-subject #{mensaje.description}
-                      %span.mail-message-preview{:class => "#{mensaje.id}"}
-                .col-xs-2
-                  %a.btn.btn-primary.btn-lg.borrar{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button"} Borrar
-  #compose.tab-pane
-    .container
-      .content-container.clearfix
-        %h1.content-title Nuevo
-        .col-md-12
-          %form{:role => "form", :action => "/message", :method => "post"}
-            .form-group
-              %input#tokenfield.form-control{:placeholder => "Para",:id => "username", :name => "username", :type => "text"}/
-            .form-group
-              %input.form-control{:placeholder => "Asunto", :id => "description", :name => "description", :type => "text"}/
-            %textarea.form-control{:placeholder => "mensaje" ,:id => "message", :name => "message"}
-            .btn-send
-              %button.btn.btn-success.btn-lg{:type => "submit"}
-                %span.glyphicon.glyphicon-send
-                Enviar
-  #sent-mail.tab-pane
-    .container
-      .content-container.clearfix
-        .col-md-12
-          %h1.content-title Mensajes enviados
-          %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
-          %ul.mail-list
-            - @enviados.each do |mensaje|
-              .row
-                .col-xs-10
-                  %li{:id => "#{mensaje.id}" }
-                    %a
-                      %span.mail-created_at #{mensaje.created_at}
-                      %span.mail-sender #{mensaje.from_user}
-                      %span.mail-subject #{mensaje.description}
-                      %span.mail-message-preview{:class => "#{mensaje.id}"}
-                .col-xs-2
-                  %a.btn.btn-primary.btn-lg.borrar{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button"} Borrar
+      / Brand and toggle get grouped for better mobile display
+      .navbar-header
+        %button.navbar-toggle.collapsed{"data-target" => "#bs-example-navbar-collapse-1", "data-toggle" => "collapse", :type => "button"}
+          %span.sr-only Toggle navigation
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+      / Collect the nav links, forms, and other content for toggling
+      #bs-example-navbar-collapse-1.collapse.navbar-collapse
+        .btn-compose.pull-left
+          %a.btn.btn-danger.navbar-btn{"data-toggle" => "tab", :href => "#compose", :role => "tab", :type => "button"}
+            %span.glyphicon.glyphicon-pencil
+            Nuevo
+        %ul.nav.navbar-nav
+          %li
+            %a{"data-toggle" => "tab", :href => "#inbox", :role => "tab"}
+              Bandeja de entrada
+              %span.label.label-success#new #{@nuevos.size}
+          %li
+            %a{"data-toggle" => "tab", :href => "#sent-mail", :role => "tab"} Mensajes enviados
+      / /.navbar-collapse
+    / /.container-fluid
+  .tab-content
+    #inbox.tab-pane.active
+      .container
+        .content-container.clearfix
+          .col-md-12
+            %h1.content-title Bandeja de entrada
+            %input.form-control.mail-search{:placeholder => "Mensajes enviados", :type => "search"}/
+            %ul.mail-list#mensaje
+              - @recibidos.each do |mensaje|
+                .row
+                  .col-xs-10
+                    %li{:id => "#{mensaje.id}" }
+                      %a{:class => "#{mensaje.status}", :onclick => "visit(#{mensaje.id});visitado()"}
+                        %span.mail-created_at #{mensaje.created_at}
+                        %span.mail-sender #{mensaje.from_user}
+                        %span.mail-subject #{mensaje.description}
+                        %span.mail-message-preview{:class => "#{mensaje.id}"}
+                  .col-xs-2
+                    %a.btn.btn-primary.btn-lg.borrar{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button"} Borrar
+    #compose.tab-pane
+      .container
+        .content-container.clearfix
+          %h1.content-title Nuevo
+          .col-md-12
+            %form{:role => "form", :action => "/message", :method => "post"}
+              .form-group
+                %input#tokenfield.form-control{:placeholder => "Para",:id => "username", :name => "username", :type => "text"}/
+              .form-group
+                %input.form-control{:placeholder => "Asunto", :id => "description", :name => "description", :type => "text"}/
+              %textarea.form-control{:placeholder => "mensaje" ,:id => "message", :name => "message"}
+              .btn-send
+                %button.btn.btn-success.btn-lg{:type => "submit"}
+                  %span.glyphicon.glyphicon-send
+                  Enviar
+    #sent-mail.tab-pane
+      .container
+        .content-container.clearfix
+          .col-md-12
+            %h1.content-title Mensajes enviados
+            %input.form-control.mail-search{:placeholder => "Search Mail", :type => "search"}/
+            %ul.mail-list
+              - @enviados.each do |mensaje|
+                .row
+                  .col-xs-10
+                    %li{:id => "#{mensaje.id}" }
+                      %a
+                        %span.mail-created_at #{mensaje.created_at}
+                        %span.mail-sender #{mensaje.from_user}
+                        %span.mail-subject #{mensaje.description}
+                        %span.mail-message-preview{:class => "#{mensaje.id}"}
+                  .col-xs-2
+                    %a.btn.btn-primary.btn-lg.borrar{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button"} Borrar

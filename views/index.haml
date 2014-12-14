@@ -42,7 +42,10 @@
                 %i.fa.fa-trophy
         .col-sm-12.col-md-12.col-xs-12.header
           .col-sm-12.col-lg-12.col-md-12.col-xs-12.user
-            .col-sm-4.col-md-4.col-sm-offset-7.col-md-offset-7.col-xs-9.info
+            .col-sm-7.col-md-7.col-xs-6.titulo
+              %h2
+                = @titulo
+            .col-sm-4.col-md-4.col-xs-12.info              
               #nombre
                 = current_user.name
                 = current_user.last_name
@@ -68,14 +71,13 @@
                 - else
                   %a.btn.dropdown-toggle{:href => "#"}
                     %i.fa.fa-bell-slash
-                %a.btn{:href => "#"}
+                %a.btn{:href => "/settings"}
                   %i.fa.fa-cog
                 %a.btn{:href => "/logout"}
                   %i.fa.fa-power-off
             .col-sm-1.col-md-1.col-xs-3.imagen
               %img.img-responsive.img-circle.avatar{:src => "/img/kid_girl.png"}/
-            
-        .col-sm-12.col-md-12.col-xs-12.main 
+                    
           =yield
 
     
