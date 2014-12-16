@@ -37,8 +37,8 @@ class Game
     DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' AND user_id = '" + id + "' GROUP BY name")
   end
 
-  def self.better_score()
-    games = DataMapper.repository.adapter.select("SELECT name,SUM(score) AS score FROM games GROUP BY name")
+  def self.better_score(id)
+    games = DataMapper.repository.adapter.select("SELECT name,SUM(score) AS score FROM games WHERE user_id = '" + id + "' GROUP BY name")
     max = nil
     games.each do |game|
       if max == nil

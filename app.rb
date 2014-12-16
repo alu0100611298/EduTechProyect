@@ -157,7 +157,7 @@ get '/home' do
     user = User.first(:username => session[:username])
     @nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
     game = Game.all(:user_id => current_user.id)
-    @better =  game.better_score()
+    @better =  game.better_score(current_user.id.to_s)
     if @better.name == 'colors'
       @game = ['Colors, English','/game/english/colors','/img/games/colors.png']
     elsif @better.name == 'memoria'
