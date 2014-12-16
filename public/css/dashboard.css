@@ -47,8 +47,7 @@ body{
     padding-left: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: lightblue;
-    border-right: 1px dotted grey;
+    background-color: #b3ff66;
   }
 }
 
@@ -66,12 +65,17 @@ body{
     padding-left: 20px;
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
-    background-color: lightblue;
-    border-right: 1px dotted grey;
+    background-color: #b3ff66;
   }
 
 }
 
+.nav li a:hover,
+.nav-sidebar li a:hover{
+    background-image: url("/img/selector-previous.png") !important;
+    background-size: 100%;
+    background-color: transparent;
+}
 @media (max-width: 768px) {
 
 /* Sidebar navigation */
@@ -89,11 +93,6 @@ body{
   .nav-sidebar > .active > a,
   .nav-sidebar > .active > a:hover,
   .nav-sidebar > .active > a:focus {
-    color: #fff;
-    background-color: snow;
-    border-bottom: 1px dotted grey;
-    background-image: url("/img/logo.png");
-    background-size: 100%;
   }
 
   
@@ -118,14 +117,17 @@ body{
   .nav-sidebar > .active > a,
   .nav-sidebar > .active > a:hover,
   .nav-sidebar > .active > a:focus {
-    color: #fff;
-    background-color: snow;
-    border-bottom: 1px dotted grey;
-    background-image: url("/img/logo.png");
-    background-size: 100%;
   }
 
 
+}
+#logo{
+  height: 75px;
+  width: 75px;
+  background-image: url("/img/logo.png");
+  background-size: 100%;
+  box-shadow: 0 1px 12px #222;
+  background-color: #6666ff;
 }
 /*
  * Main content
@@ -183,10 +185,9 @@ body{
 .header {
   width: 100%;
   height: 75px;
-  border-bottom: 1px dotted grey;
   text-align: right;
-  
-  background-color:#d8ffa5;
+  box-shadow: 0 1px 5px #222;
+  background-color:#ffb366;
 
 }
 
@@ -270,4 +271,7 @@ body{
 }
 .align-left{
   text-align: left;
+}
+.selected{
+  background-image: url("/img/selector.png");
 }

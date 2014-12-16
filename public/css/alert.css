@@ -1,6 +1,7 @@
 .ul-alert{
   width: 300px !important;
   padding: 20px;
+  z-index: 10000;
 }
 
 .ul-alert > li{
@@ -14,4 +15,19 @@
 }
 .ul-alert > li:hover{
   cursor: pointer;
+  background: #222;
+  color: #fff;
+}
+
+.message-preview > li:hover{
+  cursor: pointer;
+  background: #222 !important;
+  color: #fff;
+}
+.message-preview > li{
+  list-style: none;
+  padding: 2%;
+}
+.message-preview > li:nth-child(odd){
+  background: #ccc;
 }

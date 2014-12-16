@@ -1,17 +1,10 @@
 .col-sm-12.col-md-12.col-xs-12.main 
   .container.separator.align-left
     .row
-      .col-xs-12.col-md-4
-        %a{:href => '/message'}
-          .panel.panel-primary
-            - if @nuevos.size == 0
-              .panel-heading
-                %h1 
-                  %i.fa.fa-envelope-o
-                  Mensajes
-              .panel-footer
-                %p Enorabuena, no tienes mensajes pendientes
-            - else
+      - if @nuevos.size > 0
+        .col-xs-12.col-md-4
+          %a{:href => '/message'}
+            .panel.panel-primary
               .panel-heading
                 %h1 
                   %i.fa.fa-envelope-o
@@ -19,3 +12,22 @@
                   %span.badge.pull-right #{@nuevos.size}
               .panel-footer
                 %p Deberías de revisar tus mensajes
+      - if @alerts.length  > 0
+        .col-xs-12.col-md-4
+          .panel.panel-primary
+            .panel-heading
+              %h1 
+                %i.fa.fa-bell
+                Alertas
+                %span.badge.pull-right #{@alerts.size}
+            .panel-body.message-preview
+              - @alerts.each do |alert|
+                %li
+                  %form{:id => "form#{alert.id}", :action => "/clear/alert/#{alert.id}", :method => "POST"}
+                    %btn{:onclick => "document.getElementById(\'form#{alert.id}\').submit();", :title => "Marcar como visto", :type => "submit"}
+                      %h5.media-heading
+                        %strong #{alert.game.upcase}
+                      %p.small.text-muted
+                        %i.fa.fa-clock-o
+                        #{alert.created_at.strftime("%d / %b / %Y")}
+                      %p #{alert.message}

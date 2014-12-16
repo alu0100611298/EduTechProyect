@@ -29,17 +29,39 @@
       .row
         .col-sm-2.col-md-2.sidebar
           %ul.nav.nav-sidebar
-            %li.active
-              %a{:href => "/home"}
-            %li
-              %a{:href => "/notes"}
-                %i.fa.fa-file-text
-            %li
-              %a{:href => "/game"}
-                %i.fa.fa-gamepad
-            %li
-              %a{:href => "/puntuation"}
-                %i.fa.fa-trophy
+            #logo
+            - if /home/.match(to())
+              %li.selected
+                %a{:href => "/home", :title => "Inicio"}
+                  %i.fa.fa-home
+            -else
+              %li
+                %a{:href => "/home", :title => "Inicio"}
+                  %i.fa.fa-home
+            - if /notes/.match(to())
+              %li.selected
+                %a{:href => "/notes", :title => "Notas"}
+                  %i.fa.fa-file-text
+            - else
+              %li
+                %a{:href => "/notes", :title => "Notas"}
+                  %i.fa.fa-file-text
+            - if /game/.match(to())
+              %li.selected
+                %a{:href => "/game", :title => "Juegos"}
+                  %i.fa.fa-gamepad
+            -else
+              %li
+                %a{:href => "/game", :title => "Juegos"}
+                  %i.fa.fa-gamepad
+            - if /puntuation/.match(to())
+              %li.selected
+                %a{:href => "/puntuation", :title => "Puntuaciones"}
+                  %i.fa.fa-trophy
+            -else
+              %li
+                %a{:href => "/puntuation", :title => "Puntuaciones"}
+                  %i.fa.fa-trophy
         .col-sm-12.col-md-12.col-xs-12.header
           .col-sm-12.col-lg-12.col-md-12.col-xs-12.user
             .col-sm-7.col-md-7.col-xs-6.titulo
