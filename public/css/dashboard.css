@@ -76,6 +76,7 @@ body{
     background-size: 100%;
     background-color: transparent;
 }
+
 @media (max-width: 768px) {
 
 /* Sidebar navigation */
@@ -274,4 +275,31 @@ body{
 }
 .selected{
   background-image: url("/img/selector.png");
+}
+.no-list li{
+  list-style: none;
+  border: dashed 1px #222;
+  background: #DDD;
+  padding: 2%;
+}
+.no-list a:hover{
+  text-decoration: none;
+  cursor: pointer;
+}
+.no-list .mail-created_at{
+  box-shadow: 0 0 5px #222;
+  background: #222;
+  color: #fff;
+  border-radius: 5px;
+  position: relative;
+  left: -10%;
+  padding: 1%;
+}
+.no-list .mail-sender{
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+.no-list .icon{
+  float: right;
+  padding: 0 5px;
 }

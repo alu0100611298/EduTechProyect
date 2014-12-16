@@ -156,8 +156,6 @@ get '/home' do
     @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)#Para mostrar nuevos mensajes en cuanto se entre.
     user = User.first(:username => session[:username])
     @nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
-    puts "________________________________________________"
-    puts @nuevos.to_yaml
     haml :home, :layout => :index
 	else
     redirect '/'

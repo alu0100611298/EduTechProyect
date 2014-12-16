@@ -3,15 +3,27 @@
     .row
       - if @nuevos.size > 0
         .col-xs-12.col-md-4
-          %a{:href => '/message'}
-            .panel.panel-primary
-              .panel-heading
-                %h1 
-                  %i.fa.fa-envelope-o
-                  Mensajes
-                  %span.badge.pull-right #{@nuevos.size}
-              .panel-footer
-                %p Deberías de revisar tus mensajes
+          .panel.panel-primary
+            .panel-heading
+              %h1 
+                %i.fa.fa-envelope-o
+                Mensajes
+                %span.badge.pull-right #{@nuevos.size}
+            .panel-body
+              %ul.no-list
+                - @nuevos.each do |mensaje|
+                  %li{:id => "#{mensaje.id}" }
+                    %span.mail-created_at #{mensaje.created_at.strftime("%d-%b")}
+                    %span.mail-sender #{mensaje.from_user}
+                    %a.icon{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button", :title => "Borrar"}
+                      %i.fa.fa-trash.fa-2x
+                    %a.icon{:onclick => "visit(#{mensaje.id});visitado()", :title => "Marcar como leído"}
+                      %i.fa.fa-check.fa-2x
+                    %hr
+                    %span.mail-subject #{mensaje.description}
+                    %span.mail-message-preview{:class => "#{mensaje.id}"}
+            .panel-footer
+              %p Deberías de revisar tus mensajes
       - if @alerts.length  > 0
         .col-xs-12.col-md-4
           .panel.panel-primary
