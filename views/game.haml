@@ -1,118 +1,31 @@
 .col-sm-12.col-md-12.col-xs-12.main 
   .container#game    
     .row
-      .col-md-4.col-xs-12.col-lg-4.col-sm-12
-        .panel.panel-primary
-          .panel-heading
-            %h3 
-              Colors, English
-              - if @score['colors'] >= 1000
-                %img.mini.pull-right{:src => "/img/games/badge_#{(@score['colors']/1000).to_i}000.png"}
-              - elsif @score['colors'] >= 500
-                %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-              - elsif @score['colors'] >= 250
-                %img.mini.pull-right{:src => "/img/games/badge_250.png"}
-              %span.badge
-                #{@score['colors']} puntos
-          .panel-body
-            %a.thumbnail{:href=>"/game/english/colors"}
-              %img{:src=>"/img/games/colors.png"}
-          .panel-footer
-            %p 
-              %strong ¿Te sabes los colores en inglés?
-      .col-md-4.col-xs-12.col-lg-4.col-sm-12
-        .panel.panel-primary
-          .panel-heading
-            %h3 
-              Memoria
-              - if @score['memoria'] >= 1000
-                %img.mini.pull-right{:src => "/img/games/badge_#{(@score['memoria']/1000).to_i}000.png"}
-              - elsif @score['memoria'] >= 500
-                %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-              - elsif @score['memoria'] >= 250
-                %img.mini.pull-right{:src => "/img/games/badge_250.png"}
-              %span.badge
-                #{@score['memoria']} puntos
-          .panel-body
-            %a.thumbnail{:href=>"/game/memory"}
-              %img{:src=>"/img/games/memory.png"}
-          .panel-footer
-            %p 
-              %strong Memoriza las parejas para completar el juego
-      .col-md-4.col-xs-12.col-lg-4.col-sm-12
-        .panel.panel-primary
-          .panel-heading
-            %h3 
-              Numbers, English
-              - if @score['numbers'] >= 1000
-                %img.mini.pull-right{:src => "/img/games/badge_#{(@score['numbers']/1000).to_i}000.png"}
-              - elsif @score['numbers'] >= 500
-                %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-              - elsif @score['numbers'] >= 250
-                %img.mini.pull-right{:src => "/img/games/badge_250.png"}
-              %span.badge
-                #{@score['numbers']} puntos
-          .panel-body
-            %a.thumbnail{:href=>"/game/english/numbers"}
-              %img{:src=>"/img/games/numbers.png"}
-          .panel-footer
-            %p 
-              %strong ¿Te sabes los números en inglés?
-    
-      .col-md-4.col-xs-12.col-lg-4.col-sm-12
-        .panel.panel-primary
-          .panel-heading
-            %h3 
-              PintaMatemáticas
-              - if @score['pintamatematicas'] >= 1000
-                %img.mini.pull-right{:src => "/img/games/badge_#{(@score['pintamatematicas']/1000).to_i}000.png"}
-              - elsif @score['pintamatematicas'] >= 500
-                %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-              - elsif @score['pintamatematicas'] >= 250
-                %img.mini.pull-right{:src => "/img/games/badge_250.png"}
-              %span.badge
-                #{@score['pintamatematicas']} puntos
-          .panel-body
-            %a.thumbnail{:href=>"/game/mathematics/draw"}
-              %img{:src=>"/img/games/mathematics_draw_partial.png"}
-          .panel-footer
-            %p 
-              %strong Completa los colores usando las matemáticas
-      .col-md-4.col-xs-12.col-lg-4.col-sm-12
-        .panel.panel-primary
-          .panel-heading
-            %h3 
-              School, English
-              - if @score['school'] >= 1000
-                %img.mini.pull-right{:src => "/img/games/badge_#{(@score['school']/1000).to_i}000.png"}
-              - elsif @score['school'] >= 500
-                %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-              - elsif @score['school'] >= 250
-                %img.mini.pull-right{:src => "/img/games/badge_250.png"}
-              %span.badge
-                #{@score['school']} puntos
-          .panel-body
-            %a.thumbnail{:href=>"/game/english/school"}
-              %img{:src=>"/img/games/school.png"}
-          .panel-footer
-            %p 
-              %strong ¿Cómo se dice lo que utilizas en clase en inglés?
-      .col-md-4.col-xs-12.col-lg-4.col-sm-12
-        .panel.panel-primary
-          .panel-heading
-            %h3 
-              Calculadoraa!!
-              - if @score['calculator'] >= 1000
-                %img.mini.pull-right{:src => "/img/games/badge_#{(@score['calculator']/1000).to_i}000.png"}
-              - elsif @score['calculator'] >= 500
-                %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-              - elsif @score['calculator'] >= 250
-                %img.mini.pull-right{:src => "/img/games/badge_250.png"}
-              %span.badge
-                #{@score['calculator']} puntos
-          .panel-body
-            %a.thumbnail{:href=>"/game/mathematics/calculator"}
-              %img{:src=>"/img/games/calculator.png"}
-          .panel-footer
-            %p 
-              %strong ¿Eres una calculadora humana?
+      - @games.each do |game|
+        .col-md-4.col-xs-12.col-lg-4.col-sm-12
+          .panel.panel-primary
+            .panel-heading
+              %h3 
+                #{game[0]}
+                - if game[1] >= 20000
+                  %img.mini.pull-right{:src => "/img/games/badge_2000.png"}
+                - elsif game[1] >= 15000 && game[1] < 20000
+                  %img.mini.pull-right{:src => "/img/games/badge_1000.png"}
+                - elsif game[1] >= 10000 && game[1] < 15000
+                  %img.mini.pull-right{:src => "/img/games/badge_10000.png"}
+                - elsif game[1] >= 5000 && game[1] < 10000
+                  %img.mini.pull-right{:src => "/img/games/badge_5000.png"}
+                - elsif game[1] >= 1000
+                  %img.mini.pull-right{:src => "/img/games/badge_#{(game[1]/1000).to_i}000.png"}
+                - elsif game[1] >= 500
+                  %img.mini.pull-right{:src => "/img/games/badge_500.png"}
+                - elsif game[1] >= 250
+                  %img.mini.pull-right{:src => "/img/games/badge_250.png"}
+                %span.badge
+                  #{game[1]} puntos
+            .panel-body
+              %a.thumbnail{:href=>"#{game[3]}"}
+                %img{:src=>"#{game[4]}"}
+            .panel-footer
+              %p 
+                %strong #{game[2]}

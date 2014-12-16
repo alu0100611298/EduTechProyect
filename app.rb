@@ -156,6 +156,23 @@ get '/home' do
     @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)#Para mostrar nuevos mensajes en cuanto se entre.
     user = User.first(:username => session[:username])
     @nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
+    game = Game.all(:user_id => current_user.id)
+    @better =  game.better_score()
+    if @better.name == 'colors'
+      @game = ['Colors, English','/game/english/colors','/img/games/colors.png']
+    elsif @better.name == 'memoria'
+      @game = ['Memoria','/game/memory','/img/games/memory.png']
+    elsif @better.name == 'numbers'
+      @game = ['Numbers','/game/english/numbers','/img/games/numbers.png']
+    elsif @better.name == 'pintamatematicas'
+      @game = ['PintaMates','/game/mathematics/draw','/img/games/mathematics_draw_partial.png']
+    elsif @better.name == 'school'
+      @game = ['School, English','/game/english/school','/img/games/school.png']
+    elsif @better.name == 'calculator'
+      @game = ['Calculadoraa!!','/game/mathematics/calculator','/img/games/calculator.png']
+    end
+
+    @notas = Note.all(:user => user, :order => [ :created_at.desc ], :limit => 3)
     haml :home, :layout => :index
 	else
     redirect '/'
@@ -181,13 +198,23 @@ get '/game' do
 		@titulo = "Sección de Juegos"
 		@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		game = Game.all(:user_id => current_user.id)
-		@score = Hash.new
-		@score['pintamatematicas'] = game.score('pintamatematicas',current_user.id.to_s)[0] || 0
-		@score['memoria'] = game.score('memoria',current_user.id.to_s)[0] || 0
-		@score['numbers'] = game.score('numbers',current_user.id.to_s)[0] || 0
-		@score['colors'] = game.score('colors',current_user.id.to_s)[0] || 0
-		@score['school'] = game.score('school',current_user.id.to_s)[0] || 0
-		@score['calculator'] = game.score('calculator',current_user.id.to_s)[0] || 0
+
+    score = Hash.new
+    score['pintamatematicas'] = game.score('pintamatematicas',current_user.id.to_s)[0] || 0
+    score['memoria'] = game.score('memoria',current_user.id.to_s)[0] || 0
+    score['numbers'] = game.score('numbers',current_user.id.to_s)[0] || 0
+    score['colors'] = game.score('colors',current_user.id.to_s)[0] || 0
+    score['school'] = game.score('school',current_user.id.to_s)[0] || 0
+    score['calculator'] = game.score('calculator',current_user.id.to_s)[0] || 0
+
+    @games = [
+      ['Colors, English',score['colors'],'¿Te sabes los colores en inglés?','/game/english/colors','/img/games/colors.png'],
+      ['Memoria',score['memoria'],'Memoriza las parejas para completar el juego','/game/memory','/img/games/memory.png'],
+      ['Numbers',score['numbers'],'¿Te sabes los números en inglés?','/game/english/numbers','/img/games/numbers.png'],
+      ['PintaMates',score['pintamatematicas'],'Completa los colores usando las matemáticas','/game/mathematics/draw','/img/games/mathematics_draw_partial.png'],
+      ['School, English',score['school'],'¿Cómo se dice lo que usas en clase en inglés?','/game/english/school','/img/games/school.png'],
+      ['Calculadoraa!!',score['calculator'],'¿Eres una calculadora humana?','/game/mathematics/calculator','/img/games/calculator.png']
+    ]
   		haml :game, :layout => :index
   	else
   		redirect '/'
