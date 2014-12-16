@@ -53,3 +53,14 @@ function borrarMensaje(id) {
        }
     );
 }
+
+function clear_message(id){
+  $('#' + id).remove();
+  var n = parseInt($('#news-size').html()) - 1;
+  $('#news-size').html(n);
+  console.log(n)
+  if (0 == n){
+    $('#news').remove();
+  }
+  $.get('/message/open/' + id);
+}

@@ -2,13 +2,13 @@
   .container.separator.align-left
     .row
       - if @nuevos.size > 0
-        .col-xs-12.col-md-4
+        .col-xs-12.col-md-4#news
           .panel.panel-primary
             .panel-heading
               %h1 
                 %i.fa.fa-envelope-o
                 Mensajes
-                %span.badge.pull-right #{@nuevos.size}
+                %span.badge.pull-right#news-size #{@nuevos.size}
             .panel-body
               %ul.no-list
                 - @nuevos.each do |mensaje|
@@ -17,10 +17,10 @@
                     %span.mail-sender #{mensaje.from_user}
                     %a.icon{:onclick => "borrarMensaje(#{mensaje.id});visitado()", :role => "button", :title => "Borrar"}
                       %i.fa.fa-trash.fa-2x
-                    %a.icon{:onclick => "visit(#{mensaje.id});visitado()", :title => "Marcar como leído"}
+                    %a.icon{:onclick => "clear_message(#{mensaje.id})", :title => "Marcar como leído"}
                       %i.fa.fa-check.fa-2x
                     %hr
-                    %span.mail-subject #{mensaje.description}
+                    %span.mail-subject #{mensaje.message}
                     %span.mail-message-preview{:class => "#{mensaje.id}"}
             .panel-footer
               %p Deberías de revisar tus mensajes
