@@ -263,3 +263,11 @@ body{
 .borrar a:hover{
   color: grey;
 }
+
+
+.separator{
+  padding: 2% 0;
+}
+.align-left{
+  text-align: left;
+}

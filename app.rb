@@ -153,8 +153,12 @@ get '/home' do
 	if current_user
 	@titulo = ""
     alerts(current_user.id.to_s)
-    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
-		haml :home, :layout => :index
+    @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)#Para mostrar nuevos mensajes en cuanto se entre.
+    user = User.first(:username => session[:username])
+    @nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
+    puts "________________________________________________"
+    puts @nuevos.to_yaml
+    haml :home, :layout => :index
 	else
     redirect '/'
   end
@@ -163,6 +167,7 @@ end
 post '/home' do
 	if current_user
 		@titulo = ""
+
 	else
 		redirect '/'
 	end
@@ -414,7 +419,6 @@ def alerts(id)
     ['calculator',250,'Esas matemáticas...'],
   ]
   alerts_games.each do |al_game|
-    puts al_game
     game = Game.all
 
     better = game.better(al_game[0])[0].to_i #toque esta linea, me daba un error, puse to_i

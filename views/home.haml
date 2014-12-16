@@ -1,0 +1,21 @@
+.col-sm-12.col-md-12.col-xs-12.main 
+  .container.separator.align-left
+    .row
+      .col-xs-12.col-md-4
+        %a{:href => '/message'}
+          .panel.panel-primary
+            - if @nuevos.size == 0
+              .panel-heading
+                %h1 
+                  %i.fa.fa-envelope-o
+                  Mensajes
+              .panel-footer
+                %p Enorabuena, no tienes mensajes pendientes
+            - else
+              .panel-heading
+                %h1 
+                  %i.fa.fa-envelope-o
+                  Mensajes
+                  %span.badge.pull-right #{@nuevos.size}
+              .panel-footer
+                %p Deberías de revisar tus mensajes
