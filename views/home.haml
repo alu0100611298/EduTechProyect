@@ -43,47 +43,51 @@
                         %i.fa.fa-clock-o
                         #{alert.created_at.strftime("%d / %b / %Y")}
                       %p #{alert.message}
-      .col-md-4.col-xs-12.col-lg-4.col-sm-12
-        .panel.panel-primary
-          .panel-heading
-            %h3 
-              Tu mejor puntación #{@game[0]}
-              - if @better.score >= 20000
-                %img.mini.pull-right{:src => "/img/games/badge_2000.png"}
-              - elsif @better.score >= 15000 && @better.score < 20000
-                %img.mini.pull-right{:src => "/img/games/badge_1000.png"}
-              - elsif @better.score >= 10000 && @better.score < 15000
-                %img.mini.pull-right{:src => "/img/games/badge_10000.png"}
-              - elsif @better.score >= 5000 && @better.score < 10000
-                %img.mini.pull-right{:src => "/img/games/badge_5000.png"}
-              - elsif @better.score >= 1000
-                %img.mini.pull-right{:src => "/img/games/badge_#{(@better.score/1000).to_i}000.png"}
-              - elsif @better.score >= 500
-                %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-              - elsif @better.score >= 250
-                %img.mini.pull-right{:src => "/img/games/badge_250.png"}
-              %span.badge
-                #{@better.score} puntos
-          .panel-body
-            %a.thumbnail{:href=>"#{@game[1]}"}
-              %img{:src=>"#{@game[2]}"}
+      - if @better != nil
+        .col-md-4.col-xs-12.col-lg-4.col-sm-12
+          .panel.panel-primary
+            .panel-heading
+              %h3 
+                Tu mejor puntación #{@game[0]}
+                - if @better.score >= 20000
+                  %img.mini.pull-right{:src => "/img/games/badge_2000.png"}
+                - elsif @better.score >= 15000 && @better.score < 20000
+                  %img.mini.pull-right{:src => "/img/games/badge_1000.png"}
+                - elsif @better.score >= 10000 && @better.score < 15000
+                  %img.mini.pull-right{:src => "/img/games/badge_10000.png"}
+                - elsif @better.score >= 5000 && @better.score < 10000
+                  %img.mini.pull-right{:src => "/img/games/badge_5000.png"}
+                - elsif @better.score >= 1000
+                  %img.mini.pull-right{:src => "/img/games/badge_#{(@better.score/1000).to_i}000.png"}
+                - elsif @better.score >= 500
+                  %img.mini.pull-right{:src => "/img/games/badge_500.png"}
+                - elsif @better.score >= 250
+                  %img.mini.pull-right{:src => "/img/games/badge_250.png"}
+                %span.badge
+                  #{@better.score} puntos
+            .panel-body
+              %a.thumbnail{:href=>"#{@game[1]}"}
+                %img{:src=>"#{@game[2]}"}
     .row
       .panel.panel-primary
         .panel-heading
           %h1 Tus últimas notas
         .panel-body
-          .col-sm-12.col-md-12.col-xs-12
-            - @notas.each do |nota|
-              .col-xs-12.col-sm-12.col-md-4.col-lg-4
-                .ampliar.offer.offer-default{:id => "#{nota.id}"}
-                  .shape
-                    %a{:onclick => "notas(#{nota.id})"}
-                      .shape-text
-                        borrar
-                  .offer-content
-                    %h3.lead
-                      #{nota.name}
-                    %p
-                      #{nota.description}
-                      %br
-                        #{nota.created_at.strftime("%d / %b / %Y")}
+          - if @notas.size > 0
+            .col-sm-12.col-md-12.col-xs-12
+              - @notas.each do |nota|
+                .col-xs-12.col-sm-12.col-md-4.col-lg-4
+                  .ampliar.offer.offer-default{:id => "#{nota.id}"}
+                    .shape
+                      %a{:onclick => "notas(#{nota.id})"}
+                        .shape-text
+                          borrar
+                    .offer-content
+                      %h3.lead
+                        #{nota.name}
+                      %p
+                        #{nota.description}
+                        %br
+                          #{nota.created_at.strftime("%d / %b / %Y")}
+          - else
+            %h2 Anímate y guarda tus tareas en las notas y las podrás ver aquí.

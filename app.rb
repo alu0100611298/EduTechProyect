@@ -157,21 +157,24 @@ get '/home' do
     user = User.first(:username => session[:username])
     @nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
     game = Game.all(:user_id => current_user.id)
-    @better =  game.better_score(current_user.id.to_s)
-    if @better.name == 'colors'
-      @game = ['Colors, English','/game/english/colors','/img/games/colors.png']
-    elsif @better.name == 'memoria'
-      @game = ['Memoria','/game/memory','/img/games/memory.png']
-    elsif @better.name == 'numbers'
-      @game = ['Numbers','/game/english/numbers','/img/games/numbers.png']
-    elsif @better.name == 'pintamatematicas'
-      @game = ['PintaMates','/game/mathematics/draw','/img/games/mathematics_draw_partial.png']
-    elsif @better.name == 'school'
-      @game = ['School, English','/game/english/school','/img/games/school.png']
-    elsif @better.name == 'calculator'
-      @game = ['Calculadoraa!!','/game/mathematics/calculator','/img/games/calculator.png']
+    @better =  game.better_score(current_user.id.to_s) || nil
+    if @better != nil
+      if @better.name == 'colors'
+        @game = ['Colors, English','/game/english/colors','/img/games/colors.png']
+      elsif @better.name == 'memoria'
+        @game = ['Memoria','/game/memory','/img/games/memory.png']
+      elsif @better.name == 'numbers'
+        @game = ['Numbers','/game/english/numbers','/img/games/numbers.png']
+      elsif @better.name == 'pintamatematicas'
+        @game = ['PintaMates','/game/mathematics/draw','/img/games/mathematics_draw_partial.png']
+      elsif @better.name == 'school'
+        @game = ['School, English','/game/english/school','/img/games/school.png']
+      elsif @better.name == 'calculator'
+        @game = ['Calculadoraa!!','/game/mathematics/calculator','/img/games/calculator.png']
+      elsif @better == 0
+        @game = [1,2,3]
+      end
     end
-
     @notas = Note.all(:user => user, :order => [ :created_at.desc ], :limit => 3)
     haml :home, :layout => :index
 	else
