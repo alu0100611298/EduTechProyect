@@ -157,6 +157,7 @@ get '/home' do
     user = User.first(:username => session[:username])
     @nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
     game = Game.all(:user_id => current_user.id)
+    
     @better =  game.better_score(current_user.id.to_s) || nil
     if @better != nil
       if @better.name == 'colors'
@@ -449,7 +450,7 @@ def alerts(id)
   alerts_games.each do |al_game|
     game = Game.all
 
-    better = game.better(al_game[0])[0].to_i #toque esta linea, me daba un error, puse to_i
+    better = game.better(al_game[0])[0].to_i || 0 #toque esta linea, me daba un error, puse to_i
     me = game.score(al_game[0], id)[0].to_i || 0 #toque esta linea, me daba un error, puse to_i
 
         

@@ -49,20 +49,7 @@
             .panel-heading
               %h3 
                 Tu mejor puntación #{@game[0]}
-                - if @better.score >= 20000
-                  %img.mini.pull-right{:src => "/img/games/badge_2000.png"}
-                - elsif @better.score >= 15000 && @better.score < 20000
-                  %img.mini.pull-right{:src => "/img/games/badge_1000.png"}
-                - elsif @better.score >= 10000 && @better.score < 15000
-                  %img.mini.pull-right{:src => "/img/games/badge_10000.png"}
-                - elsif @better.score >= 5000 && @better.score < 10000
-                  %img.mini.pull-right{:src => "/img/games/badge_5000.png"}
-                - elsif @better.score >= 1000
-                  %img.mini.pull-right{:src => "/img/games/badge_#{(@better.score/1000).to_i}000.png"}
-                - elsif @better.score >= 500
-                  %img.mini.pull-right{:src => "/img/games/badge_500.png"}
-                - elsif @better.score >= 250
-                  %img.mini.pull-right{:src => "/img/games/badge_250.png"}
+                %img.mini.pull-right{:src => "/img/gold_cup.png"}
                 %span.badge
                   #{@better.score} puntos
             .panel-body
