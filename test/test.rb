@@ -38,9 +38,13 @@ describe "Edutech" do
 
 	end
 
+	#GRADO
+
 	it "El nombre del grado es gname" do
 		assert_equal @gname, @grade.name
 	end
+
+	#USUARIO
 
 	it "El usuario es name" do
 		assert_equal @uname, @name.name
@@ -54,6 +58,8 @@ describe "Edutech" do
 		assert_equal @gname, @name.grade.name
 	end
 
+	#MENSAJES
+
 	it "El mensaje viene del usuario username"
 		assert_equal @uusername, @message.from_user
 	end
@@ -66,4 +72,15 @@ describe "Edutech" do
 		assert_equal @mensaje, @message.message
 	end
 	
+	#RELACION DE MENSAJES
+
+	it "El mensaje tiene destinatario username2"
+		assert_equal @uusername2, @relationship.to_username
+	end
+
+	it "El mensaje viene del usuario username"
+		assert_equal @uusername, @relationship.from_username
+	end
+
+
 end
