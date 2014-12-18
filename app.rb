@@ -55,7 +55,7 @@ get '/' do
 	if current_user
 		redirect '/home'
 	else
-		erb :login
+		haml :login, :layout => false
 	end
 
 end
@@ -74,8 +74,8 @@ post '/registro' do
 		apellidos = params[:apellidos]
 		pass =  params[:pass].to_i(32)		
 		username = params[:username]
-
-		@set_user = User.create(:username => username, :name => name, :last_name => apellidos, :password => pass)
+		sexo = params[:sexo]
+		@set_user = User.create(:username => username, :name => name, :last_name => apellidos, :password => pass, :sexo => sexo)
 
 		if @set_user
 			session[:username] = @set_user.username
@@ -87,7 +87,7 @@ post '/registro' do
 	else
 		@error_existe = true
 
-		erb :login
+		haml :login, :layout => false
 	end
 
 end
@@ -102,7 +102,7 @@ post '/login' do
 
 	else
 		@error_no_existe = true
-		erb :login
+		haml :login, :layout => false
 	end
 end
 
@@ -153,10 +153,6 @@ post '/home' do
 	else
 		redirect '/'
 	end
-end
-
-get '/register' do
-	erb :register
 end
 
 # URLs para los juegos
@@ -599,6 +595,37 @@ get '/settings' do
 		redirect '/'
 	end
 
+end
+
+post '/settings' do
+	cuser = params[:cuser]
+
+	consulta = User.first(:username => cuser)
+
+	if consulta
+		@error_existe = true
+
+		haml :settings, :layout => :index
+	else
+		#esta en proceso... tengo que ver como se puede hacer que se cambie la clave primaria en todo.
+		puts "cambiar user  === #{cuser}"
+		consult = User.first(:name=> current_user.name)
+		consult.update(:username => cuser)
+		consult.save
+		@cambio = true
+		haml :settings, :layout => :index
+	end
+end
+
+get '/borrar' do
+	if current_user
+		user_d = User.get(current_user.id, current_user.username)
+		puts "#{user_d.name}"
+		user_d.destroy
+		redirect '/'
+	else
+		redirect '/'
+	end
 end
 
 not_found do

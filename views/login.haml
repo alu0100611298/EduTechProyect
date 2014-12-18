@@ -43,6 +43,16 @@
               %label Repetir contraseña
               %input#pass1.form-control{:name => "pass1", :placeholder => "Contraseña", :type => "password"}
             .form-group.col-sm-12.col-lg-12.col-xs-12
+              %label Sexo
+              .radio
+                %label
+                  %input#masculino{:name => "sexo", :type => "radio", :value => "masculino"}/
+                  Masculino
+              .radio
+                %label
+                  %input#femenino{:name => "sexo", :type => "radio", :value => "femenino"}/
+                  Femenino
+            .form-group.col-sm-12.col-lg-12.col-xs-12
               %label Nombre de Usuario
               %input#username.form-control{:name => "username", :placeholder => "nombre de usuario", :type => "text"}
             %button.btn.btn-primary.col-sm-12.col-lg-12.col-xs-12{:type => "submit"} Registrarse

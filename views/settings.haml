@@ -1,5 +1,5 @@
 .col-sm-12.col-md-12.col-xs-12.main 
-	.col-sm-12.col-md-6.col-xs-12.col-lg-6.col-lg-offset-3.col-md-offset-3.datos
+	.col-sm-12.col-md-6.col-xs-12.col-lg-6.datos
 		%p 
 			%strong 
 				%i Nombre: 
@@ -8,6 +8,10 @@
 			%strong 
 				%i Apellidos: 
 			= current_user.last_name
+		%p 
+			%strong 
+				%i Sexo: 
+			= current_user.sexo
 		%p 
 			%strong 
 				%i Username: 
@@ -19,3 +23,9 @@
 
 		.borrar
 			%a{:href => "/borrar"} borrar cuenta
+	.col-sm-12.col-md-4.col-md-offset-1.col-xs-12.col-lg-offset-1.col-lg-4.datos1
+		%form.col-sm-12.col-md-12.col-xs-12{:role => "form", :action => "/settings", :method => "post"}
+			.form-group
+				%label{:for => "cnomuser"} Cambiar nombre de usuario
+				%input#cuser.form-control{:placeholder => "Nuevo nombre de usuario", :name => "cuser",:type => "text"}/
+			%button.btn.btn-default.col-sm-12.col-md-12.col-xs-12.sbtn{:type => "submit"} Cambiar			
