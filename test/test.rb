@@ -35,19 +35,19 @@ describe "Edutech" do
 		@uname2 = "name2"
 		@uusername2 = "username2"
 		@ulast_name2 = "last_name2"
-		@user2 = User.first_or_create(:name => @uname2, :last_name => @ulast_name2, :username => @uusername2, :profile_picture => @uprofile_picture, :created_at => Time.now, :grade => @grade)
+		@user2 = User.first_or_create(:name => @uname2, :last_name => @ulast_name2, :username => @uusername2, :profile_picture => @uprofile_picture, :created_at => Time.now)
 
 		@asunto = "asunto"
 		@mensaje = "mensaje"
 		#@message = Message.first_or_create(:from_user => @uusername, :message => @mensaje, :created_at =>Time.now, :status => true, :user => @user2,  :description => @asunto,  :tipo => true)
-		@message = Message.first_or_create(:from_user => @uusername, :message => @mensaje, :created_at =>Time.now, :status => true, :user_id => @user2.id, :user_username => @uusername2,  :description => @asunto,  :tipo => true)
+		@message = Message.first_or_create(:from_user => @uusername, :message => @mensaje, :created_at =>Time.now, :status => true, :user =>  @user2,  :description => @asunto,  :tipo => true)
 		
 
 		#Relación de mensajes
-		@relationship = Relationship.first_or_create(:from_username => @uusername, :to_username => @uusername2)
+		#@relationship = Relationship.first_or_create(:from_username => @uusername, :to_username => @uusername2)
 
 		#Crear nota
-		@note = Note.first_or_create(:name => @asunto, :description => @message, :created_at => Time.now, :finish_at => Time.now, :status => true)
+		@note = Note.first_or_create(:name => @asunto, :description => @mensaje, :created_at => Time.now, :finish_at => Time.now, :status => true, :user => @user2)
 
 	end
 
@@ -78,13 +78,13 @@ describe "Edutech" do
 	
 	#RELACION DE MENSAJES
 
-	it "El mensaje tiene destinatario username2" do
-		assert_equal @uusername2, @relationship.to_username
+	/it "El mensaje tiene destinatario username2" do
+		assert_equal @uusername2, @relationship.user_username
 	end
 
 	it "El mensaje viene del usuario username" do
 		assert_equal @uusername, @relationship.from_username
-	end
+	end/
 
 	#NOTAS
 
@@ -93,6 +93,6 @@ describe "Edutech" do
 	end
 
 	it "La nota tiene una descripcion" do
-		assert_equal @message, @note.description
+		assert_equal @mensaje, @note.description
 	end
 end
