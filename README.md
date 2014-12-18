@@ -1,4 +1,4 @@
-Edutech [![Build Status](https://travis-ci.org/Edu-Tech/EduTechProyect.svg?branch=master)](https://travis-ci.org/Edu-Tech/EduTechProyect)
+Edutech [![Build Status](https://travis-ci.org/Edu-Tech/EduTechProyect.svg?branch=master)](https://travis-ci.org/Edu-Tech/EduTechProyect) [![Coverage Status](https://coveralls.io/repos/alu0100611298/EduTechProyect/badge.png?branch=master)](https://coveralls.io/r/alu0100611298/EduTechProyect?branch=master)
 =========
 Sistemas y Tecnologías web
 ---------------------------
