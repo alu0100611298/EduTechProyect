@@ -72,8 +72,13 @@ end
 post '/registro' do
 
 	@consult = User.first(:username => params[:username] )
-
-	if !@consult && (params[:pass] == params[:pass1])
+	if !params[:pass] or !params[:pass1] or !params[:nombre] or !params[:apellidos] or !params[:username] or !params[:sexo]
+		session['error'] = 'Faltan datos en el registro'
+		redirect '/'
+	elsif params[:pass] != params[:pass1]
+		session['error'] = 'Las constraseñas son distintas'
+		redirect '/'
+	elsif !@consult && (params[:pass] == params[:pass1])
 		name = params[:nombre]
 		apellidos = params[:apellidos]
 		pass =  params[:pass].to_i(32)		
@@ -87,6 +92,7 @@ post '/registro' do
 			redirect '/home'
 		else
 			@error_creacion = true
+			session['error'] = 'No se ha podido completar el registro'
 		end
 	else
 		session['error'] = 'El usuario ya existe'
