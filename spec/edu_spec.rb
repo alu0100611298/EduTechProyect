@@ -46,5 +46,6 @@ describe " Edutech - funcionalidades de las rutas" do
 		get '/logout'
 		last_response.body['Aprende con nosotros, registrate!']
 	end
+end
 
 	
