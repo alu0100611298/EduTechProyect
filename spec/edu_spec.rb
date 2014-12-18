@@ -41,4 +41,10 @@ describe " Edutech - funcionalidades de las rutas" do
 		last_response.body['Tus últimas notas']
 	end
 
+	it "get /logout" do
+		post '/login' , :user_log => "sergio", :pass_log => "123456"
+		get '/logout'
+		last_response.body['Aprende con nosotros, registrate!']
+	end
+
 	
