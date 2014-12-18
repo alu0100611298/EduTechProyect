@@ -19,9 +19,9 @@
 
 		.borrar
 			%a{:href => "/borrar"} borrar cuenta
-	.col-sm-12.col-md-6.col-xs-12.col-lg-6.datos
-		%form{:role => "form"}
+	.col-sm-12.col-md-4.col-md-offset-1.col-xs-12.col-lg-offset-1.col-lg-4.datos1
+		%form.col-sm-12.col-md-12.col-xs-12{:role => "form", :action => "/settings", :method => "post"}
 			.form-group
 				%label{:for => "cnomuser"} Cambiar nombre de usuario
-				%input#exampleInputEmail1.form-control{:placeholder => "Nuevo nombre de usuario", :type => "text"}/
-			%button.btn.btn-default{:type => "submit"} Cambiar			
+				%input#cuser.form-control{:placeholder => "Nuevo nombre de usuario", :name => "cuser",:type => "text"}/
+			%button.btn.btn-default.col-sm-12.col-md-12.col-xs-12.sbtn{:type => "submit"} Cambiar			

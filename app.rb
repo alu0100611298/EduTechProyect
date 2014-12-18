@@ -538,6 +538,37 @@ get '/settings' do
 
 end
 
+post '/settings' do
+	cuser = params[:cuser]
+
+	consulta = User.first(:username => cuser)
+
+	if consulta
+		@error_existe = true
+
+		haml :settings, :layout => :index
+	else
+		#esta en proceso... tengo que ver como se puede hacer que se cambie la clave primaria en todo.
+		puts "cambiar user  === #{cuser}"
+		consult = User.first(:name=> current_user.name)
+		consult.update(:username => cuser)
+		consult.save
+		@cambio = true
+		haml :settings, :layout => :index
+	end
+end
+
+get '/borrar' do
+	if current_user
+		user_d = User.get(current_user.id, current_user.username)
+		puts "#{user_d.name}"
+		user_d.destroy
+		redirect '/'
+	else
+		redirect '/'
+	end
+end
+
 not_found do
   redirect '/'
 end
