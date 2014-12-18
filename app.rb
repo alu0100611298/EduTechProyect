@@ -93,6 +93,7 @@ post '/registro' do
 		else
 			@error_creacion = true
 			session['error'] = 'No se ha podido completar el registro'
+			redirect '/'
 		end
 	else
 		session['error'] = 'El usuario ya existe'
@@ -380,7 +381,6 @@ get '/message/opened' do
     user = User.first(:username => session[:username])
     nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
     puts nuevos.size
-    puts "-----------------------------------------"
     return nuevos.size.to_s
   else
       redirect '/'
