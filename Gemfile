@@ -31,4 +31,5 @@ group :test do
 	gem "dm-sqlite-adapter"
     gem "rack-test"
     gem "rake"
+    gem 'coveralls'
 end
