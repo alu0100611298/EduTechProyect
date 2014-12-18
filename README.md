@@ -10,7 +10,7 @@ Esta red social estará dividida en 4 secciones principales:
 
 1. Home
 
-	Sección en la que se mostrarán las mejores puntuaciones del usuario y sus últimas notas (funcionalidad que explicaremos más tarde). Además, como en todas las demás secciones, encontraremos un menú en el que podremos acceder a un apartado de mensajeria para poder interactuar con otros usuarios de la aplicación, notificiaciones, sección de de ajustes de perfil y un botón para salir de la cuenta.
+	Sección en la que se mostrarán las mejores puntuaciones del usuario y sus últimas notas (funcionalidad que explicaremos más tarde). Además, como en todas las demás secciones, encontraremos un menú en el que podremos acceder a un apartado de mensajeria para poder interactuar con otros usuarios de la aplicación. Dentro del menú también veremos notificiaciones, sección de ajustes de perfil y un botón para salir de la cuenta.
 
 2. Notas
 
@@ -18,11 +18,11 @@ Esta red social estará dividida en 4 secciones principales:
 
 3. Juegos
 
-	La sección más importante de nuestra aplicación. En este punto el usuario tiene la posibilidad de elegir entre 6 juegos que contemplan contenidos como el inglés, las matemáticas, juegos de memoria...etc, incluyendo en (ciertos juegos) un sistema de niveles separados por dificultad. Cada vez que juguemos a uno de estos juegos, conseguiremos una serie de puntos, los cuales quedarán registrados en las estadísticas, sección de la que hablaremos a continuación.
+	La sección más importante de nuestra aplicación. En este punto el usuario tiene la posibilidad de elegir entre 6 juegos que contemplan contenidos como el inglés, las matemáticas, juegos de memoria...etc, incluyendo (en ciertos juegos) un sistema de niveles separados por dificultad. Cada vez que juguemos a uno de estos juegos, conseguiremos una serie de puntos, los cuales quedarán registrados en las estadísticas, sección de la que hablaremos a continuación.
 
 4. Estadísticas
 
-	En este apartado de la página veremos una serie de gráfica que mostrarán un podio con los tres mejores jugadores de toda la web, las estadisticas de tus puntos y además un podio de los tres mejores jugadores de cada juego por separado.
+	En este apartado de la página veremos una serie de gráficas que mostrarán un podio con los tres mejores jugadores de toda la web, las estadisticas de tus puntos y además un podio de los tres mejores jugadores de cada juego por separado.
 
 
 ###Funcionamiento
