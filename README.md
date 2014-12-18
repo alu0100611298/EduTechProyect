@@ -1,4 +1,4 @@
-Edutech
+Edutech [![Build Status](https://travis-ci.org/Edu-Tech/EduTechProyect.svg?branch=master)](https://travis-ci.org/Edu-Tech/EduTechProyect)
 =========
 Sistemas y Tecnologías web
 ---------------------------
