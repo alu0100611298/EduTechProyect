@@ -51,7 +51,7 @@ Hay dos formas posibles de ver el funcionamiento de la aplicación, una mediante
     
     Una vez en ejecución, abre el navegador y escribe en la barra de direcciones *localhost:9292* y accederás a la web de la aplicación:
     
-    ![ejemplo navegador]()
+    ![ejemplo navegador](https://raw.githubusercontent.com/Edu-Tech/EduTechProyect/master/public/img/ejemplo.jpg)
     
     
 [aquí]:http://my-edutech.herokuapp.com
