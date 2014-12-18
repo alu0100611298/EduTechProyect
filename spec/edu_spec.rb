@@ -44,6 +44,14 @@ describe " Edutech - funcionalidades de las rutas" do
 		get '/logout'
 		last_response.body['Aprende con nosotros, registrate!']
 	end
+
+	it "get /puntuation" do
+		post '/login' , :username => "sergio", :pass => "123456"
+		get '/puntuation'
+		last_response.body['Sección de Calificaciones']
+	end
+
+
 end
 
 	
