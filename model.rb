@@ -39,7 +39,7 @@ class Game
   end
 
   def self.podio()
-    DataMapper.repository.adapter.select("SELECT user_username AS usuario, SUM(score) AS total_score FROM games GROUP BY user_id")
+    DataMapper.repository.adapter.select("SELECT user_username AS usuario, SUM(score) AS total_score FROM games GROUP BY user_id ORDER BY total_score ASC")
   end
 
   belongs_to  :user
