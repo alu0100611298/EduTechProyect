@@ -55,6 +55,10 @@ get '/' do
 	if current_user
 		redirect '/home'
 	else
+		if session['error']
+			@error = session['error']
+		    session.delete('error')
+		end
 		haml :login, :layout => false
 	end
 
@@ -85,24 +89,29 @@ post '/registro' do
 			@error_creacion = true
 		end
 	else
+		session['error'] = 'El usuario ya existe'
 		@error_existe = true
-
-		haml :login, :layout => false
+		redirect '/'
 	end
 
 end
 
 post '/login' do
-	@consult = User.first(:username => params[:username], :password => params[:pass].to_i(32))
 
-	if @consult
+	consult = User.first(:username => params[:username])
+	@consult = User.first(:username => params[:username], :password => params[:pass].to_i(32))
+	if !consult
+		session['error'] = 'No se encuentra el usuario'
+		@error_no_existe = true
+		redirect '/'
+	elsif !@consult
+		session['error'] = 'La constraseña no es correcta'
+		@error_no_existe = true
+		redirect '/'
+	else
 		session[:username] = @consult.username
 		session[:user_id] = @consult.id
 		redirect '/home'
-
-	else
-		@error_no_existe = true
-		haml :login, :layout => false
 	end
 end
 
@@ -290,6 +299,10 @@ get '/notes' do
     	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		user = User.first(:username => session[:username])
 		@notas = Note.all(:user => user, :order => [ :created_at.desc ])
+		if session['error'] && session['error'] == 'error_nota'
+		    @error = 'No se puede guardar la nota'
+		    session.delete('error')
+		end
   		haml :notes, :layout => :index
   	else
   		redirect '/'
@@ -315,6 +328,9 @@ post '/notes' do
 		user = User.first(:username => session[:username])
 		#Guardar la nota
 		nota = Note.first_or_create(:name => params[:asunto], :description => params[:texto], :created_at => Time.now, :finish_at => Time.now, :status => "false", :user =>user)
+  		if(!user or !nota)
+  			session['error'] = 'error_nota'
+  		end
   		redirect '/notes'
   	else
   		redirect '/'
@@ -329,6 +345,10 @@ get '/message' do
 		@recibidos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ])
 		@enviados = Message.all(:user => user, :tipo => "false", :order => [ :created_at.desc ])
 		@nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
+		if session['error'] && session['error'] == 'error_usuario'
+		    @error = 'No se puede enviar el mensaje el usuario no existe'
+		    session.delete('error')
+		end
   		haml :message, :layout => :index
   	else
   		redirect '/'
@@ -378,6 +398,9 @@ post '/message' do
 		@titulo = "Mensajes"
 		#buscar el usuario
 		usuario_recibe = User.first(:username => params[:username])
+		if(!usuario_recibe)
+  			session['error'] = 'error_usuario'
+  		end
 		redirect '/message' unless usuario_recibe
 		usuario_envia = User.first(:username => session[:username])
 		#Guarda el mensaje recibido
