@@ -12,7 +12,9 @@
                   %link{:href => "/css/jumbotron-narrow.css", :rel => "stylesheet"}
                     %link{:href => "http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css", :rel => "stylesheet"}
                       %link{:href => "/css/style.css", :rel => "stylesheet", :type => "text/css"}
+                      %link{:href => "/css/alert.css", :rel => "stylesheet"}
                         %script{:src => "/js/ie-emulation-modes-warning.js"}
+                        %script{:src => "/js/alert.js"}
   %body
     .container.col-sm-12.col-lg-12.col-xs-12
       .header.col-sm-12.col-lg-12.col-xs-12
@@ -56,6 +58,9 @@
               %label Nombre de Usuario
               %input#username.form-control{:name => "username", :placeholder => "nombre de usuario", :type => "text"}
             %button.btn.btn-primary.col-sm-12.col-lg-12.col-xs-12{:type => "submit"} Registrarse
+    -if @error
+      #error-message
+        #{@error}
     / /container
     .footer
       .container

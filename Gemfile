@@ -13,7 +13,6 @@ gem 'chartkick'
 gem 'dm-core'
 gem 'time_difference'
 gem 'dm-timestamps'
-
 gem 'dm-types' 
 
 
@@ -31,4 +30,5 @@ group :test do
 	gem "dm-sqlite-adapter"
     gem "rack-test"
     gem "rake"
+    gem 'coveralls'
 end

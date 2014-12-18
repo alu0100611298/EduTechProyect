@@ -55,6 +55,10 @@ get '/' do
 	if current_user
 		redirect '/home'
 	else
+		if session['error']
+			@error = session['error']
+		    session.delete('error')
+		end
 		haml :login, :layout => false
 	end
 
@@ -68,8 +72,13 @@ end
 post '/registro' do
 
 	@consult = User.first(:username => params[:username] )
-
-	if !@consult && (params[:pass] == params[:pass1])
+	if !params[:pass] or !params[:pass1] or !params[:nombre] or !params[:apellidos] or !params[:username] or !params[:sexo]
+		session['error'] = 'Faltan datos en el registro'
+		redirect '/'
+	elsif params[:pass] != params[:pass1]
+		session['error'] = 'Las constraseñas son distintas'
+		redirect '/'
+	elsif !@consult && (params[:pass] == params[:pass1])
 		name = params[:nombre]
 		apellidos = params[:apellidos]
 		pass =  params[:pass].to_i(32)		
@@ -83,26 +92,33 @@ post '/registro' do
 			redirect '/home'
 		else
 			@error_creacion = true
+			session['error'] = 'No se ha podido completar el registro'
+			redirect '/'
 		end
 	else
+		session['error'] = 'El usuario ya existe'
 		@error_existe = true
-
-		haml :login, :layout => false
+		redirect '/'
 	end
 
 end
 
 post '/login' do
-	@consult = User.first(:username => params[:username], :password => params[:pass].to_i(32))
 
-	if @consult
+	consult = User.first(:username => params[:username])
+	@consult = User.first(:username => params[:username], :password => params[:pass].to_i(32))
+	if !consult
+		session['error'] = 'No se encuentra el usuario'
+		@error_no_existe = true
+		redirect '/'
+	elsif !@consult
+		session['error'] = 'La constraseña no es correcta'
+		@error_no_existe = true
+		redirect '/'
+	else
 		session[:username] = @consult.username
 		session[:user_id] = @consult.id
 		redirect '/home'
-
-	else
-		@error_no_existe = true
-		haml :login, :layout => false
 	end
 end
 
@@ -365,7 +381,6 @@ get '/message/opened' do
     user = User.first(:username => session[:username])
     nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
     puts nuevos.size
-    puts "-----------------------------------------"
     return nuevos.size.to_s
   else
       redirect '/'
@@ -389,7 +404,7 @@ post '/message' do
 		@titulo = "Mensajes"
 		#buscar el usuario
 		usuario_recibe = User.first(:username => params[:username])
-		if(!usuario_recibe or !nota)
+		if(!usuario_recibe)
   			session['error'] = 'error_usuario'
   		end
 		redirect '/message' unless usuario_recibe

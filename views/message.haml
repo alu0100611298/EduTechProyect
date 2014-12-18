@@ -36,7 +36,7 @@
                   .col-xs-10
                     %li{:id => "#{mensaje.id}" }
                       %a{:class => "#{mensaje.status}", :onclick => "visit(#{mensaje.id});visitado()"}
-                        %span.mail-created_at #{mensaje.created_at}
+                        %span.mail-created_at #{mensaje.created_at.strftime("%Y-%m-%d %H:%M:%S").to_s}
                         %span.mail-sender #{mensaje.from_user}
                         %span.mail-subject #{mensaje.description}
                         %span.mail-message-preview{:class => "#{mensaje.id}"}
@@ -68,8 +68,8 @@
                 .row
                   .col-xs-10
                     %li{:id => "#{mensaje.id}" }
-                      %a
-                        %span.mail-created_at #{mensaje.created_at}
+                      %a{:onclick => "visit(#{mensaje.id});visitado()"}
+                        %span.mail-created_at #{mensaje.created_at.strftime("%Y-%m-%d %H:%M:%S").to_s}
                         %span.mail-sender #{mensaje.from_user}
                         %span.mail-subject #{mensaje.description}
                         %span.mail-message-preview{:class => "#{mensaje.id}"}

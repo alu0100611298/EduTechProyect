@@ -1,42 +1,30 @@
-.col-sm-12.col-md-12.col-xs-12.main 
+.col-sm-12.col-md-12.col-xs-12.main
 	%h1 Tres Mejores Jugadores
-
 	= column_chart(@podio)
-
-
 	%h1 Tus Estadísticas
 	= pie_chart(@usuarios)
-
 	%br
 	%h1 Ranking de juegos
 	.row
-		%h2 Colors
 		.col-sm-6.col-md-6.col-xs-6
+			%h2 Colors
 			= column_chart(@colores)
-
-		%h2 Memoria
 		.col-sm-6.col-md-6.col-xs-6
+			%h2 Memoria
 			= column_chart(@memory)
-
 	.row
-		%h2 Numbers
 		.col-sm-6.col-md-6.col-xs-6
+			%h2 Numbers
 			= column_chart(@numeros)
-
-		%h2 PintaMatemáticas
 		.col-sm-6.col-md-6.col-xs-6
+			%h2 PintaMatemáticas
 			= column_chart(@pinta)
-
 	.row
-		%h2 School Things
 		.col-sm-6.col-md-6.col-xs-6
+			%h2 School Things
 			= column_chart(@ingles)
-
-		%h2 Calculadora
 		.col-sm-6.col-md-6.col-xs-6
+			%h2 Calculadora
 			= column_chart(@calculadora)
 
-
-
-
-
+%link{:href => "/css/puntuation.css", :rel => "stylesheet"}
