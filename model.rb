@@ -118,7 +118,7 @@ class Relationship
       DataMapper.repository.adapter.select("UPDATE users SET user_username = '#{user}' WHERE user_id ='#{id}'")
   end
   
-	belongs_to :user
+	#belongs_to :user
 end
 
 class Grade
