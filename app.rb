@@ -449,72 +449,131 @@ get '/puntuation' do
 	    @memory= Hash.new
 	    @pinta= Hash.new
 	    @ingles= Hash.new
+	    @podio= Hash.new
+
+	     puts "-- PODIO --"
+	     users = @game.podio()
+	     contador = 0
+
+	     users.each do |i|
+	     	puts "#{i.usuario} -- #{i.total_score}"
+	     	@podio[i.usuario.to_s] = i.total_score.to_i
+	     	contador=contador+1;
+
+	     	if (contador >= 3)
+	    		break
+	    	end
+	     end	
+
+
+	     puts "-- ESTADISTICAS DEL USUARIO --"
 
 	    users = @game.puntos(user.username)
 		users.each do |i|
-			puts "#{i.juego} -- #{i.total_score}"
+			#puts "#{i.juego} -- #{i.total_score}"
 			@usuarios[i.juego.to_s] = i.total_score.to_i
-			puts "#{ @usuarios[i.juego]}"
+			#puts "#{ @usuarios[i.juego]}"
 		end
 
 	    puts "-- ESTADISTICAS NUMBERS --"
 
 	    users = @game.puntos_juego("numbers")
+	    contador = 0
+
 	    users.each  do |i|
-	    	puts "ITERACIÓN #{i}"
-	    	puts "#{i.usuario} -- #{i.total_score}"
-	      @numeros[i.usuario.to_s] = i.total_score.to_i
-	      #puts "#{ @usuarios[i.juego]}"
+	    	#puts "#{contador}"
+	    	#puts "#{i.usuario} -- #{i.total_score}"
+		    @numeros[i.usuario.to_s] = i.total_score.to_i
+
+	    	contador=contador+1;
+
+	    	if (contador >= 3)
+	    		break
+	    	end
 	    end
+
 
 	    puts "-- ESTADISTICAS CALCULATOR--"
 
 	    users = @game.puntos_juego("calculator")
+	    contador = 0
+
 	    users.each  do |i|
-	    	puts "ITERACIÓN #{i}"
-	    	puts "#{i.usuario} -- #{i.total_score}"
-	      @calculadora[i.usuario.to_s] = i.total_score.to_i
-	      #puts "#{ @usuarios[i.juego]}"
+	    	#puts "#{i.usuario} -- #{i.total_score}"
+	      	@calculadora[i.usuario.to_s] = i.total_score.to_i
+
+	      	contador=contador+1;
+
+	    	if (contador >= 3)
+	    		break
+	    	end
+
 	    end
 
 	    puts "-- ESTADISTICAS COLORS--"
 
 	    users = @game.puntos_juego("colors")
+	    contador = 0
+
 	    users.each  do |i|
-	    	puts "ITERACIÓN #{i}"
-	    	puts "#{i.usuario} -- #{i.total_score}"
-	      @colores[i.usuario.to_s] = i.total_score.to_i
-	      #puts "#{ @usuarios[i.juego]}"
+	    	#puts "#{i.usuario} -- #{i.total_score}"
+	      	@colores[i.usuario.to_s] = i.total_score.to_i
+
+	      	contador=contador+1;
+
+	    	if (contador >= 3)
+	    		break
+	    	end
 	    end
 
 	    puts "-- ESTADISTICAS MEMORIA--"
 
 	    users = @game.puntos_juego("memoria")
+	    contador = 0
+
 	    users.each  do |i|
-	    	puts "ITERACIÓN #{i}"
-	    	puts "#{i.usuario} -- #{i.total_score}"
-	      @memory[i.usuario.to_s] = i.total_score.to_i
-	      #puts "#{ @usuarios[i.juego]}"
+	    	#puts "#{i.usuario} -- #{i.total_score}"
+		    @memory[i.usuario.to_s] = i.total_score.to_i
+		    #puts "#{ @usuarios[i.juego]}"
+
+		    contador=contador+1;
+
+	    	if (contador >= 3)
+	    		break
+	    	end
 	    end
 
 	    puts "-- ESTADISTICAS PINTAMATEMATICAS--"
 
 	    users = @game.puntos_juego("pintamatematicas")
+	    contador = 0
+
 	    users.each  do |i|
-	    	puts "ITERACIÓN #{i}"
-	    	puts "#{i.usuario} -- #{i.total_score}"
-	      @pinta[i.usuario.to_s] = i.total_score.to_i
-	      #puts "#{ @usuarios[i.juego]}"
+	    	#puts "#{i.usuario} -- #{i.total_score}"
+	      	@pinta[i.usuario.to_s] = i.total_score.to_i
+	      	#puts "#{ @usuarios[i.juego]}"
+
+	      	contador=contador+1;
+
+	    	if (contador >= 3)
+	    		break
+	    	end
 	    end
 
 	    puts "-- ESTADISTICAS SCHOOL--"
+	    contador = 0
 
 	    users = @game.puntos_juego("school")
 	    users.each  do |i|
-	    	puts "ITERACIÓN #{i}"
-	    	puts "#{i.usuario} -- #{i.total_score}"
-	      @ingles[i.usuario.to_s] = i.total_score.to_i
-	      #puts "#{ @usuarios[i.juego]}"
+	    	#puts "#{i.usuario} -- #{i.total_score}"
+	      	@ingles[i.usuario.to_s] = i.total_score.to_i
+	      	#puts "#{ @usuarios[i.juego]}"
+
+	      	contador=contador+1;
+
+	    	if (contador >= 3)
+	    		break
+	    	end
 	    end
 
 
