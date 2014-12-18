@@ -639,10 +639,31 @@ post '/settings' do
 		#esta en proceso... tengo que ver como se puede hacer que se cambie la clave primaria en todo.
 		puts "cambiar user  === #{cuser}"
 		consult = User.first(:name=> current_user.name)
-		consult.update(:username => cuser)
-		consult.save
-		@cambio = true
-		haml :settings, :layout => :index
+		User.change_user(consult.id, cuser)
+
+		consult = User.first(:username => cuser)
+
+		game = Game.first(:user_id => consult.id)
+		if game
+			Game.change_user(consult.id, cuser)
+		end
+
+		note = Note.first(:user_id => consult.id)
+
+		if note 
+			Note.change_user(consult.id, cuser)
+		end
+
+		mensaje = Message.first(:user_id => consult.id)
+		if mensaje
+			Message.change_user(consult.id, cuser)
+		end
+		
+
+		session[:username] = consult.username
+		session[:user_id] = consult.id
+		
+		redirect '/settings'
 	end
 end
 

@@ -11,6 +11,10 @@ class User
   property :created_at,  DateTime
 
   has n, :games, :notes
+
+  def self.change_user(id, user)
+      DataMapper.repository.adapter.select("UPDATE users SET USERNAME = '#{user}' WHERE id ='#{id}'")
+  end
   #belongs_to :grade
 end
 
@@ -61,6 +65,10 @@ class Game
     DataMapper.repository.adapter.select("SELECT user_username AS usuario, SUM(score) AS total_score FROM games GROUP BY user_username ORDER BY total_score DESC")
   end
 
+  def self.change_user(id, user)
+      DataMapper.repository.adapter.select("UPDATE games SET user_username = '#{user}' WHERE user_id ='#{id}'")
+  end
+
   belongs_to  :user
 end
 
@@ -73,6 +81,10 @@ class Note
 	property :created_at, DateTime
 	property :finish_at, DateTime
 	property :status, Boolean
+
+  def self.change_user(id, user)
+      DataMapper.repository.adapter.select("UPDATE notes SET user_username = '#{user}' WHERE user_id ='#{id}'")
+  end
 
 	belongs_to :user
 end
@@ -88,6 +100,10 @@ class Message
 	property :status, Boolean
 	property :tipo, Boolean
 
+  def self.change_user(id, user)
+      DataMapper.repository.adapter.select("UPDATE users SET user_username = '#{user}' WHERE user_id ='#{id}'")
+  end
+
 	belongs_to :user
 end
 
@@ -98,6 +114,10 @@ class Relationship
 	property :from_username, String
 	property :to_username, String
 
+  def self.change_user(id, user)
+      DataMapper.repository.adapter.select("UPDATE users SET user_username = '#{user}' WHERE user_id ='#{id}'")
+  end
+  
 	belongs_to :user
 end
 
