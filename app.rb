@@ -290,6 +290,10 @@ get '/notes' do
     	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
 		user = User.first(:username => session[:username])
 		@notas = Note.all(:user => user, :order => [ :created_at.desc ])
+		if session['error'] && session['error'] == 'error_nota'
+		    @error = 'No se puede guardar la nota'
+		    session.delete('error')
+		end
   		haml :notes, :layout => :index
   	else
   		redirect '/'
@@ -315,6 +319,9 @@ post '/notes' do
 		user = User.first(:username => session[:username])
 		#Guardar la nota
 		nota = Note.first_or_create(:name => params[:asunto], :description => params[:texto], :created_at => Time.now, :finish_at => Time.now, :status => "false", :user =>user)
+  		if(!user or !nota)
+  			session['error'] = 'error_nota'
+  		end
   		redirect '/notes'
   	else
   		redirect '/'
@@ -329,6 +336,10 @@ get '/message' do
 		@recibidos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ])
 		@enviados = Message.all(:user => user, :tipo => "false", :order => [ :created_at.desc ])
 		@nuevos = Message.all(:user => user, :tipo => "true", :order => [ :created_at.desc ], :status => "false")
+		if session['error'] && session['error'] == 'error_usuario'
+		    @error = 'No se puede enviar el mensaje el usuario no existe'
+		    session.delete('error')
+		end
   		haml :message, :layout => :index
   	else
   		redirect '/'
@@ -378,6 +389,9 @@ post '/message' do
 		@titulo = "Mensajes"
 		#buscar el usuario
 		usuario_recibe = User.first(:username => params[:username])
+		if(!usuario_recibe or !nota)
+  			session['error'] = 'error_usuario'
+  		end
 		redirect '/message' unless usuario_recibe
 		usuario_envia = User.first(:username => session[:username])
 		#Guarda el mensaje recibido

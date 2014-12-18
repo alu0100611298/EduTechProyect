@@ -24,6 +24,7 @@
     %script{:src => "//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"}
     %script{:src => "http://www.google.com/jsapi"}
     %script{:src => "/js/chartkick.js"}
+    %script{:src => "/js/alert.js"}
   %body
     .container-fluid
       .row
@@ -103,5 +104,8 @@
               - else
                 %img.img-responsive.img-circle.avatar{:src => "/img/kid_boy.png"}/  
           =yield
+          -if @error
+            #error-message
+              #{@error}
 
     
