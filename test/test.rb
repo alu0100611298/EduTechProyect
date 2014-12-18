@@ -3,7 +3,7 @@ require 'minitest/autorun'
 require 'rack/test'
 require_relative '../app'
 
-describe "shortened urls" do
+describe "Edutech" do
 
 	before :all do
 		#grade
@@ -15,7 +15,7 @@ describe "shortened urls" do
 		@ulast_name = "last_name"
 		@uusername = "username"
 		@uprofile_picture = "profile_picture"
-		@ucreated_at = ""
+		@ucreated_at = "2014-11-30"
 		#Crear un grado
 		@table = Grade.first_or_create(:name => @gname, :class => @gclass, :promotion => @gpromotion)
 		@grade = Grade.first(:name => @gname)
@@ -30,6 +30,14 @@ describe "shortened urls" do
 
 	it "El usuario es name" do
 		assert_equal @uname, @name.name
+	end
+
+	it "El username del usuario es username"
+		assert_equal @uusername, @name.username
+	end
+
+	it "El usuario pertenece al grado gname"
+		assert_equal @gname, @name.grade.name
 	end
 	
 end
