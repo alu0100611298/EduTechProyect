@@ -55,6 +55,10 @@ get '/' do
 	if current_user
 		redirect '/home'
 	else
+		if session['error']
+			@error = session['error']
+		    session.delete('error')
+		end
 		haml :login, :layout => false
 	end
 
@@ -85,24 +89,29 @@ post '/registro' do
 			@error_creacion = true
 		end
 	else
+		session['error'] = 'El usuario ya existe'
 		@error_existe = true
-
-		haml :login, :layout => false
+		redirect '/'
 	end
 
 end
 
 post '/login' do
-	@consult = User.first(:username => params[:username], :password => params[:pass].to_i(32))
 
-	if @consult
+	consult = User.first(:username => params[:username])
+	@consult = User.first(:username => params[:username], :password => params[:pass].to_i(32))
+	if !consult
+		session['error'] = 'No se encuentra el usuario'
+		@error_no_existe = true
+		redirect '/'
+	elsif !@consult
+		session['error'] = 'La constraseña no es correcta'
+		@error_no_existe = true
+		redirect '/'
+	else
 		session[:username] = @consult.username
 		session[:user_id] = @consult.id
 		redirect '/home'
-
-	else
-		@error_no_existe = true
-		haml :login, :layout => false
 	end
 end
 
@@ -389,7 +398,7 @@ post '/message' do
 		@titulo = "Mensajes"
 		#buscar el usuario
 		usuario_recibe = User.first(:username => params[:username])
-		if(!usuario_recibe or !nota)
+		if(!usuario_recibe)
   			session['error'] = 'error_usuario'
   		end
 		redirect '/message' unless usuario_recibe
