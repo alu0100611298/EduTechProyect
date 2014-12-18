@@ -16,13 +16,16 @@ describe "shortened urls" do
 		@uname = "name"
 		@ulast_name = "last_name"
 		@uusername = "username"
-		@uprofile_picture = "profile_picture"
+		@sexo = "masculino"
+		@pass = "12344"
+		@uprofile_picture = "foto"
 		@ucreated_at = ""
 		#Crear un grado
 		@table = Grade.first_or_create(:name => @gname, :class => @gclass, :promotion => @gpromotion)
 		@grade = Grade.first(:name => @gname)
 		#incluir usuarios en el grado
-		@user = User.first_or_create(:name => @uname, :last_name => @ulast_name, :username => @uusername, :profile_picture => @uprofile_picture, :created_at => Time.now, :grade => @grade)
+		#@user = User.create(:username => @uusername, :name => @uname, :last_name => @ulast_name, :password => @pass, :sexo => @sexo)
+		@user = User.first_or_create(:name => @uname, :last_name => @ulast_name, :username => @uusername, :profile_picture => @uprofile_picture, :created_at => Time.now, :sexo => @sexo, :password => @pass)
 		@name = User.first(:name => @uname)
 	end
 
