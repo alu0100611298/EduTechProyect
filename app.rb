@@ -435,7 +435,7 @@ get '/puntuation' do
 
 	    	contador=contador+1;
 
-	    	if (contador >= 5)
+	    	if (contador >= 3)
 	    		break
 	    	end
 	    end
@@ -452,7 +452,7 @@ get '/puntuation' do
 
 	      	contador=contador+1;
 
-	    	if (contador >= 5)
+	    	if (contador >= 3)
 	    		break
 	    	end
 
@@ -469,7 +469,7 @@ get '/puntuation' do
 
 	      	contador=contador+1;
 
-	    	if (contador >= 5)
+	    	if (contador >= 3)
 	    		break
 	    	end
 	    end
@@ -486,7 +486,7 @@ get '/puntuation' do
 
 		    contador=contador+1;
 
-	    	if (contador >= 5)
+	    	if (contador >= 3)
 	    		break
 	    	end
 	    end
@@ -503,7 +503,7 @@ get '/puntuation' do
 
 	      	contador=contador+1;
 
-	    	if (contador >= 5)
+	    	if (contador >= 3)
 	    		break
 	    	end
 	    end
@@ -519,7 +519,7 @@ get '/puntuation' do
 
 	      	contador=contador+1;
 
-	    	if (contador >= 5)
+	    	if (contador >= 3)
 	    		break
 	    	end
 	    end
