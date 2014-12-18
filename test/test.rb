@@ -22,6 +22,18 @@ describe "Edutech" do
 		#incluir usuarios en el grado
 		@user = User.first_or_create(:name => @uname, :last_name => @ulast_name, :username => @uusername, :profile_picture => @uprofile_picture, :created_at => Time.now, :grade => @grade)
 		@name = User.first(:name => @uname)
+
+		#Creando mensajes
+		@uname2 = "name2"
+		@uusername2 = "username2"
+		@ulast_name2 = "last_name2"
+		@user = User.first_or_create(:name => @uname2, :last_name => @ulast_name2, :username => @uusername2, :profile_picture => @uprofile_picture, :created_at => Time.now, :grade => @grade)
+
+		@asunto = "asunto"
+		@mensaje = "mensaje"
+		@message = Message.first_or_create(:from_user => @uusername,:description => @asunto, :message => @mensaje, :created_at =>Time.now, :status => true, :tipo => true)
+
+		
 	end
 
 	it "El nombre del grado es gname" do
