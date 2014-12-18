@@ -50,11 +50,15 @@ class Game
   end
 
   def self.puntos_juego(game)
-    DataMapper.repository.adapter.select("SELECT user_username AS usuario, SUM(score) AS total_score FROM games WHERE name = '" + game + "' GROUP BY user_username")
+    DataMapper.repository.adapter.select("SELECT user_username AS usuario, SUM(score) AS total_score FROM games WHERE name = '" + game + "' GROUP BY user_username ORDER BY total_score DESC")
   end
 
   def self.better(game)
     DataMapper.repository.adapter.select("SELECT SUM(score) FROM games WHERE name = '" + game + "' GROUP BY user_id")
+  end
+
+  def self.podio()
+    DataMapper.repository.adapter.select("SELECT user_username AS usuario, SUM(score) AS total_score FROM games GROUP BY user_id ORDER BY total_score DESC")
   end
 
   belongs_to  :user
