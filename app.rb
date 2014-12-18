@@ -55,7 +55,7 @@ get '/' do
 	if current_user
 		redirect '/home'
 	else
-		erb :login
+		haml :login, :layout => false
 	end
 
 end
@@ -87,7 +87,7 @@ post '/registro' do
 	else
 		@error_existe = true
 
-		erb :login
+		haml :login, :layout => false
 	end
 
 end
@@ -102,7 +102,7 @@ post '/login' do
 
 	else
 		@error_no_existe = true
-		erb :login
+		haml :login, :layout => false
 	end
 end
 
@@ -153,10 +153,6 @@ post '/home' do
 	else
 		redirect '/'
 	end
-end
-
-get '/register' do
-	erb :register
 end
 
 # URLs para los juegos

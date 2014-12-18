@@ -1,5 +1,5 @@
 .col-sm-12.col-md-12.col-xs-12.main 
-	.col-sm-12.col-md-6.col-xs-12.col-lg-6.col-lg-offset-3.col-md-offset-3.datos
+	.col-sm-12.col-md-6.col-xs-12.col-lg-6.datos
 		%p 
 			%strong 
 				%i Nombre: 
@@ -19,3 +19,9 @@
 
 		.borrar
 			%a{:href => "/borrar"} borrar cuenta
+	.col-sm-12.col-md-6.col-xs-12.col-lg-6.datos
+		%form{:role => "form"}
+			.form-group
+				%label{:for => "cnomuser"} Cambiar nombre de usuario
+				%input#exampleInputEmail1.form-control{:placeholder => "Nuevo nombre de usuario", :type => "text"}/
+			%button.btn.btn-default{:type => "submit"} Cambiar			
