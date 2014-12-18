@@ -14,16 +14,6 @@ class User
   #belongs_to :grade
 end
 
-class Admin
-  include DataMapper::Resource
-
-  property :id, Serial
-  property :username, String, :key => true
-  property :password, String
-  
-
-end
-
 class Game
   include DataMapper::Resource
   
@@ -129,3 +119,5 @@ class Alert
   property :created_at, DateTime
 
 end
+
+

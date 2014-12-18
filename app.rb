@@ -47,11 +47,7 @@ helpers do
 		@current_user ||= User.get(session[:user_id], session[:username]) if session[:user_id] && session[:username]
 	end
 end
-helpers do
-	def current_admin
-		@current_admin ||= Admin.get(session[:admin_id], session[:admin_username]) if session[:admin_id] && session[:admin_username]
-	end
-end
+
 
 get '/' do
 	@titulo = ""
@@ -68,39 +64,6 @@ post '/' do
 	@titulo = ""
 end
 
-get '/admin' do
-	a = "1234".to_i(32)
-	consulta = Admin.first_or_create(:username => "admin", :password => a)
-	erb :admin
-end
-
-post '/admin' do
-	user = params[:user]
-	pass = params[:pass].to_i(32)
-
-	consulta = Admin.first(:username => user, :password => pass)
-
-	if consulta
-		session[:admin_username] = consulta.username
-		session[:admin_id] = consulta.id
-		redirect '/admin/home'
-	else
-		redirect '/admin'
-	end
-
-end
-
-get '/admin/home' do
-	if current_admin
-		
-
-		@consulta = Game.calificaciones
-		puts "#{@consulta}"
-		erb :"admin-home"
-	else
-		redirect '/admin'
-	end
-end
 
 post '/registro' do
 
@@ -241,7 +204,7 @@ get '/game/mathematics/draw' do
   #al nivel hay que extraer el curso del alumno
   #Provisionalmente se pone por defecto el mismo
   if current_user
-  	@titulo = "Sección de Juegos"
+  	@titulo = "Pinta Matemáticas"
     @alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   	haml :mth_draw1, :layout => :index
   else
@@ -273,7 +236,7 @@ end
 
 get '/game/english/numbers' do
 	if current_user
-		@titulo = "Sección de Juegos"
+		@titulo = "Numbers"
     	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :numbers, :layout => :index
   	else
@@ -283,7 +246,7 @@ end
 
 get '/game/english/colors' do
 	if current_user
-		@titulo = "Sección de Juegos"
+		@titulo = "Colors"
     	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :colors, :layout => :index
   	else
@@ -293,7 +256,7 @@ end
 
 get '/game/english/school' do
 	if current_user
-		@titulo = "Sección de Juegos"
+		@titulo = "School Things"
     	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
   		haml :school, :layout => :index
   	else
@@ -303,7 +266,7 @@ end
 
 get '/game/mathematics/calculator' do
 	if current_user
-		@titulo = "Sección de Juegos"
+		@titulo = "Caculadoraaaaa!!"
     	@alerts = Alert.all(:to_user => current_user.id.to_s, :status => false)
  		haml :calculator, :layout => :index
  	else
@@ -577,4 +540,8 @@ get '/settings' do
 		redirect '/'
 	end
 
+end
+
+not_found do
+  redirect '/'
 end
