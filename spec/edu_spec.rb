@@ -57,6 +57,14 @@ describe " Edutech - funcionalidades de las rutas" do
 		last_response.body['Sección de Juegos']
 	end
 
+	it "get /notes" do
+		post '/login' , :username => "sergio", :pass => "123456"
+		get '/notes'
+		last_response.body['Sección de Notas']
+	end
+
+	
+
 
 end
 
