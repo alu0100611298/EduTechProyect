@@ -4,7 +4,7 @@ script: bundle exec rake
 before_install:
 - sudo apt-get update
 - sudo apt-get install libpq-dev
-- sudo apt-get install postgresql
+- sudo apt-get install postgresql-9.1 -y --force-yes
 - sudo apt-get install postgresql-server-dev-9.3
 before_script:
   - export DISPLAY=:99.0
