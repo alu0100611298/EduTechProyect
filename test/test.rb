@@ -61,48 +61,45 @@ describe "Edutech" do
 		assert_equal @uname, @name.name
 	end
 
-	it "El username del usuario es username"
+	it "El username del usuario es username" do
 		assert_equal @uusername, @name.username
 	end
 
-	it "El usuario pertenece al grado gname"
-		assert_equal @gname, @name.grade.name
+	it "El usuario pertenece al grado gname" do
+		assert_equal @gname, @grade.name
 	end
 
 	#MENSAJES
 
-	it "El mensaje viene del usuario username"
+	it "El mensaje viene del usuario username" do
 		assert_equal @uusername, @message.from_user
 	end
 
-	it "El mensaje tiene asunto"
+	it "El mensaje tiene asunto" do
 		assert_equal @asunto, @message.description
 	end
 
-	it "El mensaje tiene contenido"
+	it "El mensaje tiene contenido" do
 		assert_equal @mensaje, @message.message
 	end
 	
 	#RELACION DE MENSAJES
 
-	it "El mensaje tiene destinatario username2"
+	it "El mensaje tiene destinatario username2" do
 		assert_equal @uusername2, @relationship.to_username
 	end
 
-	it "El mensaje viene del usuario username"
+	it "El mensaje viene del usuario username" do
 		assert_equal @uusername, @relationship.from_username
 	end
 
 	#NOTAS
 
-	it "La nota tiene un título"
+	it "La nota tiene un título" do
 		assert_equal @asunto, @note.name
 	end
 
-	it "La nota tiene una descripcion"
+	it "La nota tiene una descripcion" do
 		assert_equal @message, @note.description
 	end
-
-
-
 end
