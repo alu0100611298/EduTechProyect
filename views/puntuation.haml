@@ -1,24 +1,39 @@
-.col-sm-12.col-md-12.col-xs-12.main 
-	%h2 Tus Estadísticas
-	= bar_chart(@usuarios)
+%h1 Tres Mejores Jugadores
 
+= column_chart(@podio)
+
+
+%h1 Tus Estadísticas
+= pie_chart(@usuarios)
+
+%br
+%h1 Ranking de juegos
+.row
 	%h2 Colors
-	= bar_chart(@colores)
+	.col-sm-6.col-md-6.col-xs-6
+		= column_chart(@colores)
 
 	%h2 Memoria
-	= bar_chart(@memory)
+	.col-sm-6.col-md-6.col-xs-6
+		= column_chart(@memory)
 
+.row
 	%h2 Numbers
-	= bar_chart(@numeros)
+	.col-sm-6.col-md-6.col-xs-6
+		= column_chart(@numeros)
 
 	%h2 PintaMatemáticas
-	= bar_chart(@pinta)
+	.col-sm-6.col-md-6.col-xs-6
+		= column_chart(@pinta)
 
+.row
 	%h2 School Things
-	= bar_chart(@ingles)
+	.col-sm-6.col-md-6.col-xs-6
+		= column_chart(@ingles)
 
 	%h2 Calculadora
-	= bar_chart(@calculadora)
+	.col-sm-6.col-md-6.col-xs-6
+		= column_chart(@calculadora)
 
 
 
