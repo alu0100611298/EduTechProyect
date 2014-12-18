@@ -39,7 +39,9 @@ describe "Edutech" do
 
 		@asunto = "asunto"
 		@mensaje = "mensaje"
-		@message = Message.first_or_create(:from_user => @uusername,:description => @asunto, :message => @mensaje, :created_at =>Time.now, :status => true, :tipo => true)
+		#@message = Message.first_or_create(:from_user => @uusername, :message => @mensaje, :created_at =>Time.now, :status => true, :user => @user2,  :description => @asunto,  :tipo => true)
+		@message = Message.first_or_create(:from_user => @uusername, :message => @mensaje, :created_at =>Time.now, :status => true, :user_id => @user2.id, :user_username => @uusername2,  :description => @asunto,  :tipo => true)
+		
 
 		#Relación de mensajes
 		@relationship = Relationship.first_or_create(:from_username => @uusername, :to_username => @uusername2)
