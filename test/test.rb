@@ -27,13 +27,15 @@ describe "Edutech" do
 		@uname2 = "name2"
 		@uusername2 = "username2"
 		@ulast_name2 = "last_name2"
-		@user = User.first_or_create(:name => @uname2, :last_name => @ulast_name2, :username => @uusername2, :profile_picture => @uprofile_picture, :created_at => Time.now, :grade => @grade)
+		@user2 = User.first_or_create(:name => @uname2, :last_name => @ulast_name2, :username => @uusername2, :profile_picture => @uprofile_picture, :created_at => Time.now, :grade => @grade)
 
 		@asunto = "asunto"
 		@mensaje = "mensaje"
 		@message = Message.first_or_create(:from_user => @uusername,:description => @asunto, :message => @mensaje, :created_at =>Time.now, :status => true, :tipo => true)
 
-		
+		#Relación de mensajes
+		@relationship = Relationship.first_or_create(:from_username => @uusername, :to_username => @uusername2)
+
 	end
 
 	it "El nombre del grado es gname" do
@@ -50,6 +52,18 @@ describe "Edutech" do
 
 	it "El usuario pertenece al grado gname"
 		assert_equal @gname, @name.grade.name
+	end
+
+	it "El mensaje viene del usuario username"
+		assert_equal @uusername, @message.from_user
+	end
+
+	it "El mensaje tiene asunto"
+		assert_equal @asunto, @message.description
+	end
+
+	it "El mensaje tiene contenido"
+		assert_equal @mensaje, @message.message
 	end
 	
 end
