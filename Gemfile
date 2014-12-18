@@ -26,9 +26,13 @@ group :development do
 	gem "dm-sqlite-adapter"
 end
 group :test do
+	gem 'selenium-webdriver'
 	gem "sqlite3"
 	gem "dm-sqlite-adapter"
     gem "rack-test"
+    gem 'rspec'
     gem "rake"
+    gem 'minitest'
+	gem 'test-unit'
     gem 'coveralls'
 end

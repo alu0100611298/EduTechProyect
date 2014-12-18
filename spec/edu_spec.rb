@@ -2,9 +2,7 @@
 require 'coveralls'
 Coveralls.wear!
 ENV['RACK_ENV'] = 'test'
-require_relative '../chat.rb'
-require 'test/unit'
-require 'minitest/autorun'
+require_relative '../app.rb'
 require 'rack/test'
 require 'selenium-webdriver'
 require 'rubygems'
@@ -37,12 +35,12 @@ describe " Edutech - funcionalidades de las rutas" do
 	end	
 
 	it "post /login" do
-		post '/login' , :user_log => "sergio", :pass_log => "123456"
+		post '/login' , :username => "sergio", :pass => "123456"
 		last_response.body['Tus últimas notas']
 	end
 
 	it "get /logout" do
-		post '/login' , :user_log => "sergio", :pass_log => "123456"
+		post '/login' , :username => "sergio", :pass => "123456"
 		get '/logout'
 		last_response.body['Aprende con nosotros, registrate!']
 	end
