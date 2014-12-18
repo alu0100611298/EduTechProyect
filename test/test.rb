@@ -36,6 +36,9 @@ describe "Edutech" do
 		#Relación de mensajes
 		@relationship = Relationship.first_or_create(:from_username => @uusername, :to_username => @uusername2)
 
+		#Crear nota
+		@note = Note.first_or_create(:name => @asunto, :description => @message, :created_at => Time.now, :finish_at => Time.now, :status => true)
+
 	end
 
 	#GRADO
@@ -81,6 +84,17 @@ describe "Edutech" do
 	it "El mensaje viene del usuario username"
 		assert_equal @uusername, @relationship.from_username
 	end
+
+	#NOTAS
+
+	it "La nota tiene un título"
+		assert_equal @asunto, @note.name
+	end
+
+	it "La nota tiene una descripcion"
+		assert_equal @message, @note.description
+	end
+
 
 
 end
