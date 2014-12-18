@@ -98,8 +98,10 @@
                 %a.btn{:href => "/logout"}
                   %i.fa.fa-power-off
             .col-sm-1.col-md-1.col-xs-3.imagen
-              %img.img-responsive.img-circle.avatar{:src => "/img/kid_girl.png"}/
-                    
+              - if current_user.sexo == "femenino"
+                %img.img-responsive.img-circle.avatar{:src => "/img/kid_girl.png"}/
+              - else
+                %img.img-responsive.img-circle.avatar{:src => "/img/kid_boy.png"}/  
           =yield
 
     

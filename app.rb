@@ -74,8 +74,8 @@ post '/registro' do
 		apellidos = params[:apellidos]
 		pass =  params[:pass].to_i(32)		
 		username = params[:username]
-
-		@set_user = User.create(:username => username, :name => name, :last_name => apellidos, :password => pass)
+		sexo = params[:sexo]
+		@set_user = User.create(:username => username, :name => name, :last_name => apellidos, :password => pass, :sexo => sexo)
 
 		if @set_user
 			session[:username] = @set_user.username
